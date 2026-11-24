@@ -1,0 +1,29 @@
+{
+  "bits": 169,
+  "checks": {
+    "precision_floor_bits": true,
+    "distinct_times_identical_binary64": true,
+    "positive_time_underflows_binary64": true,
+    "exact_zero": true,
+    "overlapping_boxes": true,
+    "symmetric_order": true,
+    "signed_binary64_export_6": true,
+    "signed_binary64_export_7": true,
+    "signed_binary64_export_8": true,
+    "signed_binary64_export_9": true,
+    "signed_binary64_export_10": true,
+    "quadratic_vertex_11": true,
+    "quadratic_vertex_12": true,
+    "quadratic_vertex_13": true,
+    "quadratic_vertex_14": true,
+    "quadratic_vertex_15": true,
+    "quadratic_vertex_16": true,
+    "quadratic_vertex_17": true,
+    "quadratic_vertex_18": true,
+    "quadratic_vertex_19": true,
+    "black_known_root": true,
+    "black_zero_generalised_lower": true,
+    "black_crossed_upper": true,
+    "black_intrinsic": true
+  }
+}

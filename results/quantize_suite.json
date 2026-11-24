@@ -1,0 +1,2388 @@
+[
+  {
+    "curve": "flat",
+    "months": 1,
+    "budget": 50,
+    "allocation": [
+      6,
+      4,
+      2
+    ],
+    "actual_paths": 48,
+    "status": "Arb-certified",
+    "future": [
+      21.608581404145127,
+      21.611979456914767
+    ],
+    "target": [
+      21.933717062733646,
+      21.936710642630313
+    ],
+    "signed_future_error": [
+      -0.3281292384937907,
+      -0.32173760581027355
+    ],
+    "strikes": [],
+    "calls": [],
+    "basis_setup_s": 0.10871819999920262,
+    "product_setup_s": 0.007088899999871501,
+    "online_s": 0.06588600000031875
+  },
+  {
+    "curve": "quad",
+    "months": 1,
+    "budget": 50,
+    "allocation": [
+      6,
+      4,
+      2
+    ],
+    "actual_paths": 48,
+    "status": "Arb-certified",
+    "future": [
+      24.34608356877842,
+      24.35025988819516
+    ],
+    "target": [
+      24.70355480212698,
+      24.707135759531546
+    ],
+    "signed_future_error": [
+      -0.3610521907672678,
+      -0.3532949139176792
+    ],
+    "strikes": [],
+    "calls": [],
+    "basis_setup_s": 0.10871819999920262,
+    "product_setup_s": 0.007088899999871501,
+    "online_s": 0.05685529999936989
+  },
+  {
+    "curve": "sqrt",
+    "months": 1,
+    "budget": 50,
+    "allocation": [
+      6,
+      4,
+      2
+    ],
+    "actual_paths": 48,
+    "status": "Arb-certified",
+    "future": [
+      22.260810411732496,
+      22.264388803775493
+    ],
+    "target": [
+      22.59372891704305,
+      22.59684613646963
+    ],
+    "signed_future_error": [
+      -0.33603572474356025,
+      -0.3293401132611321
+    ],
+    "strikes": [],
+    "calls": [],
+    "basis_setup_s": 0.10871819999920262,
+    "product_setup_s": 0.007088899999871501,
+    "online_s": 0.054512000000613625
+  },
+  {
+    "curve": "flat",
+    "months": 1,
+    "budget": 100,
+    "allocation": [
+      8,
+      3,
+      2,
+      2
+    ],
+    "actual_paths": 96,
+    "status": "Arb-certified",
+    "future": [
+      21.647938754828587,
+      21.65279609393906
+    ],
+    "target": [
+      21.933717062733646,
+      21.936710642630313
+    ],
+    "signed_future_error": [
+      -0.2887718878157878,
+      -0.2809209687805242
+    ],
+    "strikes": [],
+    "calls": [],
+    "basis_setup_s": 0.10871819999920262,
+    "product_setup_s": 0.0049385999991500285,
+    "online_s": 0.12414370000078634
+  },
+  {
+    "curve": "quad",
+    "months": 1,
+    "budget": 100,
+    "allocation": [
+      8,
+      3,
+      2,
+      2
+    ],
+    "actual_paths": 96,
+    "status": "Arb-certified",
+    "future": [
+      24.389777872201964,
+      24.395698645137475
+    ],
+    "target": [
+      24.70355480212698,
+      24.707135759531546
+    ],
+    "signed_future_error": [
+      -0.3173578873437216,
+      -0.30785615697536517
+    ],
+    "strikes": [],
+    "calls": [],
+    "basis_setup_s": 0.10871819999920262,
+    "product_setup_s": 0.0049385999991500285,
+    "online_s": 0.1198424000012892
+  },
+  {
+    "curve": "sqrt",
+    "months": 1,
+    "budget": 100,
+    "allocation": [
+      8,
+      3,
+      2,
+      2
+    ],
+    "actual_paths": 96,
+    "status": "Arb-certified",
+    "future": [
+      22.301206920406585,
+      22.306311278627305
+    ],
+    "target": [
+      22.59372891704305,
+      22.59684613646963
+    ],
+    "signed_future_error": [
+      -0.29563921607856625,
+      -0.2874176384002246
+    ],
+    "strikes": [],
+    "calls": [],
+    "basis_setup_s": 0.10871819999920262,
+    "product_setup_s": 0.0049385999991500285,
+    "online_s": 0.1421028999993723
+  },
+  {
+    "curve": "flat",
+    "months": 1,
+    "budget": 500,
+    "allocation": [
+      10,
+      4,
+      3,
+      2,
+      2
+    ],
+    "actual_paths": 480,
+    "status": "Arb-certified",
+    "future": [
+      21.70971633098205,
+      21.71674712329086
+    ],
+    "target": [
+      21.933717062733646,
+      21.936710642630313
+    ],
+    "signed_future_error": [
+      -0.2269943116659619,
+      -0.21696993942508408
+    ],
+    "strikes": [],
+    "calls": [],
+    "basis_setup_s": 0.10871819999920262,
+    "product_setup_s": 0.02164910000101372,
+    "online_s": 0.5756715000006807
+  },
+  {
+    "curve": "quad",
+    "months": 1,
+    "budget": 500,
+    "allocation": [
+      10,
+      4,
+      3,
+      2,
+      2
+    ],
+    "actual_paths": 480,
+    "status": "Arb-certified",
+    "future": [
+      24.457709208487824,
+      24.4662099100756
+    ],
+    "target": [
+      24.70355480212698,
+      24.707135759531546
+    ],
+    "signed_future_error": [
+      -0.24942655106513817,
+      -0.23734489202996295
+    ],
+    "strikes": [],
+    "calls": [],
+    "basis_setup_s": 0.10871819999920262,
+    "product_setup_s": 0.02164910000101372,
+    "online_s": 0.6201175000005605
+  },
+  {
+    "curve": "sqrt",
+    "months": 1,
+    "budget": 500,
+    "allocation": [
+      10,
+      4,
+      3,
+      2,
+      2
+    ],
+    "actual_paths": 480,
+    "status": "Arb-certified",
+    "future": [
+      22.364464242548326,
+      22.371837254677732
+    ],
+    "target": [
+      22.59372891704305,
+      22.59684613646963
+    ],
+    "signed_future_error": [
+      -0.23238189393318726,
+      -0.22189166235343544
+    ],
+    "strikes": [],
+    "calls": [],
+    "basis_setup_s": 0.10871819999920262,
+    "product_setup_s": 0.02164910000101372,
+    "online_s": 0.6157438000009279
+  },
+  {
+    "curve": "flat",
+    "months": 1,
+    "budget": 1000,
+    "allocation": [
+      10,
+      4,
+      3,
+      2,
+      2,
+      2
+    ],
+    "actual_paths": 960,
+    "status": "Arb-certified",
+    "future": [
+      21.715743247057244,
+      21.725270094467856
+    ],
+    "target": [
+      21.933717062733646,
+      21.936710642630313
+    ],
+    "signed_future_error": [
+      -0.22096739559440698,
+      -0.20844696824445202
+    ],
+    "strikes": [],
+    "calls": [],
+    "basis_setup_s": 0.10871819999920262,
+    "product_setup_s": 0.049472400000013295,
+    "online_s": 1.376817000000301
+  },
+  {
+    "curve": "quad",
+    "months": 1,
+    "budget": 1000,
+    "allocation": [
+      10,
+      4,
+      3,
+      2,
+      2,
+      2
+    ],
+    "actual_paths": 960,
+    "status": "Arb-certified",
+    "future": [
+      24.46432636686788,
+      24.475778695325275
+    ],
+    "target": [
+      24.70355480212698,
+      24.707135759531546
+    ],
+    "signed_future_error": [
+      -0.24280939268508211,
+      -0.22777610678028987
+    ],
+    "strikes": [],
+    "calls": [],
+    "basis_setup_s": 0.10871819999920262,
+    "product_setup_s": 0.049472400000013295,
+    "online_s": 1.325163400000747
+  },
+  {
+    "curve": "sqrt",
+    "months": 1,
+    "budget": 1000,
+    "allocation": [
+      10,
+      4,
+      3,
+      2,
+      2,
+      2
+    ],
+    "actual_paths": 960,
+    "status": "Arb-certified",
+    "future": [
+      22.37063359907948,
+      22.380609483087365
+    ],
+    "target": [
+      22.59372891704305,
+      22.59684613646963
+    ],
+    "signed_future_error": [
+      -0.22621253741294828,
+      -0.2131194339328885
+    ],
+    "strikes": [],
+    "calls": [],
+    "basis_setup_s": 0.10871819999920262,
+    "product_setup_s": 0.049472400000013295,
+    "online_s": 1.7200014000009105
+  },
+  {
+    "curve": "flat",
+    "months": 2,
+    "budget": 50,
+    "allocation": [
+      6,
+      4,
+      2
+    ],
+    "actual_paths": 48,
+    "status": "Arb-certified",
+    "future": [
+      20.788120657551868,
+      20.790604990547546
+    ],
+    "target": [
+      21.2366564728651,
+      21.240621116049407
+    ],
+    "signed_future_error": [
+      -0.4525004585115707,
+      -0.4460514823035221
+    ],
+    "strikes": [],
+    "calls": [],
+    "basis_setup_s": 0.15724050000062562,
+    "product_setup_s": 0.0037350000002334127,
+    "online_s": 0.0832178999989992
+  },
+  {
+    "curve": "quad",
+    "months": 2,
+    "budget": 50,
+    "allocation": [
+      6,
+      4,
+      2
+    ],
+    "actual_paths": 48,
+    "status": "Arb-certified",
+    "future": [
+      25.159869209738552,
+      25.163152627685953
+    ],
+    "target": [
+      25.691602276782078,
+      25.69678486055462
+    ],
+    "signed_future_error": [
+      -0.5369156508288688,
+      -0.5284496490833221
+    ],
+    "strikes": [],
+    "calls": [],
+    "basis_setup_s": 0.15724050000062562,
+    "product_setup_s": 0.0037350000002334127,
+    "online_s": 0.10693679999894812
+  },
+  {
+    "curve": "sqrt",
+    "months": 2,
+    "budget": 50,
+    "allocation": [
+      6,
+      4,
+      2
+    ],
+    "actual_paths": 48,
+    "status": "Arb-certified",
+    "future": [
+      21.802556726302253,
+      21.80522092326208
+    ],
+    "target": [
+      22.27056561083082,
+      22.27478780688518
+    ],
+    "signed_future_error": [
+      -0.4722310805972346,
+      -0.46534468755442926
+    ],
+    "strikes": [],
+    "calls": [],
+    "basis_setup_s": 0.15724050000062562,
+    "product_setup_s": 0.0037350000002334127,
+    "online_s": 0.10441520000131277
+  },
+  {
+    "curve": "flat",
+    "months": 2,
+    "budget": 100,
+    "allocation": [
+      8,
+      3,
+      2,
+      2
+    ],
+    "actual_paths": 96,
+    "status": "Arb-certified",
+    "future": [
+      20.884056161062553,
+      20.887535062628835
+    ],
+    "target": [
+      21.2366564728651,
+      21.240621116049407
+    ],
+    "signed_future_error": [
+      -0.35656495499906715,
+      -0.3491214102240522
+    ],
+    "strikes": [],
+    "calls": [],
+    "basis_setup_s": 0.15724050000062562,
+    "product_setup_s": 0.006332799999654526,
+    "online_s": 0.16875949999848672
+  },
+  {
+    "curve": "quad",
+    "months": 2,
+    "budget": 100,
+    "allocation": [
+      8,
+      3,
+      2,
+      2
+    ],
+    "actual_paths": 96,
+    "status": "Arb-certified",
+    "future": [
+      25.274208732286866,
+      25.278771396751054
+    ],
+    "target": [
+      25.691602276782078,
+      25.69678486055462
+    ],
+    "signed_future_error": [
+      -0.4225761282787365,
+      -0.4128308800200403
+    ],
+    "strikes": [],
+    "calls": [],
+    "basis_setup_s": 0.15724050000062562,
+    "product_setup_s": 0.006332799999654526,
+    "online_s": 0.17690249999941443
+  },
+  {
+    "curve": "sqrt",
+    "months": 2,
+    "budget": 100,
+    "allocation": [
+      8,
+      3,
+      2,
+      2
+    ],
+    "actual_paths": 96,
+    "status": "Arb-certified",
+    "future": [
+      21.90278792062467,
+      21.906511371739324
+    ],
+    "target": [
+      22.27056561083082,
+      22.27478780688518
+    ],
+    "signed_future_error": [
+      -0.37199988627663505,
+      -0.3640542390753668
+    ],
+    "strikes": [],
+    "calls": [],
+    "basis_setup_s": 0.15724050000062562,
+    "product_setup_s": 0.006332799999654526,
+    "online_s": 0.1455805000005057
+  },
+  {
+    "curve": "flat",
+    "months": 2,
+    "budget": 500,
+    "allocation": [
+      10,
+      4,
+      3,
+      2,
+      2
+    ],
+    "actual_paths": 480,
+    "status": "Arb-certified",
+    "future": [
+      20.93027465601652,
+      20.935201981872066
+    ],
+    "target": [
+      21.2366564728651,
+      21.240621116049407
+    ],
+    "signed_future_error": [
+      -0.31034646005055866,
+      -0.3014544909753648
+    ],
+    "strikes": [],
+    "calls": [],
+    "basis_setup_s": 0.15724050000062562,
+    "product_setup_s": 0.03149879999909899,
+    "online_s": 0.8449170000003505
+  },
+  {
+    "curve": "quad",
+    "months": 2,
+    "budget": 500,
+    "allocation": [
+      10,
+      4,
+      3,
+      2,
+      2
+    ],
+    "actual_paths": 480,
+    "status": "Arb-certified",
+    "future": [
+      25.329300972408294,
+      25.33571381884474
+    ],
+    "target": [
+      25.691602276782078,
+      25.69678486055462
+    ],
+    "signed_future_error": [
+      -0.3674838881573078,
+      -0.35588845792635293
+    ],
+    "strikes": [],
+    "calls": [],
+    "basis_setup_s": 0.15724050000062562,
+    "product_setup_s": 0.03149879999909899,
+    "online_s": 0.7651725999985501
+  },
+  {
+    "curve": "sqrt",
+    "months": 2,
+    "budget": 500,
+    "allocation": [
+      10,
+      4,
+      3,
+      2,
+      2
+    ],
+    "actual_paths": 480,
+    "status": "Arb-certified",
+    "future": [
+      21.951077626240554,
+      21.95634097298271
+    ],
+    "target": [
+      22.27056561083082,
+      22.27478780688518
+    ],
+    "signed_future_error": [
+      -0.3237101806625714,
+      -0.3142246378301631
+    ],
+    "strikes": [],
+    "calls": [],
+    "basis_setup_s": 0.15724050000062562,
+    "product_setup_s": 0.03149879999909899,
+    "online_s": 0.7271352999996452
+  },
+  {
+    "curve": "flat",
+    "months": 2,
+    "budget": 1000,
+    "allocation": [
+      10,
+      4,
+      3,
+      2,
+      2,
+      2
+    ],
+    "actual_paths": 960,
+    "status": "Arb-certified",
+    "future": [
+      20.947220506970645,
+      20.95379782666179
+    ],
+    "target": [
+      21.2366564728651,
+      21.240621116049407
+    ],
+    "signed_future_error": [
+      -0.2934006090964322,
+      -0.28285864618563916
+    ],
+    "strikes": [],
+    "calls": [],
+    "basis_setup_s": 0.15724050000062562,
+    "product_setup_s": 0.04046800000105577,
+    "online_s": 1.5584251000000222
+  },
+  {
+    "curve": "quad",
+    "months": 2,
+    "budget": 1000,
+    "allocation": [
+      10,
+      4,
+      3,
+      2,
+      2,
+      2
+    ],
+    "actual_paths": 960,
+    "status": "Arb-certified",
+    "future": [
+      25.349475832905256,
+      25.357987611570977
+    ],
+    "target": [
+      25.691602276782078,
+      25.69678486055462
+    ],
+    "signed_future_error": [
+      -0.34730902767126015,
+      -0.3336146651892039
+    ],
+    "strikes": [],
+    "calls": [],
+    "basis_setup_s": 0.15724050000062562,
+    "product_setup_s": 0.04046800000105577,
+    "online_s": 1.4522195999998075
+  },
+  {
+    "curve": "sqrt",
+    "months": 2,
+    "budget": 1000,
+    "allocation": [
+      10,
+      4,
+      3,
+      2,
+      2,
+      2
+    ],
+    "actual_paths": 960,
+    "status": "Arb-certified",
+    "future": [
+      21.968777799967082,
+      21.9757934867476
+    ],
+    "target": [
+      22.27056561083082,
+      22.27478780688518
+    ],
+    "signed_future_error": [
+      -0.30601000693240554,
+      -0.29477212406890796
+    ],
+    "strikes": [],
+    "calls": [],
+    "basis_setup_s": 0.15724050000062562,
+    "product_setup_s": 0.04046800000105577,
+    "online_s": 1.4275639000006777
+  },
+  {
+    "curve": "flat",
+    "months": 3,
+    "budget": 50,
+    "allocation": [
+      6,
+      4,
+      2
+    ],
+    "actual_paths": 48,
+    "status": "Arb-certified",
+    "future": [
+      20.227955445122237,
+      20.22996935361404
+    ],
+    "target": [
+      20.753743308234252,
+      20.758236034453766
+    ],
+    "signed_future_error": [
+      -0.5302805893411764,
+      -0.5237739546105631
+    ],
+    "strikes": [],
+    "calls": [],
+    "basis_setup_s": 0.11077359999944747,
+    "product_setup_s": 0.001981000001251232,
+    "online_s": 0.07374830000117072
+  },
+  {
+    "curve": "quad",
+    "months": 3,
+    "budget": 50,
+    "allocation": [
+      6,
+      4,
+      2
+    ],
+    "actual_paths": 48,
+    "status": "Arb-certified",
+    "future": [
+      26.169847015271284,
+      26.17268871812288
+    ],
+    "target": [
+      26.838222536916295,
+      26.84452948538158
+    ],
+    "signed_future_error": [
+      -0.6746824701224023,
+      -0.6655338187813091
+    ],
+    "strikes": [
+      0.25,
+      0.27,
+      0.3
+    ],
+    "calls": [
+      [
+        5.060182662860724,
+        5.062097697376787
+      ],
+      [
+        4.229063122036028,
+        4.23079221009838
+      ],
+      [
+        3.1978054769882474,
+        3.199247098429949
+      ]
+    ],
+    "basis_setup_s": 0.11077359999944747,
+    "product_setup_s": 0.001981000001251232,
+    "online_s": 0.08226470000045083
+  },
+  {
+    "curve": "sqrt",
+    "months": 3,
+    "budget": 50,
+    "allocation": [
+      6,
+      4,
+      2
+    ],
+    "actual_paths": 48,
+    "status": "Arb-certified",
+    "future": [
+      21.571835726058346,
+      21.574031052313238
+    ],
+    "target": [
+      22.130110146055166,
+      22.134982757591267
+    ],
+    "signed_future_error": [
+      -0.5631470315467484,
+      -0.556079093728101
+    ],
+    "strikes": [],
+    "calls": [],
+    "basis_setup_s": 0.11077359999944747,
+    "product_setup_s": 0.001981000001251232,
+    "online_s": 0.06913069999973231
+  },
+  {
+    "curve": "flat",
+    "months": 3,
+    "budget": 100,
+    "allocation": [
+      8,
+      3,
+      2,
+      2
+    ],
+    "actual_paths": 96,
+    "status": "Arb-certified",
+    "future": [
+      20.30343459613465,
+      20.30620308647083
+    ],
+    "target": [
+      20.753743308234252,
+      20.758236034453766
+    ],
+    "signed_future_error": [
+      -0.4548014383287634,
+      -0.4475402217537744
+    ],
+    "strikes": [],
+    "calls": [],
+    "basis_setup_s": 0.11077359999944747,
+    "product_setup_s": 0.0027621999997791136,
+    "online_s": 0.12384369999927003
+  },
+  {
+    "curve": "quad",
+    "months": 3,
+    "budget": 100,
+    "allocation": [
+      8,
+      3,
+      2,
+      2
+    ],
+    "actual_paths": 96,
+    "status": "Arb-certified",
+    "future": [
+      26.26696315237488,
+      26.270843131784144
+    ],
+    "target": [
+      26.838222536916295,
+      26.84452948538158
+    ],
+    "signed_future_error": [
+      -0.5775663330206238,
+      -0.5673794051182275
+    ],
+    "strikes": [
+      0.25,
+      0.27,
+      0.3
+    ],
+    "calls": [
+      [
+        5.192522710218863,
+        5.195089813537009
+      ],
+      [
+        4.360370498585641,
+        4.362750210888726
+      ],
+      [
+        3.3095632043459657,
+        3.3116365883197334
+      ]
+    ],
+    "basis_setup_s": 0.11077359999944747,
+    "product_setup_s": 0.0027621999997791136,
+    "online_s": 0.15522670000063954
+  },
+  {
+    "curve": "sqrt",
+    "months": 3,
+    "budget": 100,
+    "allocation": [
+      8,
+      3,
+      2,
+      2
+    ],
+    "actual_paths": 96,
+    "status": "Arb-certified",
+    "future": [
+      21.652219195283138,
+      21.65523187150805
+    ],
+    "target": [
+      22.130110146055166,
+      22.134982757591267
+    ],
+    "signed_future_error": [
+      -0.4827635623237755,
+      -0.4748782745314698
+    ],
+    "strikes": [],
+    "calls": [],
+    "basis_setup_s": 0.11077359999944747,
+    "product_setup_s": 0.0027621999997791136,
+    "online_s": 0.1475377999995544
+  },
+  {
+    "curve": "flat",
+    "months": 3,
+    "budget": 500,
+    "allocation": [
+      10,
+      4,
+      3,
+      2,
+      2
+    ],
+    "actual_paths": 480,
+    "status": "Arb-certified",
+    "future": [
+      20.399991356642296,
+      20.403856703205854
+    ],
+    "target": [
+      20.753743308234252,
+      20.758236034453766
+    ],
+    "signed_future_error": [
+      -0.35824467782475555,
+      -0.34988660501511315
+    ],
+    "strikes": [],
+    "calls": [],
+    "basis_setup_s": 0.11077359999944747,
+    "product_setup_s": 0.01943369999935385,
+    "online_s": 0.6757242000003316
+  },
+  {
+    "curve": "quad",
+    "months": 3,
+    "budget": 500,
+    "allocation": [
+      10,
+      4,
+      3,
+      2,
+      2
+    ],
+    "actual_paths": 480,
+    "status": "Arb-certified",
+    "future": [
+      26.390033976108864,
+      26.395412073666574
+    ],
+    "target": [
+      26.838222536916295,
+      26.84452948538158
+    ],
+    "signed_future_error": [
+      -0.4544955092848221,
+      -0.44281046323761675
+    ],
+    "strikes": [
+      0.25,
+      0.27,
+      0.3
+    ],
+    "calls": [
+      [
+        5.361623579713144,
+        5.365130102895443
+      ],
+      [
+        4.510901519070305,
+        4.5141855333988365
+      ],
+      [
+        3.480671975016314,
+        3.483490123341193
+      ]
+    ],
+    "basis_setup_s": 0.11077359999944747,
+    "product_setup_s": 0.01943369999935385,
+    "online_s": 0.6615292000005866
+  },
+  {
+    "curve": "sqrt",
+    "months": 3,
+    "budget": 500,
+    "allocation": [
+      10,
+      4,
+      3,
+      2,
+      2
+    ],
+    "actual_paths": 480,
+    "status": "Arb-certified",
+    "future": [
+      21.754807871010563,
+      21.759006378380015
+    ],
+    "target": [
+      22.130110146055166,
+      22.134982757591267
+    ],
+    "signed_future_error": [
+      -0.38017488659816945,
+      -0.3711037676576864
+    ],
+    "strikes": [],
+    "calls": [],
+    "basis_setup_s": 0.11077359999944747,
+    "product_setup_s": 0.01943369999935385,
+    "online_s": 0.7251235999992787
+  },
+  {
+    "curve": "flat",
+    "months": 3,
+    "budget": 1000,
+    "allocation": [
+      10,
+      4,
+      3,
+      2,
+      2,
+      2
+    ],
+    "actual_paths": 960,
+    "status": "Arb-certified",
+    "future": [
+      20.4128588164724,
+      20.417957899332812
+    ],
+    "target": [
+      20.753743308234252,
+      20.758236034453766
+    ],
+    "signed_future_error": [
+      -0.3453772179964699,
+      -0.3357854088863358
+    ],
+    "strikes": [],
+    "calls": [],
+    "basis_setup_s": 0.11077359999944747,
+    "product_setup_s": 0.05933310000000347,
+    "online_s": 1.3772379999991244
+  },
+  {
+    "curve": "quad",
+    "months": 3,
+    "budget": 1000,
+    "allocation": [
+      10,
+      4,
+      3,
+      2,
+      2,
+      2
+    ],
+    "actual_paths": 960,
+    "status": "Arb-certified",
+    "future": [
+      26.406127133544523,
+      26.413183311392963
+    ],
+    "target": [
+      26.838222536916295,
+      26.84452948538158
+    ],
+    "signed_future_error": [
+      -0.4384023518528012,
+      -0.4250392255075893
+    ],
+    "strikes": [
+      0.25,
+      0.27,
+      0.3
+    ],
+    "calls": [
+      [
+        5.379558056392268,
+        5.38415733939779
+      ],
+      [
+        4.532932962119933,
+        4.5372095162710835
+      ],
+      [
+        3.4950865762106456,
+        3.4987489798144593
+      ]
+    ],
+    "basis_setup_s": 0.11077359999944747,
+    "product_setup_s": 0.05933310000000347,
+    "online_s": 1.4451255000003584
+  },
+  {
+    "curve": "sqrt",
+    "months": 3,
+    "budget": 1000,
+    "allocation": [
+      10,
+      4,
+      3,
+      2,
+      2,
+      2
+    ],
+    "actual_paths": 960,
+    "status": "Arb-certified",
+    "future": [
+      21.76841529100454,
+      21.773946200108536
+    ],
+    "target": [
+      22.130110146055166,
+      22.134982757591267
+    ],
+    "signed_future_error": [
+      -0.3665674666041917,
+      -0.35616394592916467
+    ],
+    "strikes": [],
+    "calls": [],
+    "basis_setup_s": 0.11077359999944747,
+    "product_setup_s": 0.05933310000000347,
+    "online_s": 1.3319647000007535
+  },
+  {
+    "curve": "flat",
+    "months": 6,
+    "budget": 50,
+    "allocation": [
+      6,
+      4,
+      2
+    ],
+    "actual_paths": 48,
+    "status": "Arb-certified",
+    "future": [
+      19.162766776418916,
+      19.164142098610892
+    ],
+    "target": [
+      19.811082262647076,
+      19.816334139437682
+    ],
+    "signed_future_error": [
+      -0.6535673630274366,
+      -0.6469401640275139
+    ],
+    "strikes": [],
+    "calls": [],
+    "basis_setup_s": 0.11497439999948256,
+    "product_setup_s": 0.001973099999304395,
+    "online_s": 0.06175169999914942
+  },
+  {
+    "curve": "quad",
+    "months": 6,
+    "budget": 50,
+    "allocation": [
+      6,
+      4,
+      2
+    ],
+    "actual_paths": 48,
+    "status": "Arb-certified",
+    "future": [
+      29.585763799350133,
+      29.588062765531262
+    ],
+    "target": [
+      30.573240325624443,
+      30.58200808915554
+    ],
+    "signed_future_error": [
+      -0.9962442898272139,
+      -0.9851775600713741
+    ],
+    "strikes": [],
+    "calls": [],
+    "basis_setup_s": 0.11497439999948256,
+    "product_setup_s": 0.001973099999304395,
+    "online_s": 0.06744599999910861
+  },
+  {
+    "curve": "sqrt",
+    "months": 6,
+    "budget": 50,
+    "allocation": [
+      6,
+      4,
+      2
+    ],
+    "actual_paths": 48,
+    "status": "Arb-certified",
+    "future": [
+      21.35970802907129,
+      21.3612720704098
+    ],
+    "target": [
+      22.079920619694768,
+      22.08587465711048
+    ],
+    "signed_future_error": [
+      -0.7261666280497396,
+      -0.7186485492744195
+    ],
+    "strikes": [],
+    "calls": [],
+    "basis_setup_s": 0.11497439999948256,
+    "product_setup_s": 0.001973099999304395,
+    "online_s": 0.0648380000002362
+  },
+  {
+    "curve": "flat",
+    "months": 6,
+    "budget": 100,
+    "allocation": [
+      8,
+      3,
+      2,
+      2
+    ],
+    "actual_paths": 96,
+    "status": "Arb-certified",
+    "future": [
+      19.18609143356901,
+      19.187910518922443
+    ],
+    "target": [
+      19.811082262647076,
+      19.816334139437682
+    ],
+    "signed_future_error": [
+      -0.6302427058755227,
+      -0.6231717437177815
+    ],
+    "strikes": [],
+    "calls": [],
+    "basis_setup_s": 0.11497439999948256,
+    "product_setup_s": 0.0036814999984926544,
+    "online_s": 0.14451499999995576
+  },
+  {
+    "curve": "quad",
+    "months": 6,
+    "budget": 100,
+    "allocation": [
+      8,
+      3,
+      2,
+      2
+    ],
+    "actual_paths": 96,
+    "status": "Arb-certified",
+    "future": [
+      29.6214902859633,
+      29.624516187721834
+    ],
+    "target": [
+      30.573240325624443,
+      30.58200808915554
+    ],
+    "signed_future_error": [
+      -0.960517803217684,
+      -0.948724137877164
+    ],
+    "strikes": [],
+    "calls": [],
+    "basis_setup_s": 0.11497439999948256,
+    "product_setup_s": 0.0036814999984926544,
+    "online_s": 0.1600445000003674
+  },
+  {
+    "curve": "sqrt",
+    "months": 6,
+    "budget": 100,
+    "allocation": [
+      8,
+      3,
+      2,
+      2
+    ],
+    "actual_paths": 96,
+    "status": "Arb-certified",
+    "future": [
+      21.385655047585622,
+      21.387721200985574
+    ],
+    "target": [
+      22.079920619694768,
+      22.08587465711048
+    ],
+    "signed_future_error": [
+      -0.7002196095381346,
+      -0.6921994186959173
+    ],
+    "strikes": [],
+    "calls": [],
+    "basis_setup_s": 0.11497439999948256,
+    "product_setup_s": 0.0036814999984926544,
+    "online_s": 0.1400419999990845
+  },
+  {
+    "curve": "flat",
+    "months": 6,
+    "budget": 500,
+    "allocation": [
+      10,
+      4,
+      3,
+      2,
+      2
+    ],
+    "actual_paths": 480,
+    "status": "Arb-certified",
+    "future": [
+      19.285885882317295,
+      19.288347123104252
+    ],
+    "target": [
+      19.811082262647076,
+      19.816334139437682
+    ],
+    "signed_future_error": [
+      -0.5304482571317861,
+      -0.5227351395314253
+    ],
+    "strikes": [],
+    "calls": [],
+    "basis_setup_s": 0.11497439999948256,
+    "product_setup_s": 0.027378200000384822,
+    "online_s": 0.6999753000000055
+  },
+  {
+    "curve": "quad",
+    "months": 6,
+    "budget": 500,
+    "allocation": [
+      10,
+      4,
+      3,
+      2,
+      2
+    ],
+    "actual_paths": 480,
+    "status": "Arb-certified",
+    "future": [
+      29.774344300824826,
+      29.77841510770212
+    ],
+    "target": [
+      30.573240325624443,
+      30.58200808915554
+    ],
+    "signed_future_error": [
+      -0.807663788356159,
+      -0.7948252178968784
+    ],
+    "strikes": [],
+    "calls": [],
+    "basis_setup_s": 0.11497439999948256,
+    "product_setup_s": 0.027378200000384822,
+    "online_s": 0.7165155000002414
+  },
+  {
+    "curve": "sqrt",
+    "months": 6,
+    "budget": 500,
+    "allocation": [
+      10,
+      4,
+      3,
+      2,
+      2
+    ],
+    "actual_paths": 480,
+    "status": "Arb-certified",
+    "future": [
+      21.496669483713585,
+      21.499460964926225
+    ],
+    "target": [
+      22.079920619694768,
+      22.08587465711048
+    ],
+    "signed_future_error": [
+      -0.5892051734119905,
+      -0.5804596547534471
+    ],
+    "strikes": [],
+    "calls": [],
+    "basis_setup_s": 0.11497439999948256,
+    "product_setup_s": 0.027378200000384822,
+    "online_s": 0.9943045999989408
+  },
+  {
+    "curve": "flat",
+    "months": 6,
+    "budget": 1000,
+    "allocation": [
+      10,
+      4,
+      3,
+      2,
+      2,
+      2
+    ],
+    "actual_paths": 960,
+    "status": "Arb-certified",
+    "future": [
+      19.302641642608332,
+      19.305812033378157
+    ],
+    "target": [
+      19.811082262647076,
+      19.816334139437682
+    ],
+    "signed_future_error": [
+      -0.51369249683893,
+      -0.5052702292593396
+    ],
+    "strikes": [],
+    "calls": [],
+    "basis_setup_s": 0.11497439999948256,
+    "product_setup_s": 0.04536480000024312,
+    "online_s": 1.497197500000766
+  },
+  {
+    "curve": "quad",
+    "months": 6,
+    "budget": 1000,
+    "allocation": [
+      10,
+      4,
+      3,
+      2,
+      2,
+      2
+    ],
+    "actual_paths": 960,
+    "status": "Arb-certified",
+    "future": [
+      29.8000936022786,
+      29.80531389506225
+    ],
+    "target": [
+      30.573240325624443,
+      30.58200808915554
+    ],
+    "signed_future_error": [
+      -0.781914486902384,
+      -0.7679264305367501
+    ],
+    "strikes": [],
+    "calls": [],
+    "basis_setup_s": 0.11497439999948256,
+    "product_setup_s": 0.04536480000024312,
+    "online_s": 1.4124891999999818
+  },
+  {
+    "curve": "sqrt",
+    "months": 6,
+    "budget": 1000,
+    "allocation": [
+      10,
+      4,
+      3,
+      2,
+      2,
+      2
+    ],
+    "actual_paths": 960,
+    "status": "Arb-certified",
+    "future": [
+      21.515324616396327,
+      21.518916306081323
+    ],
+    "target": [
+      22.079920619694768,
+      22.08587465711048
+    ],
+    "signed_future_error": [
+      -0.5705500407256106,
+      -0.5610043136019873
+    ],
+    "strikes": [],
+    "calls": [],
+    "basis_setup_s": 0.11497439999948256,
+    "product_setup_s": 0.04536480000024312,
+    "online_s": 1.554591399999481
+  },
+  {
+    "curve": "flat",
+    "months": 9,
+    "budget": 50,
+    "allocation": [
+      6,
+      4,
+      2
+    ],
+    "actual_paths": 48,
+    "status": "Arb-certified",
+    "future": [
+      18.36691793355786,
+      18.368009393955095
+    ],
+    "target": [
+      19.197533306831176,
+      19.203128881260227
+    ],
+    "signed_future_error": [
+      -0.8362109477119868,
+      -0.8295239128664595
+    ],
+    "strikes": [],
+    "calls": [],
+    "basis_setup_s": 0.11454020000019227,
+    "product_setup_s": 0.0035986999992019264,
+    "online_s": 0.06464080000114336
+  },
+  {
+    "curve": "quad",
+    "months": 9,
+    "budget": 50,
+    "allocation": [
+      6,
+      4,
+      2
+    ],
+    "actual_paths": 48,
+    "status": "Arb-certified",
+    "future": [
+      32.95188974649256,
+      32.95399341597781
+    ],
+    "target": [
+      34.42605020974977,
+      34.43681775033667
+    ],
+    "signed_future_error": [
+      -1.484928003857807,
+      -1.472056793758259
+    ],
+    "strikes": [],
+    "calls": [],
+    "basis_setup_s": 0.11454020000019227,
+    "product_setup_s": 0.0035986999992019264,
+    "online_s": 0.07822659999874304
+  },
+  {
+    "curve": "sqrt",
+    "months": 9,
+    "budget": 50,
+    "allocation": [
+      6,
+      4,
+      2
+    ],
+    "actual_paths": 48,
+    "status": "Arb-certified",
+    "future": [
+      21.256082469464292,
+      21.257368643749576
+    ],
+    "target": [
+      22.2147701835884,
+      22.221347473372223
+    ],
+    "signed_future_error": [
+      -0.9652650039213084,
+      -0.9574015398254454
+    ],
+    "strikes": [],
+    "calls": [],
+    "basis_setup_s": 0.11454020000019227,
+    "product_setup_s": 0.0035986999992019264,
+    "online_s": 0.07455529999970167
+  },
+  {
+    "curve": "flat",
+    "months": 9,
+    "budget": 100,
+    "allocation": [
+      8,
+      3,
+      2,
+      2
+    ],
+    "actual_paths": 96,
+    "status": "Arb-certified",
+    "future": [
+      18.43933230073372,
+      18.44074656452751
+    ],
+    "target": [
+      19.197533306831176,
+      19.203128881260227
+    ],
+    "signed_future_error": [
+      -0.7637965805361271,
+      -0.7567867422940429
+    ],
+    "strikes": [],
+    "calls": [],
+    "basis_setup_s": 0.11454020000019227,
+    "product_setup_s": 0.002779799999188981,
+    "online_s": 0.12360980000084965
+  },
+  {
+    "curve": "quad",
+    "months": 9,
+    "budget": 100,
+    "allocation": [
+      8,
+      3,
+      2,
+      2
+    ],
+    "actual_paths": 96,
+    "status": "Arb-certified",
+    "future": [
+      33.080616769071135,
+      33.08333252034161
+    ],
+    "target": [
+      34.42605020974977,
+      34.43681775033667
+    ],
+    "signed_future_error": [
+      -1.3562009812792337,
+      -1.342717689394465
+    ],
+    "strikes": [],
+    "calls": [],
+    "basis_setup_s": 0.11454020000019227,
+    "product_setup_s": 0.002779799999188981,
+    "online_s": 0.14345589999902586
+  },
+  {
+    "curve": "sqrt",
+    "months": 9,
+    "budget": 100,
+    "allocation": [
+      8,
+      3,
+      2,
+      2
+    ],
+    "actual_paths": 96,
+    "status": "Arb-certified",
+    "future": [
+      21.339695019080903,
+      21.341360036486602
+    ],
+    "target": [
+      22.2147701835884,
+      22.221347473372223
+    ],
+    "signed_future_error": [
+      -0.881652454304698,
+      -0.8734101470884192
+    ],
+    "strikes": [],
+    "calls": [],
+    "basis_setup_s": 0.11454020000019227,
+    "product_setup_s": 0.002779799999188981,
+    "online_s": 0.12444590000086464
+  },
+  {
+    "curve": "flat",
+    "months": 9,
+    "budget": 500,
+    "allocation": [
+      10,
+      4,
+      3,
+      2,
+      2
+    ],
+    "actual_paths": 480,
+    "status": "Arb-certified",
+    "future": [
+      18.587748720527383,
+      18.589627841134952
+    ],
+    "target": [
+      19.197533306831176,
+      19.203128881260227
+    ],
+    "signed_future_error": [
+      -0.6153801607424649,
+      -0.6079054656866025
+    ],
+    "strikes": [],
+    "calls": [],
+    "basis_setup_s": 0.11454020000019227,
+    "product_setup_s": 0.02085110000007262,
+    "online_s": 0.7464904000007664
+  },
+  {
+    "curve": "quad",
+    "months": 9,
+    "budget": 500,
+    "allocation": [
+      10,
+      4,
+      3,
+      2,
+      2
+    ],
+    "actual_paths": 480,
+    "status": "Arb-certified",
+    "future": [
+      33.34498845346409,
+      33.34858031096906
+    ],
+    "target": [
+      34.42605020974977,
+      34.43681775033667
+    ],
+    "signed_future_error": [
+      -1.0918292968862784,
+      -1.0774698987670095
+    ],
+    "strikes": [],
+    "calls": [],
+    "basis_setup_s": 0.11454020000019227,
+    "product_setup_s": 0.02085110000007262,
+    "online_s": 0.8427291999996669
+  },
+  {
+    "curve": "sqrt",
+    "months": 9,
+    "budget": 500,
+    "allocation": [
+      10,
+      4,
+      3,
+      2,
+      2
+    ],
+    "actual_paths": 480,
+    "status": "Arb-certified",
+    "future": [
+      21.511150172422948,
+      21.513359899085803
+    ],
+    "target": [
+      22.2147701835884,
+      22.221347473372223
+    ],
+    "signed_future_error": [
+      -0.7101973009617437,
+      -0.7014102844901282
+    ],
+    "strikes": [],
+    "calls": [],
+    "basis_setup_s": 0.11454020000019227,
+    "product_setup_s": 0.02085110000007262,
+    "online_s": 1.0308187999999063
+  },
+  {
+    "curve": "flat",
+    "months": 9,
+    "budget": 1000,
+    "allocation": [
+      10,
+      4,
+      3,
+      2,
+      2,
+      2
+    ],
+    "actual_paths": 960,
+    "status": "Arb-certified",
+    "future": [
+      18.590379119798786,
+      18.592758514142535
+    ],
+    "target": [
+      19.197533306831176,
+      19.203128881260227
+    ],
+    "signed_future_error": [
+      -0.612749761475609,
+      -0.6047747926744724
+    ],
+    "strikes": [],
+    "calls": [],
+    "basis_setup_s": 0.11454020000019227,
+    "product_setup_s": 0.05457560000104422,
+    "online_s": 1.582160499998281
+  },
+  {
+    "curve": "quad",
+    "months": 9,
+    "budget": 1000,
+    "allocation": [
+      10,
+      4,
+      3,
+      2,
+      2,
+      2
+    ],
+    "actual_paths": 960,
+    "status": "Arb-certified",
+    "future": [
+      33.34952322979492,
+      33.35405468645455
+    ],
+    "target": [
+      34.42605020974977,
+      34.43681775033667
+    ],
+    "signed_future_error": [
+      -1.0872945205609068,
+      -1.0719955232760614
+    ],
+    "strikes": [],
+    "calls": [],
+    "basis_setup_s": 0.11454020000019227,
+    "product_setup_s": 0.05457560000104422,
+    "online_s": 1.7302860999989207
+  },
+  {
+    "curve": "sqrt",
+    "months": 9,
+    "budget": 1000,
+    "allocation": [
+      10,
+      4,
+      3,
+      2,
+      2,
+      2
+    ],
+    "actual_paths": 960,
+    "status": "Arb-certified",
+    "future": [
+      21.514164485444397,
+      21.516959904769095
+    ],
+    "target": [
+      22.2147701835884,
+      22.221347473372223
+    ],
+    "signed_future_error": [
+      -0.7071829879384757,
+      -0.6978102788086546
+    ],
+    "strikes": [],
+    "calls": [],
+    "basis_setup_s": 0.11454020000019227,
+    "product_setup_s": 0.05457560000104422,
+    "online_s": 1.4029139999984181
+  },
+  {
+    "curve": "flat",
+    "months": 12,
+    "budget": 50,
+    "allocation": [
+      6,
+      4,
+      2
+    ],
+    "actual_paths": 48,
+    "status": "Arb-certified",
+    "future": [
+      17.71822255874388,
+      17.719148531535158
+    ],
+    "target": [
+      18.73692331944318,
+      18.74271642163591
+    ],
+    "signed_future_error": [
+      -1.0244938628989364,
+      -1.0177747879011174
+    ],
+    "strikes": [],
+    "calls": [],
+    "basis_setup_s": 0.1380650000010064,
+    "product_setup_s": 0.0018958999989990843,
+    "online_s": 0.08268859999952838
+  },
+  {
+    "curve": "quad",
+    "months": 12,
+    "budget": 50,
+    "allocation": [
+      6,
+      4,
+      2
+    ],
+    "actual_paths": 48,
+    "status": "Arb-certified",
+    "future": [
+      36.21998887898558,
+      36.22200844497828
+    ],
+    "target": [
+      38.28434414517295,
+      38.296949822557515
+    ],
+    "signed_future_error": [
+      -2.076960943586326,
+      -2.06233570018028
+    ],
+    "strikes": [],
+    "calls": [],
+    "basis_setup_s": 0.1380650000010064,
+    "product_setup_s": 0.0018958999989990843,
+    "online_s": 0.07861830000001646
+  },
+  {
+    "curve": "sqrt",
+    "months": 12,
+    "budget": 50,
+    "allocation": [
+      6,
+      4,
+      2
+    ],
+    "actual_paths": 48,
+    "status": "Arb-certified",
+    "future": [
+      21.185629641068225,
+      21.186755020564682
+    ],
+    "target": [
+      22.401041408669975,
+      22.40806645159977
+    ],
+    "signed_future_error": [
+      -1.222436810543846,
+      -1.2142863880929915
+    ],
+    "strikes": [],
+    "calls": [],
+    "basis_setup_s": 0.1380650000010064,
+    "product_setup_s": 0.0018958999989990843,
+    "online_s": 0.07910359999914363
+  },
+  {
+    "curve": "flat",
+    "months": 12,
+    "budget": 100,
+    "allocation": [
+      8,
+      3,
+      2,
+      2
+    ],
+    "actual_paths": 96,
+    "status": "Arb-certified",
+    "future": [
+      17.829826344258564,
+      17.831008637035808
+    ],
+    "target": [
+      18.73692331944318,
+      18.74271642163591
+    ],
+    "signed_future_error": [
+      -0.9128900773856155,
+      -0.9059146823991033
+    ],
+    "strikes": [],
+    "calls": [],
+    "basis_setup_s": 0.1380650000010064,
+    "product_setup_s": 0.004724399999759044,
+    "online_s": 0.16351329999997688
+  },
+  {
+    "curve": "quad",
+    "months": 12,
+    "budget": 100,
+    "allocation": [
+      8,
+      3,
+      2,
+      2
+    ],
+    "actual_paths": 96,
+    "status": "Arb-certified",
+    "future": [
+      36.446644611615405,
+      36.44921587472587
+    ],
+    "target": [
+      38.28434414517295,
+      38.296949822557515
+    ],
+    "signed_future_error": [
+      -1.85030521096196,
+      -1.8351282704272296
+    ],
+    "strikes": [],
+    "calls": [],
+    "basis_setup_s": 0.1380650000010064,
+    "product_setup_s": 0.004724399999759044,
+    "online_s": 0.14268439999978
+  },
+  {
+    "curve": "sqrt",
+    "months": 12,
+    "budget": 100,
+    "allocation": [
+      8,
+      3,
+      2,
+      2
+    ],
+    "actual_paths": 96,
+    "status": "Arb-certified",
+    "future": [
+      21.31885583315706,
+      21.3202917199782
+    ],
+    "target": [
+      22.401041408669975,
+      22.40806645159977
+    ],
+    "signed_future_error": [
+      -1.0892106184559212,
+      -1.0807496886785635
+    ],
+    "strikes": [],
+    "calls": [],
+    "basis_setup_s": 0.1380650000010064,
+    "product_setup_s": 0.004724399999759044,
+    "online_s": 0.11819389999982377
+  },
+  {
+    "curve": "flat",
+    "months": 12,
+    "budget": 500,
+    "allocation": [
+      10,
+      4,
+      3,
+      2,
+      2
+    ],
+    "actual_paths": 480,
+    "status": "Arb-certified",
+    "future": [
+      18.02697730015138,
+      18.02852816560013
+    ],
+    "target": [
+      18.73692331944318,
+      18.74271642163591
+    ],
+    "signed_future_error": [
+      -0.7157391214918898,
+      -0.7083951538356918
+    ],
+    "strikes": [],
+    "calls": [],
+    "basis_setup_s": 0.1380650000010064,
+    "product_setup_s": 0.01960280000093917,
+    "online_s": 0.664919099999679
+  },
+  {
+    "curve": "quad",
+    "months": 12,
+    "budget": 500,
+    "allocation": [
+      10,
+      4,
+      3,
+      2,
+      2
+    ],
+    "actual_paths": 480,
+    "status": "Arb-certified",
+    "future": [
+      36.847421010362275,
+      36.850781264815886
+    ],
+    "target": [
+      38.28434414517295,
+      38.296949822557515
+    ],
+    "signed_future_error": [
+      -1.4495288122132703,
+      -1.4335628803390352
+    ],
+    "strikes": [],
+    "calls": [],
+    "basis_setup_s": 0.1380650000010064,
+    "product_setup_s": 0.01960280000093917,
+    "online_s": 0.679010500000004
+  },
+  {
+    "curve": "sqrt",
+    "months": 12,
+    "budget": 500,
+    "allocation": [
+      10,
+      4,
+      3,
+      2,
+      2
+    ],
+    "actual_paths": 480,
+    "status": "Arb-certified",
+    "future": [
+      21.554259589530457,
+      21.556141331305394
+    ],
+    "target": [
+      22.401041408669975,
+      22.40806645159977
+    ],
+    "signed_future_error": [
+      -0.8538068620816139,
+      -0.8449000773522799
+    ],
+    "strikes": [],
+    "calls": [],
+    "basis_setup_s": 0.1380650000010064,
+    "product_setup_s": 0.01960280000093917,
+    "online_s": 0.6886905000010302
+  },
+  {
+    "curve": "flat",
+    "months": 12,
+    "budget": 1000,
+    "allocation": [
+      10,
+      4,
+      3,
+      2,
+      2,
+      2
+    ],
+    "actual_paths": 960,
+    "status": "Arb-certified",
+    "future": [
+      18.0488365546636,
+      18.050778076339302
+    ],
+    "target": [
+      18.73692331944318,
+      18.74271642163591
+    ],
+    "signed_future_error": [
+      -0.6938798669796713,
+      -0.6861452430965185
+    ],
+    "strikes": [],
+    "calls": [],
+    "basis_setup_s": 0.1380650000010064,
+    "product_setup_s": 0.06254020000051241,
+    "online_s": 1.4030798000003415
+  },
+  {
+    "curve": "quad",
+    "months": 12,
+    "budget": 1000,
+    "allocation": [
+      10,
+      4,
+      3,
+      2,
+      2,
+      2
+    ],
+    "actual_paths": 960,
+    "status": "Arb-certified",
+    "future": [
+      36.89146597445681,
+      36.89565976302579
+    ],
+    "target": [
+      38.28434414517295,
+      38.296949822557515
+    ],
+    "signed_future_error": [
+      -1.4054838481314715,
+      -1.388684382116398
+    ],
+    "strikes": [],
+    "calls": [],
+    "basis_setup_s": 0.1380650000010064,
+    "product_setup_s": 0.06254020000051241,
+    "online_s": 1.408891399998538
+  },
+  {
+    "curve": "sqrt",
+    "months": 12,
+    "budget": 1000,
+    "allocation": [
+      10,
+      4,
+      3,
+      2,
+      2,
+      2
+    ],
+    "actual_paths": 960,
+    "status": "Arb-certified",
+    "future": [
+      21.58030269200332,
+      21.582656608832057
+    ],
+    "target": [
+      22.401041408669975,
+      22.40806645159977
+    ],
+    "signed_future_error": [
+      -0.8277637596114806,
+      -0.8183847998228886
+    ],
+    "strikes": [],
+    "calls": [],
+    "basis_setup_s": 0.1380650000010064,
+    "product_setup_s": 0.06254020000051241,
+    "online_s": 1.3716473999993468
+  },
+  {
+    "curve": "stress",
+    "months": 6,
+    "budget": 50,
+    "allocation": [
+      6,
+      4,
+      2
+    ],
+    "actual_paths": 48,
+    "status": "Arb-certified",
+    "future": [
+      14.318255210424592,
+      14.32122203520898
+    ],
+    "target": [
+      15.54091195730778,
+      15.556344056368049
+    ],
+    "signed_future_error": [
+      -1.2380888459644823,
+      -1.2196899220777744
+    ],
+    "strikes": [],
+    "calls": [],
+    "basis_setup_s": 0.13226450000001932,
+    "product_setup_s": 0.0019264000002294779,
+    "online_s": 0.05875010000090697
+  },
+  {
+    "curve": "stress",
+    "months": 6,
+    "budget": 100,
+    "allocation": [
+      8,
+      3,
+      2,
+      2
+    ],
+    "actual_paths": 96,
+    "status": "Arb-certified",
+    "future": [
+      14.372498460006968,
+      14.376414040862366
+    ],
+    "target": [
+      15.54091195730778,
+      15.556344056368049
+    ],
+    "signed_future_error": [
+      -1.1838455963912016,
+      -1.1644979164152924
+    ],
+    "strikes": [],
+    "calls": [],
+    "basis_setup_s": 0.13226450000001932,
+    "product_setup_s": 0.003942199999073637,
+    "online_s": 0.1513833999997587
+  },
+  {
+    "curve": "stress",
+    "months": 6,
+    "budget": 500,
+    "allocation": [
+      10,
+      4,
+      3,
+      2,
+      2
+    ],
+    "actual_paths": 480,
+    "status": "Arb-certified",
+    "future": [
+      14.563164508926834,
+      14.568486167725334
+    ],
+    "target": [
+      15.54091195730778,
+      15.556344056368049
+    ],
+    "signed_future_error": [
+      -0.9931795474676977,
+      -0.9724257895559629
+    ],
+    "strikes": [],
+    "calls": [],
+    "basis_setup_s": 0.13226450000001932,
+    "product_setup_s": 0.019009399999049492,
+    "online_s": 0.7508654999983264
+  },
+  {
+    "curve": "stress",
+    "months": 6,
+    "budget": 1000,
+    "allocation": [
+      10,
+      4,
+      3,
+      2,
+      2,
+      2
+    ],
+    "actual_paths": 960,
+    "status": "Arb-certified",
+    "future": [
+      14.591949118392844,
+      14.598777847216017
+    ],
+    "target": [
+      15.54091195730778,
+      15.556344056368049
+    ],
+    "signed_future_error": [
+      -0.9643949380053256,
+      -0.9421341100616425
+    ],
+    "strikes": [],
+    "calls": [],
+    "basis_setup_s": 0.13226450000001932,
+    "product_setup_s": 0.06088339999951131,
+    "online_s": 2.1501702000005025
+  }
+]

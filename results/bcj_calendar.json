@@ -1,0 +1,2270 @@
+[
+  {
+    "curve": "flat",
+    "months": 1,
+    "window": "30/365",
+    "H": ".10",
+    "amplitude": "1.9*sqrt(2H)",
+    "budget": 50,
+    "allocation": [
+      6,
+      4,
+      2
+    ],
+    "actual_paths": 48,
+    "future": [
+      21.600004980870274,
+      21.6033753718606
+    ],
+    "target": [
+      21.925668275793143,
+      21.928219620371397
+    ],
+    "signed_future_error": [
+      -0.3282146395073672,
+      -0.32229290392629817
+    ],
+    "basis_setup_s": 0.0930900000003021,
+    "product_setup_s": 0.0031420000013895333,
+    "online_s": 0.05008409999936703,
+    "status": "Arb-certified"
+  },
+  {
+    "curve": "quad",
+    "months": 1,
+    "window": "30/365",
+    "H": ".10",
+    "amplitude": "1.9*sqrt(2H)",
+    "budget": 50,
+    "allocation": [
+      6,
+      4,
+      2
+    ],
+    "actual_paths": 48,
+    "future": [
+      24.323549108114445,
+      24.32768548459026
+    ],
+    "target": [
+      24.68155655714099,
+      24.68462561631295
+    ],
+    "signed_future_error": [
+      -0.3610765082103652,
+      -0.3538710725388706
+    ],
+    "basis_setup_s": 0.0930900000003021,
+    "product_setup_s": 0.0031420000013895333,
+    "online_s": 0.051724699998885626,
+    "status": "Arb-certified"
+  },
+  {
+    "curve": "sqrt",
+    "months": 1,
+    "window": "30/365",
+    "H": ".10",
+    "amplitude": "1.9*sqrt(2H)",
+    "budget": 50,
+    "allocation": [
+      6,
+      4,
+      2
+    ],
+    "actual_paths": 48,
+    "future": [
+      22.249080520684,
+      22.252628499937213
+    ],
+    "target": [
+      22.58252881032904,
+      22.585188227572377
+    ],
+    "signed_future_error": [
+      -0.33610770689466574,
+      -0.3299003103855397
+    ],
+    "basis_setup_s": 0.0930900000003021,
+    "product_setup_s": 0.0031420000013895333,
+    "online_s": 0.05159800000001269,
+    "status": "Arb-certified"
+  },
+  {
+    "curve": "flat",
+    "months": 1,
+    "window": "30/365",
+    "H": ".10",
+    "amplitude": "1.9*sqrt(2H)",
+    "budget": 100,
+    "allocation": [
+      8,
+      3,
+      2,
+      2
+    ],
+    "actual_paths": 96,
+    "future": [
+      21.6380486070206,
+      21.64286431672503
+    ],
+    "target": [
+      21.925668275793143,
+      21.928219620371397
+    ],
+    "signed_future_error": [
+      -0.29017101336249784,
+      -0.28280395905641054
+    ],
+    "basis_setup_s": 0.0930900000003021,
+    "product_setup_s": 0.004192799999145791,
+    "online_s": 0.10109399999964808,
+    "status": "Arb-certified"
+  },
+  {
+    "curve": "quad",
+    "months": 1,
+    "window": "30/365",
+    "H": ".10",
+    "amplitude": "1.9*sqrt(2H)",
+    "budget": 100,
+    "allocation": [
+      8,
+      3,
+      2,
+      2
+    ],
+    "actual_paths": 96,
+    "future": [
+      24.365781744930416,
+      24.371643920577483
+    ],
+    "target": [
+      24.68155655714099,
+      24.68462561631295
+    ],
+    "signed_future_error": [
+      -0.3188438713943943,
+      -0.3099126365516457
+    ],
+    "basis_setup_s": 0.0930900000003021,
+    "product_setup_s": 0.004192799999145791,
+    "online_s": 0.10507430000143358,
+    "status": "Arb-certified"
+  },
+  {
+    "curve": "sqrt",
+    "months": 1,
+    "window": "30/365",
+    "H": ".10",
+    "amplitude": "1.9*sqrt(2H)",
+    "budget": 100,
+    "allocation": [
+      8,
+      3,
+      2,
+      2
+    ],
+    "actual_paths": 96,
+    "future": [
+      22.28812796024206,
+      22.293186866850686
+    ],
+    "target": [
+      22.58252881032904,
+      22.585188227572377
+    ],
+    "signed_future_error": [
+      -0.2970602673420616,
+      -0.2893419434666099
+    ],
+    "basis_setup_s": 0.0930900000003021,
+    "product_setup_s": 0.004192799999145791,
+    "online_s": 0.09845320000022184,
+    "status": "Arb-certified"
+  },
+  {
+    "curve": "flat",
+    "months": 1,
+    "window": "30/365",
+    "H": ".10",
+    "amplitude": "1.9*sqrt(2H)",
+    "budget": 500,
+    "allocation": [
+      10,
+      4,
+      3,
+      2,
+      2
+    ],
+    "actual_paths": 480,
+    "future": [
+      21.701784675835427,
+      21.70875335470562
+    ],
+    "target": [
+      21.925668275793143,
+      21.928219620371397
+    ],
+    "signed_future_error": [
+      -0.22643494455130947,
+      -0.21691492107218296
+    ],
+    "basis_setup_s": 0.0930900000003021,
+    "product_setup_s": 0.01660029999948165,
+    "online_s": 0.5002378999997745,
+    "status": "Arb-certified"
+  },
+  {
+    "curve": "quad",
+    "months": 1,
+    "window": "30/365",
+    "H": ".10",
+    "amplitude": "1.9*sqrt(2H)",
+    "budget": 500,
+    "allocation": [
+      10,
+      4,
+      3,
+      2,
+      2
+    ],
+    "actual_paths": 480,
+    "future": [
+      24.435868888398275,
+      24.44428394014878
+    ],
+    "target": [
+      24.68155655714099,
+      24.68462561631295
+    ],
+    "signed_future_error": [
+      -0.24875672793381126,
+      -0.23727261697307428
+    ],
+    "basis_setup_s": 0.0930900000003021,
+    "product_setup_s": 0.01660029999948165,
+    "online_s": 0.5215632000017649,
+    "status": "Arb-certified"
+  },
+  {
+    "curve": "sqrt",
+    "months": 1,
+    "window": "30/365",
+    "H": ".10",
+    "amplitude": "1.9*sqrt(2H)",
+    "budget": 500,
+    "allocation": [
+      10,
+      4,
+      3,
+      2,
+      2
+    ],
+    "actual_paths": 480,
+    "future": [
+      22.353391295348885,
+      22.36069687433968
+    ],
+    "target": [
+      22.58252881032904,
+      22.585188227572377
+    ],
+    "signed_future_error": [
+      -0.2317969322388756,
+      -0.22183193597397727
+    ],
+    "basis_setup_s": 0.0930900000003021,
+    "product_setup_s": 0.01660029999948165,
+    "online_s": 0.5089876999991247,
+    "status": "Arb-certified"
+  },
+  {
+    "curve": "flat",
+    "months": 1,
+    "window": "30/365",
+    "H": ".10",
+    "amplitude": "1.9*sqrt(2H)",
+    "budget": 1000,
+    "allocation": [
+      10,
+      4,
+      3,
+      2,
+      2,
+      2
+    ],
+    "actual_paths": 960,
+    "future": [
+      21.706621680243654,
+      21.71606139810549
+    ],
+    "target": [
+      21.925668275793143,
+      21.928219620371397
+    ],
+    "signed_future_error": [
+      -0.22159794014672057,
+      -0.20960687766867453
+    ],
+    "basis_setup_s": 0.0930900000003021,
+    "product_setup_s": 0.03253500000027998,
+    "online_s": 0.9737256999997044,
+    "status": "Arb-certified"
+  },
+  {
+    "curve": "quad",
+    "months": 1,
+    "window": "30/365",
+    "H": ".10",
+    "amplitude": "1.9*sqrt(2H)",
+    "budget": 1000,
+    "allocation": [
+      10,
+      4,
+      3,
+      2,
+      2,
+      2
+    ],
+    "actual_paths": 960,
+    "future": [
+      24.4411722990923,
+      24.452506391856033
+    ],
+    "target": [
+      24.68155655714099,
+      24.68462561631295
+    ],
+    "signed_future_error": [
+      -0.2434533172397853,
+      -0.22905016526581962
+    ],
+    "basis_setup_s": 0.0930900000003021,
+    "product_setup_s": 0.03253500000027998,
+    "online_s": 1.0316454999992857,
+    "status": "Arb-certified"
+  },
+  {
+    "curve": "sqrt",
+    "months": 1,
+    "window": "30/365",
+    "H": ".10",
+    "amplitude": "1.9*sqrt(2H)",
+    "budget": 1000,
+    "allocation": [
+      10,
+      4,
+      3,
+      2,
+      2,
+      2
+    ],
+    "actual_paths": 960,
+    "future": [
+      22.358340999381618,
+      22.368222707352267
+    ],
+    "target": [
+      22.58252881032904,
+      22.585188227572377
+    ],
+    "signed_future_error": [
+      -0.22684722820978115,
+      -0.21430610295775304
+    ],
+    "basis_setup_s": 0.0930900000003021,
+    "product_setup_s": 0.03253500000027998,
+    "online_s": 1.0482827000014368,
+    "status": "Arb-certified"
+  },
+  {
+    "curve": "flat",
+    "months": 2,
+    "window": "30/365",
+    "H": ".10",
+    "amplitude": "1.9*sqrt(2H)",
+    "budget": 50,
+    "allocation": [
+      6,
+      4,
+      2
+    ],
+    "actual_paths": 48,
+    "future": [
+      20.776064072239024,
+      20.778524855801166
+    ],
+    "target": [
+      21.22712154541366,
+      21.230531241895104
+    ],
+    "signed_future_error": [
+      -0.45446716966492506,
+      -0.44859668960364896
+    ],
+    "basis_setup_s": 0.08970910000061849,
+    "product_setup_s": 0.001882699998532189,
+    "online_s": 0.0510534999993979,
+    "status": "Arb-certified"
+  },
+  {
+    "curve": "quad",
+    "months": 2,
+    "window": "30/365",
+    "H": ".10",
+    "amplitude": "1.9*sqrt(2H)",
+    "budget": 50,
+    "allocation": [
+      6,
+      4,
+      2
+    ],
+    "actual_paths": 48,
+    "future": [
+      25.132815248250814,
+      25.13606301028789
+    ],
+    "target": [
+      25.66748055761207,
+      25.671968177268432
+    ],
+    "signed_future_error": [
+      -0.5391529290297952,
+      -0.5314175473120011
+    ],
+    "basis_setup_s": 0.08970910000061849,
+    "product_setup_s": 0.001882699998532189,
+    "online_s": 0.053498100000069826,
+    "status": "Arb-certified"
+  },
+  {
+    "curve": "sqrt",
+    "months": 2,
+    "window": "30/365",
+    "H": ".10",
+    "amplitude": "1.9*sqrt(2H)",
+    "budget": 50,
+    "allocation": [
+      6,
+      4,
+      2
+    ],
+    "actual_paths": 48,
+    "future": [
+      21.787252439686064,
+      21.789890442590938
+    ],
+    "target": [
+      22.25787952587093,
+      22.26151577231399
+    ],
+    "signed_future_error": [
+      -0.4742633326344664,
+      -0.4679890832734531
+    ],
+    "basis_setup_s": 0.08970910000061849,
+    "product_setup_s": 0.001882699998532189,
+    "online_s": 0.05846650000057707,
+    "status": "Arb-certified"
+  },
+  {
+    "curve": "flat",
+    "months": 2,
+    "window": "30/365",
+    "H": ".10",
+    "amplitude": "1.9*sqrt(2H)",
+    "budget": 100,
+    "allocation": [
+      8,
+      3,
+      2,
+      2
+    ],
+    "actual_paths": 96,
+    "future": [
+      20.873048863534784,
+      20.87649303393585
+    ],
+    "target": [
+      21.22712154541366,
+      21.230531241895104
+    ],
+    "signed_future_error": [
+      -0.35748237836916463,
+      -0.35062851146896346
+    ],
+    "basis_setup_s": 0.08970910000061849,
+    "product_setup_s": 0.0028688999991572928,
+    "online_s": 0.10380720000102883,
+    "status": "Arb-certified"
+  },
+  {
+    "curve": "quad",
+    "months": 2,
+    "window": "30/365",
+    "H": ".10",
+    "amplitude": "1.9*sqrt(2H)",
+    "budget": 100,
+    "allocation": [
+      8,
+      3,
+      2,
+      2
+    ],
+    "actual_paths": 96,
+    "future": [
+      25.248399599211226,
+      25.252910864826532
+    ],
+    "target": [
+      25.66748055761207,
+      25.671968177268432
+    ],
+    "signed_future_error": [
+      -0.42356857807120296,
+      -0.41456969277154154
+    ],
+    "basis_setup_s": 0.08970910000061849,
+    "product_setup_s": 0.0028688999991572928,
+    "online_s": 0.11730639999950654,
+    "status": "Arb-certified"
+  },
+  {
+    "curve": "sqrt",
+    "months": 2,
+    "window": "30/365",
+    "H": ".10",
+    "amplitude": "1.9*sqrt(2H)",
+    "budget": 100,
+    "allocation": [
+      8,
+      3,
+      2,
+      2
+    ],
+    "actual_paths": 96,
+    "future": [
+      21.888578815412345,
+      21.892263893031952
+    ],
+    "target": [
+      22.25787952587093,
+      22.26151577231399
+    ],
+    "signed_future_error": [
+      -0.37293695690818585,
+      -0.3656156328324388
+    ],
+    "basis_setup_s": 0.08970910000061849,
+    "product_setup_s": 0.0028688999991572928,
+    "online_s": 0.10816939999858732,
+    "status": "Arb-certified"
+  },
+  {
+    "curve": "flat",
+    "months": 2,
+    "window": "30/365",
+    "H": ".10",
+    "amplitude": "1.9*sqrt(2H)",
+    "budget": 500,
+    "allocation": [
+      10,
+      4,
+      3,
+      2,
+      2
+    ],
+    "actual_paths": 480,
+    "future": [
+      20.91992845408387,
+      20.92480408251434
+    ],
+    "target": [
+      21.22712154541366,
+      21.230531241895104
+    ],
+    "signed_future_error": [
+      -0.31060278782917383,
+      -0.3023174628813815
+    ],
+    "basis_setup_s": 0.08970910000061849,
+    "product_setup_s": 0.014147399999274057,
+    "online_s": 0.5040100000005623,
+    "status": "Arb-certified"
+  },
+  {
+    "curve": "quad",
+    "months": 2,
+    "window": "30/365",
+    "H": ".10",
+    "amplitude": "1.9*sqrt(2H)",
+    "budget": 500,
+    "allocation": [
+      10,
+      4,
+      3,
+      2,
+      2
+    ],
+    "actual_paths": 480,
+    "future": [
+      25.304243341310595,
+      25.310581237947588
+    ],
+    "target": [
+      25.66748055761207,
+      25.671968177268432
+    ],
+    "signed_future_error": [
+      -0.36772483597183314,
+      -0.3568993196504858
+    ],
+    "basis_setup_s": 0.08970910000061849,
+    "product_setup_s": 0.014147399999274057,
+    "online_s": 0.5194331000002421,
+    "status": "Arb-certified"
+  },
+  {
+    "curve": "sqrt",
+    "months": 2,
+    "window": "30/365",
+    "H": ".10",
+    "amplitude": "1.9*sqrt(2H)",
+    "budget": 500,
+    "allocation": [
+      10,
+      4,
+      3,
+      2,
+      2
+    ],
+    "actual_paths": 480,
+    "future": [
+      21.9375513298998,
+      21.942757874354083
+    ],
+    "target": [
+      22.25787952587093,
+      22.26151577231399
+    ],
+    "signed_future_error": [
+      -0.3239644424261866,
+      -0.3151216515048513
+    ],
+    "basis_setup_s": 0.08970910000061849,
+    "product_setup_s": 0.014147399999274057,
+    "online_s": 0.5253443000001425,
+    "status": "Arb-certified"
+  },
+  {
+    "curve": "flat",
+    "months": 2,
+    "window": "30/365",
+    "H": ".10",
+    "amplitude": "1.9*sqrt(2H)",
+    "budget": 1000,
+    "allocation": [
+      10,
+      4,
+      3,
+      2,
+      2,
+      2
+    ],
+    "actual_paths": 960,
+    "future": [
+      20.9352738167274,
+      20.941779331462595
+    ],
+    "target": [
+      21.22712154541366,
+      21.230531241895104
+    ],
+    "signed_future_error": [
+      -0.29525742518564446,
+      -0.2853422139331253
+    ],
+    "basis_setup_s": 0.08970910000061849,
+    "product_setup_s": 0.03152750000117521,
+    "online_s": 0.9937773000001471,
+    "status": "Arb-certified"
+  },
+  {
+    "curve": "quad",
+    "months": 2,
+    "window": "30/365",
+    "H": ".10",
+    "amplitude": "1.9*sqrt(2H)",
+    "budget": 1000,
+    "allocation": [
+      10,
+      4,
+      3,
+      2,
+      2,
+      2
+    ],
+    "actual_paths": 960,
+    "future": [
+      25.322518375883707,
+      25.330927607421092
+    ],
+    "target": [
+      25.66748055761207,
+      25.671968177268432
+    ],
+    "signed_future_error": [
+      -0.34944980140963555,
+      -0.3365529501660677
+    ],
+    "basis_setup_s": 0.08970910000061849,
+    "product_setup_s": 0.03152750000117521,
+    "online_s": 1.034217799999169,
+    "status": "Arb-certified"
+  },
+  {
+    "curve": "sqrt",
+    "months": 2,
+    "window": "30/365",
+    "H": ".10",
+    "amplitude": "1.9*sqrt(2H)",
+    "budget": 1000,
+    "allocation": [
+      10,
+      4,
+      3,
+      2,
+      2,
+      2
+    ],
+    "actual_paths": 960,
+    "future": [
+      21.953581047337348,
+      21.960518155914766
+    ],
+    "target": [
+      22.25787952587093,
+      22.26151577231399
+    ],
+    "signed_future_error": [
+      -0.3079347249886394,
+      -0.29736136994416806
+    ],
+    "basis_setup_s": 0.08970910000061849,
+    "product_setup_s": 0.03152750000117521,
+    "online_s": 1.0632872999995016,
+    "status": "Arb-certified"
+  },
+  {
+    "curve": "flat",
+    "months": 3,
+    "window": "30/365",
+    "H": ".10",
+    "amplitude": "1.9*sqrt(2H)",
+    "budget": 50,
+    "allocation": [
+      6,
+      4,
+      2
+    ],
+    "actual_paths": 48,
+    "future": [
+      20.216815706341325,
+      20.218809770637353
+    ],
+    "target": [
+      20.74361317955038,
+      20.747484390934957
+    ],
+    "signed_future_error": [
+      -0.5306686845995723,
+      -0.5248034089070861
+    ],
+    "basis_setup_s": 0.09079630000087491,
+    "product_setup_s": 0.0025163999998767395,
+    "online_s": 0.05004530000041996,
+    "status": "Arb-certified"
+  },
+  {
+    "curve": "quad",
+    "months": 3,
+    "window": "30/365",
+    "H": ".10",
+    "amplitude": "1.9*sqrt(2H)",
+    "budget": 50,
+    "allocation": [
+      6,
+      4,
+      2
+    ],
+    "actual_paths": 48,
+    "future": [
+      26.143231992878718,
+      26.146041879743002
+    ],
+    "target": [
+      26.812795027917744,
+      26.81826861813574
+    ],
+    "signed_future_error": [
+      -0.6750366252741282,
+      -0.6667531481576352
+    ],
+    "basis_setup_s": 0.09079630000087491,
+    "product_setup_s": 0.0025163999998767395,
+    "online_s": 0.04988180000145803,
+    "status": "Arb-certified"
+  },
+  {
+    "curve": "sqrt",
+    "months": 3,
+    "window": "30/365",
+    "H": ".10",
+    "amplitude": "1.9*sqrt(2H)",
+    "budget": 50,
+    "allocation": [
+      6,
+      4,
+      2
+    ],
+    "actual_paths": 48,
+    "future": [
+      21.557476114074557,
+      21.559649068851623
+    ],
+    "target": [
+      22.116802240860352,
+      22.121007195339747
+    ],
+    "signed_future_error": [
+      -0.5635310812777503,
+      -0.5571531719961678
+    ],
+    "basis_setup_s": 0.09079630000087491,
+    "product_setup_s": 0.0025163999998767395,
+    "online_s": 0.05058950000056939,
+    "status": "Arb-certified"
+  },
+  {
+    "curve": "flat",
+    "months": 3,
+    "window": "30/365",
+    "H": ".10",
+    "amplitude": "1.9*sqrt(2H)",
+    "budget": 100,
+    "allocation": [
+      8,
+      3,
+      2,
+      2
+    ],
+    "actual_paths": 96,
+    "future": [
+      20.28986446421169,
+      20.292603571928183
+    ],
+    "target": [
+      20.74361317955038,
+      20.747484390934957
+    ],
+    "signed_future_error": [
+      -0.45761992672920837,
+      -0.45100960761625675
+    ],
+    "basis_setup_s": 0.09079630000087491,
+    "product_setup_s": 0.0025729999997565756,
+    "online_s": 0.1004997000000003,
+    "status": "Arb-certified"
+  },
+  {
+    "curve": "quad",
+    "months": 3,
+    "window": "30/365",
+    "H": ".10",
+    "amplitude": "1.9*sqrt(2H)",
+    "budget": 100,
+    "allocation": [
+      8,
+      3,
+      2,
+      2
+    ],
+    "actual_paths": 96,
+    "future": [
+      26.23722195727355,
+      26.241055932156147
+    ],
+    "target": [
+      26.812795027917744,
+      26.81826861813574
+    ],
+    "signed_future_error": [
+      -0.5810466608738383,
+      -0.5717390957499473
+    ],
+    "basis_setup_s": 0.09079630000087491,
+    "product_setup_s": 0.0025729999997565756,
+    "online_s": 0.11088589999963006,
+    "status": "Arb-certified"
+  },
+  {
+    "curve": "sqrt",
+    "months": 3,
+    "window": "30/365",
+    "H": ".10",
+    "amplitude": "1.9*sqrt(2H)",
+    "budget": 100,
+    "allocation": [
+      8,
+      3,
+      2,
+      2
+    ],
+    "actual_paths": 96,
+    "future": [
+      21.63527161710552,
+      21.63825137365311
+    ],
+    "target": [
+      22.116802240860352,
+      22.121007195339747
+    ],
+    "signed_future_error": [
+      -0.4857355782467875,
+      -0.4785508671946824
+    ],
+    "basis_setup_s": 0.09079630000087491,
+    "product_setup_s": 0.0025729999997565756,
+    "online_s": 0.1255330000003596,
+    "status": "Arb-certified"
+  },
+  {
+    "curve": "flat",
+    "months": 3,
+    "window": "30/365",
+    "H": ".10",
+    "amplitude": "1.9*sqrt(2H)",
+    "budget": 500,
+    "allocation": [
+      10,
+      4,
+      3,
+      2,
+      2
+    ],
+    "actual_paths": 480,
+    "future": [
+      20.387435863108774,
+      20.391258095709002
+    ],
+    "target": [
+      20.74361317955038,
+      20.747484390934957
+    ],
+    "signed_future_error": [
+      -0.3600485278339428,
+      -0.35235508383361835
+    ],
+    "basis_setup_s": 0.09079630000087491,
+    "product_setup_s": 0.017869000001155655,
+    "online_s": 0.698505500000465,
+    "status": "Arb-certified"
+  },
+  {
+    "curve": "quad",
+    "months": 3,
+    "window": "30/365",
+    "H": ".10",
+    "amplitude": "1.9*sqrt(2H)",
+    "budget": 500,
+    "allocation": [
+      10,
+      4,
+      3,
+      2,
+      2
+    ],
+    "actual_paths": 480,
+    "future": [
+      26.361574721982077,
+      26.366886624165257
+    ],
+    "target": [
+      26.812795027917744,
+      26.81826861813574
+    ],
+    "signed_future_error": [
+      -0.4566938961671313,
+      -0.4459084037390183
+    ],
+    "basis_setup_s": 0.09079630000087491,
+    "product_setup_s": 0.017869000001155655,
+    "online_s": 0.5670012999999017,
+    "status": "Arb-certified"
+  },
+  {
+    "curve": "sqrt",
+    "months": 3,
+    "window": "30/365",
+    "H": ".10",
+    "amplitude": "1.9*sqrt(2H)",
+    "budget": 500,
+    "allocation": [
+      10,
+      4,
+      3,
+      2,
+      2
+    ],
+    "actual_paths": 480,
+    "future": [
+      21.73893611277537,
+      21.743086571998113
+    ],
+    "target": [
+      22.116802240860352,
+      22.121007195339747
+    ],
+    "signed_future_error": [
+      -0.3820710825823942,
+      -0.37371566884422147
+    ],
+    "basis_setup_s": 0.09079630000087491,
+    "product_setup_s": 0.017869000001155655,
+    "online_s": 0.5575339000006352,
+    "status": "Arb-certified"
+  },
+  {
+    "curve": "flat",
+    "months": 3,
+    "window": "30/365",
+    "H": ".10",
+    "amplitude": "1.9*sqrt(2H)",
+    "budget": 1000,
+    "allocation": [
+      10,
+      4,
+      3,
+      2,
+      2,
+      2
+    ],
+    "actual_paths": 960,
+    "future": [
+      20.40193779624597,
+      20.40697816938984
+    ],
+    "target": [
+      20.74361317955038,
+      20.747484390934957
+    ],
+    "signed_future_error": [
+      -0.3455465947058408,
+      -0.33663501014368424
+    ],
+    "basis_setup_s": 0.09079630000087491,
+    "product_setup_s": 0.048209399999905145,
+    "online_s": 1.2062938999988546,
+    "status": "Arb-certified"
+  },
+  {
+    "curve": "quad",
+    "months": 3,
+    "window": "30/365",
+    "H": ".10",
+    "amplitude": "1.9*sqrt(2H)",
+    "budget": 1000,
+    "allocation": [
+      10,
+      4,
+      3,
+      2,
+      2,
+      2
+    ],
+    "actual_paths": 960,
+    "future": [
+      26.37974128899058,
+      26.386708495439784
+    ],
+    "target": [
+      26.812795027917744,
+      26.81826861813574
+    ],
+    "signed_future_error": [
+      -0.43852732915862813,
+      -0.4260865324644917
+    ],
+    "basis_setup_s": 0.09079630000087491,
+    "product_setup_s": 0.048209399999905145,
+    "online_s": 1.1045016999996733,
+    "status": "Arb-certified"
+  },
+  {
+    "curve": "sqrt",
+    "months": 3,
+    "window": "30/365",
+    "H": ".10",
+    "amplitude": "1.9*sqrt(2H)",
+    "budget": 1000,
+    "allocation": [
+      10,
+      4,
+      3,
+      2,
+      2,
+      2
+    ],
+    "actual_paths": 960,
+    "future": [
+      21.754278064501346,
+      21.759743772141174
+    ],
+    "target": [
+      22.116802240860352,
+      22.121007195339747
+    ],
+    "signed_future_error": [
+      -0.36672913085641856,
+      -0.35705846870115987
+    ],
+    "basis_setup_s": 0.09079630000087491,
+    "product_setup_s": 0.048209399999905145,
+    "online_s": 1.1417978000008588,
+    "status": "Arb-certified"
+  },
+  {
+    "curve": "flat",
+    "months": 6,
+    "window": "30/365",
+    "H": ".10",
+    "amplitude": "1.9*sqrt(2H)",
+    "budget": 50,
+    "allocation": [
+      6,
+      4,
+      2
+    ],
+    "actual_paths": 48,
+    "future": [
+      19.148685599060318,
+      19.150046939679374
+    ],
+    "target": [
+      19.800420811334284,
+      19.804941850029255
+    ],
+    "signed_future_error": [
+      -0.6562562509767764,
+      -0.6503738716470708
+    ],
+    "basis_setup_s": 0.08778720000009343,
+    "product_setup_s": 0.00188230000094336,
+    "online_s": 0.05293419999907201,
+    "status": "Arb-certified"
+  },
+  {
+    "curve": "quad",
+    "months": 6,
+    "window": "30/365",
+    "H": ".10",
+    "amplitude": "1.9*sqrt(2H)",
+    "budget": 50,
+    "allocation": [
+      6,
+      4,
+      2
+    ],
+    "actual_paths": 48,
+    "future": [
+      29.552464423931355,
+      29.55473721627378
+    ],
+    "target": [
+      30.544994535177313,
+      30.552595821771668
+    ],
+    "signed_future_error": [
+      -1.000131397856427,
+      -0.9902573188874209
+    ],
+    "basis_setup_s": 0.08778720000009343,
+    "product_setup_s": 0.00188230000094336,
+    "online_s": 0.06579030000102648,
+    "status": "Arb-certified"
+  },
+  {
+    "curve": "sqrt",
+    "months": 6,
+    "window": "30/365",
+    "H": ".10",
+    "amplitude": "1.9*sqrt(2H)",
+    "budget": 50,
+    "allocation": [
+      6,
+      4,
+      2
+    ],
+    "actual_paths": 48,
+    "future": [
+      21.34195060248767,
+      21.34349826223317
+    ],
+    "target": [
+      22.065933655434115,
+      22.071067257010885
+    ],
+    "signed_future_error": [
+      -0.7291166545341083,
+      -0.7224353931900518
+    ],
+    "basis_setup_s": 0.08778720000009343,
+    "product_setup_s": 0.00188230000094336,
+    "online_s": 0.05615600000055565,
+    "status": "Arb-certified"
+  },
+  {
+    "curve": "flat",
+    "months": 6,
+    "window": "30/365",
+    "H": ".10",
+    "amplitude": "1.9*sqrt(2H)",
+    "budget": 100,
+    "allocation": [
+      8,
+      3,
+      2,
+      2
+    ],
+    "actual_paths": 96,
+    "future": [
+      19.173006286894406,
+      19.174805588016866
+    ],
+    "target": [
+      19.800420811334284,
+      19.804941850029255
+    ],
+    "signed_future_error": [
+      -0.6319355631417791,
+      -0.6256152233104879
+    ],
+    "basis_setup_s": 0.08778720000009343,
+    "product_setup_s": 0.002960499999971944,
+    "online_s": 0.11005950000071607,
+    "status": "Arb-certified"
+  },
+  {
+    "curve": "quad",
+    "months": 6,
+    "window": "30/365",
+    "H": ".10",
+    "amplitude": "1.9*sqrt(2H)",
+    "budget": 100,
+    "allocation": [
+      8,
+      3,
+      2,
+      2
+    ],
+    "actual_paths": 96,
+    "future": [
+      29.589685190958818,
+      29.592674732778093
+    ],
+    "target": [
+      30.544994535177313,
+      30.552595821771668
+    ],
+    "signed_future_error": [
+      -0.9629106308289634,
+      -0.9523198023831065
+    ],
+    "basis_setup_s": 0.08778720000009343,
+    "product_setup_s": 0.002960499999971944,
+    "online_s": 0.11205669999981183,
+    "status": "Arb-certified"
+  },
+  {
+    "curve": "sqrt",
+    "months": 6,
+    "window": "30/365",
+    "H": ".10",
+    "amplitude": "1.9*sqrt(2H)",
+    "budget": 100,
+    "allocation": [
+      8,
+      3,
+      2,
+      2
+    ],
+    "actual_paths": 96,
+    "future": [
+      21.368999986343418,
+      21.37104307121789
+    ],
+    "target": [
+      22.065933655434115,
+      22.071067257010885
+    ],
+    "signed_future_error": [
+      -0.7020672706810898,
+      -0.6948905842026016
+    ],
+    "basis_setup_s": 0.08778720000009343,
+    "product_setup_s": 0.002960499999971944,
+    "online_s": 0.11847940000006929,
+    "status": "Arb-certified"
+  },
+  {
+    "curve": "flat",
+    "months": 6,
+    "window": "30/365",
+    "H": ".10",
+    "amplitude": "1.9*sqrt(2H)",
+    "budget": 500,
+    "allocation": [
+      10,
+      4,
+      3,
+      2,
+      2
+    ],
+    "actual_paths": 480,
+    "future": [
+      19.273350844388005,
+      19.275783719799634
+    ],
+    "target": [
+      19.800420811334284,
+      19.804941850029255
+    ],
+    "signed_future_error": [
+      -0.5315910056509081,
+      -0.524637091524992
+    ],
+    "basis_setup_s": 0.08778720000009343,
+    "product_setup_s": 0.014549999999871943,
+    "online_s": 0.5355202999999165,
+    "status": "Arb-certified"
+  },
+  {
+    "curve": "quad",
+    "months": 6,
+    "window": "30/365",
+    "H": ".10",
+    "amplitude": "1.9*sqrt(2H)",
+    "budget": 500,
+    "allocation": [
+      10,
+      4,
+      3,
+      2,
+      2
+    ],
+    "actual_paths": 480,
+    "future": [
+      29.743332888056678,
+      29.74735247639787
+    ],
+    "target": [
+      30.544994535177313,
+      30.552595821771668
+    ],
+    "signed_future_error": [
+      -0.8092629337311037,
+      -0.7976420587633279
+    ],
+    "basis_setup_s": 0.08778720000009343,
+    "product_setup_s": 0.014549999999871943,
+    "online_s": 0.5642733000004228,
+    "status": "Arb-certified"
+  },
+  {
+    "curve": "sqrt",
+    "months": 6,
+    "window": "30/365",
+    "H": ".10",
+    "amplitude": "1.9*sqrt(2H)",
+    "budget": 500,
+    "allocation": [
+      10,
+      4,
+      3,
+      2,
+      2
+    ],
+    "actual_paths": 480,
+    "future": [
+      21.48061763004133,
+      21.483376194636186
+    ],
+    "target": [
+      22.065933655434115,
+      22.071067257010885
+    ],
+    "signed_future_error": [
+      -0.590449626986816,
+      -0.5825574607806681
+    ],
+    "basis_setup_s": 0.08778720000009343,
+    "product_setup_s": 0.014549999999871943,
+    "online_s": 0.5738397000004625,
+    "status": "Arb-certified"
+  },
+  {
+    "curve": "flat",
+    "months": 6,
+    "window": "30/365",
+    "H": ".10",
+    "amplitude": "1.9*sqrt(2H)",
+    "budget": 1000,
+    "allocation": [
+      10,
+      4,
+      3,
+      2,
+      2,
+      2
+    ],
+    "actual_paths": 960,
+    "future": [
+      19.28880817648829,
+      19.29194016312401
+    ],
+    "target": [
+      19.800420811334284,
+      19.804941850029255
+    ],
+    "signed_future_error": [
+      -0.5161336735506252,
+      -0.5084806482006152
+    ],
+    "basis_setup_s": 0.08778720000009343,
+    "product_setup_s": 0.041545899999618996,
+    "online_s": 1.4222526000012294,
+    "status": "Arb-certified"
+  },
+  {
+    "curve": "quad",
+    "months": 6,
+    "window": "30/365",
+    "H": ".10",
+    "amplitude": "1.9*sqrt(2H)",
+    "budget": 1000,
+    "allocation": [
+      10,
+      4,
+      3,
+      2,
+      2,
+      2
+    ],
+    "actual_paths": 960,
+    "future": [
+      29.767089806534226,
+      29.7722416699697
+    ],
+    "target": [
+      30.544994535177313,
+      30.552595821771668
+    ],
+    "signed_future_error": [
+      -0.7855060152535549,
+      -0.772752865191501
+    ],
+    "basis_setup_s": 0.08778720000009343,
+    "product_setup_s": 0.041545899999618996,
+    "online_s": 1.254653200001485,
+    "status": "Arb-certified"
+  },
+  {
+    "curve": "sqrt",
+    "months": 6,
+    "window": "30/365",
+    "H": ".10",
+    "amplitude": "1.9*sqrt(2H)",
+    "budget": 1000,
+    "allocation": [
+      10,
+      4,
+      3,
+      2,
+      2,
+      2
+    ],
+    "actual_paths": 960,
+    "future": [
+      21.497827711145284,
+      21.501374996374004
+    ],
+    "target": [
+      22.065933655434115,
+      22.071067257010885
+    ],
+    "signed_future_error": [
+      -0.5732395458810429,
+      -0.5645586590446692
+    ],
+    "basis_setup_s": 0.08778720000009343,
+    "product_setup_s": 0.041545899999618996,
+    "online_s": 1.0918588000004092,
+    "status": "Arb-certified"
+  },
+  {
+    "curve": "flat",
+    "months": 9,
+    "window": "30/365",
+    "H": ".10",
+    "amplitude": "1.9*sqrt(2H)",
+    "budget": 50,
+    "allocation": [
+      6,
+      4,
+      2
+    ],
+    "actual_paths": 48,
+    "future": [
+      18.349526396969512,
+      18.35060677259266
+    ],
+    "target": [
+      19.186809653816386,
+      19.191615666099562
+    ],
+    "signed_future_error": [
+      -0.842089269138871,
+      -0.8362028812149054
+    ],
+    "basis_setup_s": 0.09004749999985506,
+    "product_setup_s": 0.0032305999993695877,
+    "online_s": 0.055353800000375486,
+    "status": "Arb-certified"
+  },
+  {
+    "curve": "quad",
+    "months": 9,
+    "window": "30/365",
+    "H": ".10",
+    "amplitude": "1.9*sqrt(2H)",
+    "budget": 50,
+    "allocation": [
+      6,
+      4,
+      2
+    ],
+    "actual_paths": 48,
+    "future": [
+      32.909590563963604,
+      32.91167056646859
+    ],
+    "target": [
+      34.395387974411946,
+      34.40469737094378
+    ],
+    "signed_future_error": [
+      -1.4951068070009303,
+      -1.483717407922604
+    ],
+    "basis_setup_s": 0.09004749999985506,
+    "product_setup_s": 0.0032305999993695877,
+    "online_s": 0.08369180000045162,
+    "status": "Arb-certified"
+  },
+  {
+    "curve": "sqrt",
+    "months": 9,
+    "window": "30/365",
+    "H": ".10",
+    "amplitude": "1.9*sqrt(2H)",
+    "budget": 50,
+    "allocation": [
+      6,
+      4,
+      2
+    ],
+    "actual_paths": 48,
+    "future": [
+      21.234183625356962,
+      21.23545637925848
+    ],
+    "target": [
+      22.200535214213758,
+      22.206192931262926
+    ],
+    "signed_future_error": [
+      -0.9720093059149486,
+      -0.9650788349462933
+    ],
+    "basis_setup_s": 0.09004749999985506,
+    "product_setup_s": 0.0032305999993695877,
+    "online_s": 0.07989810000071884,
+    "status": "Arb-certified"
+  },
+  {
+    "curve": "flat",
+    "months": 9,
+    "window": "30/365",
+    "H": ".10",
+    "amplitude": "1.9*sqrt(2H)",
+    "budget": 100,
+    "allocation": [
+      8,
+      3,
+      2,
+      2
+    ],
+    "actual_paths": 96,
+    "future": [
+      18.42375108254571,
+      18.425150002758247
+    ],
+    "target": [
+      19.186809653816386,
+      19.191615666099562
+    ],
+    "signed_future_error": [
+      -0.7678645835626734,
+      -0.7616596510493172
+    ],
+    "basis_setup_s": 0.09004749999985506,
+    "product_setup_s": 0.0025664999993750826,
+    "online_s": 0.1053180999988399,
+    "status": "Arb-certified"
+  },
+  {
+    "curve": "quad",
+    "months": 9,
+    "window": "30/365",
+    "H": ".10",
+    "amplitude": "1.9*sqrt(2H)",
+    "budget": 100,
+    "allocation": [
+      8,
+      3,
+      2,
+      2
+    ],
+    "actual_paths": 96,
+    "future": [
+      33.0415173902785,
+      33.044200880844215
+    ],
+    "target": [
+      34.395387974411946,
+      34.40469737094378
+    ],
+    "signed_future_error": [
+      -1.3631799806878537,
+      -1.3511870935451564
+    ],
+    "basis_setup_s": 0.09004749999985506,
+    "product_setup_s": 0.0025664999993750826,
+    "online_s": 0.11081769999873359,
+    "status": "Arb-certified"
+  },
+  {
+    "curve": "sqrt",
+    "months": 9,
+    "window": "30/365",
+    "H": ".10",
+    "amplitude": "1.9*sqrt(2H)",
+    "budget": 100,
+    "allocation": [
+      8,
+      3,
+      2,
+      2
+    ],
+    "actual_paths": 96,
+    "future": [
+      21.319883537590936,
+      21.321530063626934
+    ],
+    "target": [
+      22.200535214213758,
+      22.206192931262926
+    ],
+    "signed_future_error": [
+      -0.8863093936809749,
+      -0.8790051505778391
+    ],
+    "basis_setup_s": 0.09004749999985506,
+    "product_setup_s": 0.0025664999993750826,
+    "online_s": 0.11489529999926162,
+    "status": "Arb-certified"
+  },
+  {
+    "curve": "flat",
+    "months": 9,
+    "window": "30/365",
+    "H": ".10",
+    "amplitude": "1.9*sqrt(2H)",
+    "budget": 500,
+    "allocation": [
+      10,
+      4,
+      3,
+      2,
+      2
+    ],
+    "actual_paths": 480,
+    "future": [
+      18.574139537075144,
+      18.575997105801495
+    ],
+    "target": [
+      19.186809653816386,
+      19.191615666099562
+    ],
+    "signed_future_error": [
+      -0.6174761290341488,
+      -0.6108125480051603
+    ],
+    "basis_setup_s": 0.09004749999985506,
+    "product_setup_s": 0.01419759999953385,
+    "online_s": 0.6111548999997467,
+    "status": "Arb-certified"
+  },
+  {
+    "curve": "quad",
+    "months": 9,
+    "window": "30/365",
+    "H": ".10",
+    "amplitude": "1.9*sqrt(2H)",
+    "budget": 500,
+    "allocation": [
+      10,
+      4,
+      3,
+      2,
+      2
+    ],
+    "actual_paths": 480,
+    "future": [
+      33.30934309942197,
+      33.31289029829964
+    ],
+    "target": [
+      34.395387974411946,
+      34.40469737094378
+    ],
+    "signed_future_error": [
+      -1.0953542715425617,
+      -1.0824976760915486
+    ],
+    "basis_setup_s": 0.09004749999985506,
+    "product_setup_s": 0.01419759999953385,
+    "online_s": 0.575062899999466,
+    "status": "Arb-certified"
+  },
+  {
+    "curve": "sqrt",
+    "months": 9,
+    "window": "30/365",
+    "H": ".10",
+    "amplitude": "1.9*sqrt(2H)",
+    "budget": 500,
+    "allocation": [
+      10,
+      4,
+      3,
+      2,
+      2
+    ],
+    "actual_paths": 480,
+    "future": [
+      21.493607483139012,
+      21.495791327725424
+    ],
+    "target": [
+      22.200535214213758,
+      22.206192931262926
+    ],
+    "signed_future_error": [
+      -0.7125854481356273,
+      -0.7047438864766205
+    ],
+    "basis_setup_s": 0.09004749999985506,
+    "product_setup_s": 0.01419759999953385,
+    "online_s": 0.5777555999993638,
+    "status": "Arb-certified"
+  },
+  {
+    "curve": "flat",
+    "months": 9,
+    "window": "30/365",
+    "H": ".10",
+    "amplitude": "1.9*sqrt(2H)",
+    "budget": 1000,
+    "allocation": [
+      10,
+      4,
+      3,
+      2,
+      2,
+      2
+    ],
+    "actual_paths": 960,
+    "future": [
+      18.577245792306844,
+      18.579596591187656
+    ],
+    "target": [
+      19.186809653816386,
+      19.191615666099562
+    ],
+    "signed_future_error": [
+      -0.6143698738051777,
+      -0.6072130626162708
+    ],
+    "basis_setup_s": 0.09004749999985506,
+    "product_setup_s": 0.03712509999968461,
+    "online_s": 1.2998669999997219,
+    "status": "Arb-certified"
+  },
+  {
+    "curve": "quad",
+    "months": 9,
+    "window": "30/365",
+    "H": ".10",
+    "amplitude": "1.9*sqrt(2H)",
+    "budget": 1000,
+    "allocation": [
+      10,
+      4,
+      3,
+      2,
+      2,
+      2
+    ],
+    "actual_paths": 960,
+    "future": [
+      33.3147130148511,
+      33.319185882385916
+    ],
+    "target": [
+      34.395387974411946,
+      34.40469737094378
+    ],
+    "signed_future_error": [
+      -1.0899843561152527,
+      -1.0762020920034554
+    ],
+    "basis_setup_s": 0.09004749999985506,
+    "product_setup_s": 0.03712509999968461,
+    "online_s": 1.2566443999985495,
+    "status": "Arb-certified"
+  },
+  {
+    "curve": "sqrt",
+    "months": 9,
+    "window": "30/365",
+    "H": ".10",
+    "amplitude": "1.9*sqrt(2H)",
+    "budget": 1000,
+    "allocation": [
+      10,
+      4,
+      3,
+      2,
+      2,
+      2
+    ],
+    "actual_paths": 960,
+    "future": [
+      21.49716949020886,
+      21.499930671911102
+    ],
+    "target": [
+      22.200535214213758,
+      22.206192931262926
+    ],
+    "signed_future_error": [
+      -0.7090234410694161,
+      -0.7006045422873048
+    ],
+    "basis_setup_s": 0.09004749999985506,
+    "product_setup_s": 0.03712509999968461,
+    "online_s": 1.1508180999990145,
+    "status": "Arb-certified"
+  },
+  {
+    "curve": "flat",
+    "months": 12,
+    "window": "30/365",
+    "H": ".10",
+    "amplitude": "1.9*sqrt(2H)",
+    "budget": 50,
+    "allocation": [
+      6,
+      4,
+      2
+    ],
+    "actual_paths": 48,
+    "future": [
+      17.699192246621987,
+      17.70010895705556
+    ],
+    "target": [
+      18.72624605160057,
+      18.731211202382163
+    ],
+    "signed_future_error": [
+      -1.0320189557678892,
+      -1.026137094537297
+    ],
+    "basis_setup_s": 0.09466609999981301,
+    "product_setup_s": 0.0020772999996552244,
+    "online_s": 0.05833879999954661,
+    "status": "Arb-certified"
+  },
+  {
+    "curve": "quad",
+    "months": 12,
+    "window": "30/365",
+    "H": ".10",
+    "amplitude": "1.9*sqrt(2H)",
+    "budget": 50,
+    "allocation": [
+      6,
+      4,
+      2
+    ],
+    "actual_paths": 48,
+    "future": [
+      36.17034830786432,
+      36.172345630152286
+    ],
+    "target": [
+      38.25136989473501,
+      38.26224001106111
+    ],
+    "signed_future_error": [
+      -2.0918917032150413,
+      -2.079024264564466
+    ],
+    "basis_setup_s": 0.09466609999981301,
+    "product_setup_s": 0.0020772999996552244,
+    "online_s": 0.06468200000017532,
+    "status": "Arb-certified"
+  },
+  {
+    "curve": "sqrt",
+    "months": 12,
+    "window": "30/365",
+    "H": ".10",
+    "amplitude": "1.9*sqrt(2H)",
+    "budget": 50,
+    "allocation": [
+      6,
+      4,
+      2
+    ],
+    "actual_paths": 48,
+    "future": [
+      21.16131873471647,
+      21.16243256430324
+    ],
+    "target": [
+      22.386658200032663,
+      22.392687718693022
+    ],
+    "signed_future_error": [
+      -1.2313689839861142,
+      -1.224225635719859
+    ],
+    "basis_setup_s": 0.09466609999981301,
+    "product_setup_s": 0.0020772999996552244,
+    "online_s": 0.06588390000069921,
+    "status": "Arb-certified"
+  },
+  {
+    "curve": "flat",
+    "months": 12,
+    "window": "30/365",
+    "H": ".10",
+    "amplitude": "1.9*sqrt(2H)",
+    "budget": 100,
+    "allocation": [
+      8,
+      3,
+      2,
+      2
+    ],
+    "actual_paths": 96,
+    "future": [
+      17.8122720119071,
+      17.81344161999448
+    ],
+    "target": [
+      18.72624605160057,
+      18.731211202382163
+    ],
+    "signed_future_error": [
+      -0.9189391904868673,
+      -0.9128044315942814
+    ],
+    "basis_setup_s": 0.09466609999981301,
+    "product_setup_s": 0.0029321000001800712,
+    "online_s": 0.11480719999963185,
+    "status": "Arb-certified"
+  },
+  {
+    "curve": "quad",
+    "months": 12,
+    "window": "30/365",
+    "H": ".10",
+    "amplitude": "1.9*sqrt(2H)",
+    "budget": 100,
+    "allocation": [
+      8,
+      3,
+      2,
+      2
+    ],
+    "actual_paths": 96,
+    "future": [
+      36.39996962577454,
+      36.402510857890185
+    ],
+    "target": [
+      38.25136989473501,
+      38.26224001106111
+    ],
+    "signed_future_error": [
+      -1.8622703852993685,
+      -1.8488590368320241
+    ],
+    "basis_setup_s": 0.09466609999981301,
+    "product_setup_s": 0.0029321000001800712,
+    "online_s": 0.11967270000059216,
+    "status": "Arb-certified"
+  },
+  {
+    "curve": "sqrt",
+    "months": 12,
+    "window": "30/365",
+    "H": ".10",
+    "amplitude": "1.9*sqrt(2H)",
+    "budget": 100,
+    "allocation": [
+      8,
+      3,
+      2,
+      2
+    ],
+    "actual_paths": 96,
+    "future": [
+      21.296302255293273,
+      21.29772239431006
+    ],
+    "target": [
+      22.386658200032663,
+      22.392687718693022
+    ],
+    "signed_future_error": [
+      -1.096385463407492,
+      -1.088935805714859
+    ],
+    "basis_setup_s": 0.09466609999981301,
+    "product_setup_s": 0.0029321000001800712,
+    "online_s": 0.16301170000042475,
+    "status": "Arb-certified"
+  },
+  {
+    "curve": "flat",
+    "months": 12,
+    "window": "30/365",
+    "H": ".10",
+    "amplitude": "1.9*sqrt(2H)",
+    "budget": 500,
+    "allocation": [
+      10,
+      4,
+      3,
+      2,
+      2
+    ],
+    "actual_paths": 480,
+    "future": [
+      18.011278941634973,
+      18.012812147479668
+    ],
+    "target": [
+      18.72624605160057,
+      18.731211202382163
+    ],
+    "signed_future_error": [
+      -0.7199322607580856,
+      -0.7134339041100046
+    ],
+    "basis_setup_s": 0.09466609999981301,
+    "product_setup_s": 0.022077399999034242,
+    "online_s": 0.7642125000002125,
+    "status": "Arb-certified"
+  },
+  {
+    "curve": "quad",
+    "months": 12,
+    "window": "30/365",
+    "H": ".10",
+    "amplitude": "1.9*sqrt(2H)",
+    "budget": 500,
+    "allocation": [
+      10,
+      4,
+      3,
+      2,
+      2
+    ],
+    "actual_paths": 480,
+    "future": [
+      36.804446073672786,
+      36.80776509175303
+    ],
+    "target": [
+      38.25136989473501,
+      38.26224001106111
+    ],
+    "signed_future_error": [
+      -1.4577939374047593,
+      -1.4436048029655377
+    ],
+    "basis_setup_s": 0.09466609999981301,
+    "product_setup_s": 0.022077399999034242,
+    "online_s": 0.695110200000272,
+    "status": "Arb-certified"
+  },
+  {
+    "curve": "sqrt",
+    "months": 12,
+    "window": "30/365",
+    "H": ".10",
+    "amplitude": "1.9*sqrt(2H)",
+    "budget": 500,
+    "allocation": [
+      10,
+      4,
+      3,
+      2,
+      2
+    ],
+    "actual_paths": 480,
+    "future": [
+      21.53391156705023,
+      21.53577146290795
+    ],
+    "target": [
+      22.386658200032663,
+      22.392687718693022
+    ],
+    "signed_future_error": [
+      -0.8587761516541745,
+      -0.8508867371133328
+    ],
+    "basis_setup_s": 0.09466609999981301,
+    "product_setup_s": 0.022077399999034242,
+    "online_s": 0.6686766000002535,
+    "status": "Arb-certified"
+  },
+  {
+    "curve": "flat",
+    "months": 12,
+    "window": "30/365",
+    "H": ".10",
+    "amplitude": "1.9*sqrt(2H)",
+    "budget": 1000,
+    "allocation": [
+      10,
+      4,
+      3,
+      2,
+      2,
+      2
+    ],
+    "actual_paths": 960,
+    "future": [
+      18.034354175250325,
+      18.0362725604904
+    ],
+    "target": [
+      18.72624605160057,
+      18.731211202382163
+    ],
+    "signed_future_error": [
+      -0.6968570271427341,
+      -0.6899734910992732
+    ],
+    "basis_setup_s": 0.09466609999981301,
+    "product_setup_s": 0.03473699999995006,
+    "online_s": 1.0943388999985473,
+    "status": "Arb-certified"
+  },
+  {
+    "curve": "quad",
+    "months": 12,
+    "window": "30/365",
+    "H": ".10",
+    "amplitude": "1.9*sqrt(2H)",
+    "budget": 1000,
+    "allocation": [
+      10,
+      4,
+      3,
+      2,
+      2,
+      2
+    ],
+    "actual_paths": 960,
+    "future": [
+      36.85095239404385,
+      36.855092702352586
+    ],
+    "target": [
+      38.25136989473501,
+      38.26224001106111
+    ],
+    "signed_future_error": [
+      -1.4112876170355126,
+      -1.3962771923641664
+    ],
+    "basis_setup_s": 0.09466609999981301,
+    "product_setup_s": 0.03473699999995006,
+    "online_s": 1.2640130999989196,
+    "status": "Arb-certified"
+  },
+  {
+    "curve": "sqrt",
+    "months": 12,
+    "window": "30/365",
+    "H": ".10",
+    "amplitude": "1.9*sqrt(2H)",
+    "budget": 1000,
+    "allocation": [
+      10,
+      4,
+      3,
+      2,
+      2,
+      2
+    ],
+    "actual_paths": 960,
+    "future": [
+      21.561405045737228,
+      21.56373041701246
+    ],
+    "target": [
+      22.386658200032663,
+      22.392687718693022
+    ],
+    "signed_future_error": [
+      -0.8312826729662659,
+      -0.8229277830097297
+    ],
+    "basis_setup_s": 0.09466609999981301,
+    "product_setup_s": 0.03473699999995006,
+    "online_s": 1.144051400000535,
+    "status": "Arb-certified"
+  }
+]

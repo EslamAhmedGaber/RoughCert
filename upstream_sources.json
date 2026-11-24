@@ -1,0 +1,112 @@
+[
+  {
+    "repo": "SimonBreneis/approximations_to_fractional_stochastic_volterra_equations",
+    "commit": "985ef2b66ff75535965cf91361b56083819bef69",
+    "path": "RoughKernel.py",
+    "local": "RoughKernel.py",
+    "blob": "d5f9ea04f70d16258ea4baeeaccb5cce21a10ec1",
+    "local_sha256": "9c16bbf0fdc370c782ad8c07e0c9d8820292701ab5dcac350a708d05d4c90b38",
+    "matches": true,
+    "upstream_sha256": "9c16bbf0fdc370c782ad8c07e0c9d8820292701ab5dcac350a708d05d4c90b38"
+  },
+  {
+    "repo": "fbourgey/rough-bergomi",
+    "commit": "7822b00abc42ffb5c9db4d242f3a7852491eb325",
+    "path": "rbergomi.py",
+    "local": "fbourgey_rbergomi_7822b00a.py",
+    "blob": "c130231f41081d9726cb2c116d6987175a00aa6c",
+    "local_sha256": "1b3b94dd46297cf24f12de8800aba1748085d873abeea85a6280e23aaee69766",
+    "matches": true,
+    "upstream_sha256": "269b9035be61d8b9ea4631b301c1be4a75106c40b000e4e8e5eb8efca2b02167"
+  },
+  {
+    "repo": "fbourgey/rough-bergomi",
+    "commit": "7822b00abc42ffb5c9db4d242f3a7852491eb325",
+    "path": "utils.py",
+    "local": "legacy/utils.py",
+    "blob": "ea349d32ffeaf84aeae4afab52e7b082296e8a18",
+    "local_sha256": "64f931ac7c9a6034fda368e2d7ec3d02b8c67a9302f963f67ba6c30f3702cc6d",
+    "matches": true,
+    "upstream_sha256": "64f931ac7c9a6034fda368e2d7ec3d02b8c67a9302f963f67ba6c30f3702cc6d"
+  },
+  {
+    "repo": "fbourgey/vix-expansion-bergomi",
+    "commit": "d11feba37291dbb800d819aa9b265fd098ff118a",
+    "path": "model.py",
+    "local": "bourgey/model.py",
+    "blob": "5ff5c30409889259c37bdce046fc701bba5c37e0",
+    "local_sha256": "0c13b8a258bf456491aedb33af9aeb10d6a48bae311882d4a90e6ec6ec36f755",
+    "matches": true,
+    "upstream_sha256": "df962875d6548e064721bd57ef28bb2bf2d1bf738f30f2ed0ac4487aa3970f3d"
+  },
+  {
+    "repo": "fbourgey/vix-expansion-bergomi",
+    "commit": "d11feba37291dbb800d819aa9b265fd098ff118a",
+    "path": "mixed_iv.py",
+    "local": "bourgey/mixed_iv.py",
+    "blob": "ef2bedfa1ff5f7ad5d0b5c1db1712ed90eb00451",
+    "local_sha256": "2203a011cd5479b49cf1e1dd5116686be8f8723a7b8fb58f267781eae734c5f3",
+    "matches": true,
+    "upstream_sha256": "c5519f5f6fd94c25dca299cecd4ca5ebef9f16a5cff5f0cec96cc7a2979cb1bf"
+  },
+  {
+    "repo": "fbourgey/vix-expansion-bergomi",
+    "commit": "d11feba37291dbb800d819aa9b265fd098ff118a",
+    "path": "rbergomi.py",
+    "local": "bourgey/rbergomi.py",
+    "blob": "36badda8c595fb01a1e28bfda8461a4319385b38",
+    "local_sha256": "4f9486be94e38bd7b2a8410baa24093a96d4d055858c351e8fb03e2a2e04020e",
+    "matches": true,
+    "upstream_sha256": "d6b1bfd96b2a68480da8688f391d4c2fd0c5f924af9edda36e54e215a903b9fe"
+  },
+  {
+    "repo": "fbourgey/vix-expansion-bergomi",
+    "commit": "d11feba37291dbb800d819aa9b265fd098ff118a",
+    "path": "utils.py",
+    "local": "bourgey/utils.py",
+    "blob": "4993eb6930771b0ecad033816043eaab83e68eff",
+    "local_sha256": "2437dc2c03d35c04dfa901332bd5857e5548f3f6e123c89642507ba4547c51d7",
+    "matches": true,
+    "upstream_sha256": "b6f50cb9ba4f0e650a780271a92eb8728367da256ab025b5a5ee5ab23af6eb91"
+  },
+  {
+    "repo": "fbourgey/vix-expansion-bergomi",
+    "commit": "d11feba37291dbb800d819aa9b265fd098ff118a",
+    "path": "bergomi.py",
+    "local": "bourgey/bergomi.py",
+    "blob": "3c83163942982a6572ce6c641d436505772fe986",
+    "local_sha256": "6b12862b76adf4dce8834a630b6b8bd06321b772a1403a9b071c6c43ff52bce7",
+    "matches": true,
+    "upstream_sha256": "672bd504b8224409057c097898481119076987e20999d12656bdc0d420c9ed1c"
+  },
+  {
+    "repo": "fbourgey/vix-expansion-bergomi",
+    "commit": "d11feba37291dbb800d819aa9b265fd098ff118a",
+    "path": "scripts/common.py",
+    "local": "bourgey/scripts/common.py",
+    "blob": "69bab359b58a7e6df441ee82ad12a8fd7abf9048",
+    "local_sha256": "321510b1dba47426c543941b57c32463093c24a74d327383d3e28c1b397f874d",
+    "matches": true,
+    "upstream_sha256": "e4cfa6cbb2b24131871229e38421285566facfc010a5063624f15fed6a3a8e0d"
+  },
+  {
+    "repo": "fbourgey/vix-expansion-bergomi",
+    "commit": "d11feba37291dbb800d819aa9b265fd098ff118a",
+    "path": "scripts/reproduce_single_figures.py",
+    "local": "bourgey/scripts/reproduce_single_figures.py",
+    "blob": "844abdb6fc2a79518b3f304826b0bc2c8a7687d5",
+    "local_sha256": "d3b8e0c339125356f6381722995ec8b7bb4c5e688b7918f39656fc8629293a4f",
+    "matches": true,
+    "upstream_sha256": "5cddbe39d5d553fd53c0addc76b847aab6f7bbd745b6caaa9e9ef4e3b39cc887"
+  },
+  {
+    "repo": "fbourgey/vix-expansion-bergomi",
+    "commit": "d11feba37291dbb800d819aa9b265fd098ff118a",
+    "path": "LICENSE",
+    "local": "bourgey/LICENSE",
+    "blob": "5b6ed230654b043995f2db7894e6014499c2340a",
+    "local_sha256": "2b5aac3e903a1198f389863a6effa5d0dfeb2123320461f72dd028ad9041af18",
+    "matches": true,
+    "upstream_sha256": "8fd9f2b8880d0c708366c8e4b1317c9ef2b52305f9c027d32bcd865c2c00977a"
+  }
+]

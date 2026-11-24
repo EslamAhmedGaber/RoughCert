@@ -1,0 +1,6 @@
+__pycache__/
+*.py[cod]
+.venv/
+/00_references/
+/manuscript/
+/audit/

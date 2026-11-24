@@ -1,0 +1,216 @@
+{
+  "convention_note": "Kernel K(u,s) = a * (u - s)^(H - 1/2) on s in [0, T], u in [T, T + Delta]. Relation: a = eta_P1 * sqrt(2*H). VIX_T^2 = (1/Delta) * int_T^{T+Delta} xi_T(u) du. Units: volatility points = 100 * VIX (so 0.05 vol points = 5e-4 in decimal VIX units).",
+  "tick_vol_points": 0.05,
+  "analytic_controls": [
+    {
+      "id": "ctrl_const",
+      "type": "constant_kernel",
+      "norm_h": 1.2,
+      "int_a": 0.055225
+    },
+    {
+      "id": "ctrl_2atom_e01",
+      "type": "two_atom",
+      "norm_h": 1.2,
+      "int_a": 0.055225,
+      "eps": 0.1
+    },
+    {
+      "id": "ctrl_2atom_e02",
+      "type": "two_atom",
+      "norm_h": 1.2,
+      "int_a": 0.055225,
+      "eps": 0.2
+    },
+    {
+      "id": "ctrl_2atom_e04",
+      "type": "two_atom",
+      "norm_h": 1.2,
+      "int_a": 0.055225,
+      "eps": 0.4
+    }
+  ],
+  "headline_cells": [
+    {
+      "id": "E14_stress_H010",
+      "source": "P1 E14 stress",
+      "H": 0.1,
+      "T": 0.5,
+      "eta_P1": 3.0,
+      "Delta_num": 30,
+      "Delta_den": 365,
+      "xi0_type": "flat",
+      "xi0_base": 0.235,
+      "target": "continuum"
+    },
+    {
+      "id": "E14_base_H010_1m",
+      "source": "P1 E14 base",
+      "H": 0.1,
+      "T_num": 1,
+      "T_den": 12,
+      "eta_P1": 1.9,
+      "Delta_num": 30,
+      "Delta_den": 365,
+      "xi0_type": "flat",
+      "xi0_base": 0.235,
+      "target": "continuum"
+    },
+    {
+      "id": "E14_base_H005_1m",
+      "source": "P1 E14 base",
+      "H": 0.05,
+      "T_num": 1,
+      "T_den": 12,
+      "eta_P1": 1.9,
+      "Delta_num": 30,
+      "Delta_den": 365,
+      "xi0_type": "flat",
+      "xi0_base": 0.235,
+      "target": "continuum"
+    },
+    {
+      "id": "E14_stress_H030",
+      "source": "P1 E14 stress",
+      "H": 0.3,
+      "T": 0.5,
+      "eta_P1": 3.0,
+      "Delta_num": 30,
+      "Delta_den": 365,
+      "xi0_type": "flat",
+      "xi0_base": 0.235,
+      "target": "continuum"
+    },
+    {
+      "id": "BD2022_MLMC_JCF",
+      "source": "Bourgey-De Marco (2022, JCF, Sec 3.3)",
+      "H": 0.1,
+      "T": 0.5,
+      "a_direct": 0.5,
+      "Delta_num": 1,
+      "Delta_den": 12,
+      "xi0_type": "flat",
+      "xi0_base": 0.235,
+      "published_fut_volpts": 22.18135,
+      "published_atm_call_volpts": 2.9884,
+      "published_atm_strike_decimal": 0.2218135,
+      "published_grid_n": 500,
+      "target": "continuum_and_grid500"
+    },
+    {
+      "id": "BDG2023_Fig1_a15_T6m",
+      "source": "Bourgey-De Marco-Gobet (2023, QF, Sec 2.5.1 Fig 1 extreme)",
+      "H": 0.1,
+      "T": 0.5,
+      "a_direct": 1.5,
+      "Delta_num": 1,
+      "Delta_den": 12,
+      "xi0_type": "flat",
+      "xi0_base": 0.235,
+      "target": "continuum"
+    },
+    {
+      "id": "BDG2023_Fig6_smile_T3m",
+      "source": "Bourgey-De Marco-Gobet (2023, QF, Fig 6)",
+      "H": 0.1,
+      "T": 0.25,
+      "a_direct": 1.0,
+      "Delta_num": 1,
+      "Delta_den": 12,
+      "xi0_type": "flat",
+      "xi0_base": 0.235,
+      "target": "continuum"
+    },
+    {
+      "id": "BCJ2023_Sec53_flat_T6m",
+      "source": "Bonesini-Callegaro-Jacquier (2023, QF, Sec 5.3)",
+      "H": 0.1,
+      "T": 0.5,
+      "eta_P1": 1.9,
+      "Delta_num": 1,
+      "Delta_den": 12,
+      "xi0_type": "flat",
+      "xi0_base": 0.234,
+      "target": "continuum"
+    }
+  ],
+  "v2_experiments": {
+    "LAB_publication": {
+      "window": "30/365",
+      "H_and_amplitude": [
+        [
+          "0.10",
+          "1"
+        ],
+        [
+          "0.23",
+          "1.02"
+        ]
+      ],
+      "xi0": "0.24^2",
+      "months": [
+        1,
+        3,
+        6
+      ],
+      "strikes": "30-node author forward * exp(linspace(-0.1,0.4,10))"
+    },
+    "markov_flat": {
+      "H": [
+        ".05",
+        ".10",
+        ".30"
+      ],
+      "T": "1/4",
+      "window": "1/12",
+      "a": "1",
+      "xi0": "0.235^2",
+      "strikes_points": [
+        18,
+        22,
+        26
+      ]
+    },
+    "BCJ": {
+      "T_months": [
+        1,
+        2,
+        3,
+        6,
+        9,
+        12
+      ],
+      "H": ".1",
+      "a": "1.9*sqrt(.2)",
+      "windows": [
+        "1/12",
+        "30/365"
+      ],
+      "base": ".234",
+      "curves": [
+        "constant",
+        "(1+t)^2",
+        "sqrt(1+t)"
+      ],
+      "multiply_curve_by": "base^2",
+      "budgets": [
+        50,
+        100,
+        500,
+        1000
+      ]
+    },
+    "curved_common": {
+      "T": "1/4",
+      "window": "1/12",
+      "xi0": "0.234^2*(1+t)^2",
+      "H": ".1",
+      "a": "1.9*sqrt(.2)",
+      "strikes_points": [
+        25,
+        27,
+        30
+      ]
+    }
+  }
+}
