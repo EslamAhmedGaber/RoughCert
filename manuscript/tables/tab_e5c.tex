@@ -1,0 +1,40 @@
+\begin{table}[!htbp]\centering\scriptsize\setlength{\tabcolsep}{3.6pt}
+\caption{Paired statistical $95\%$ quantile brackets for $\int_0^1 B_H(s)^2\dd s$ from $n$-point midpoint observations ($K=20{,}000$, $100$ replications).}\label{tab:e5c}
+\begin{tabular}{@{}rrrrrrr@{}}\toprule
+\multicolumn{7}{@{}l}{\emph{Panel A: Grid, residual variance and empirical coverage}} \\
+ & & & \multicolumn{4}{c}{Fraction of 100 replications covering the reference quantile} \\
+\cmidrule(lr){4-7}
+$H$ & Dates & Residual share & Martingale & Cantelli & Rao--Blackwell & Binomial Cantelli \\\midrule
+0.10 & 4 & $2.4\times 10^{-1}$ & 1.00 & 1.00 & 1.00 & 1.00 \\
+0.10 & 16 & $5.9\times 10^{-2}$ & 1.00 & 1.00 & 1.00 & 1.00 \\
+0.10 & 64 & $1.3\times 10^{-2}$ & 1.00 & 1.00 & 1.00 & 1.00 \\
+0.30 & 4 & $9.1\times 10^{-2}$ & 1.00 & 1.00 & 1.00 & 1.00 \\
+0.30 & 16 & $1.2\times 10^{-2}$ & 1.00 & 1.00 & 1.00 & 1.00 \\
+0.30 & 64 & $1.4\times 10^{-3}$ & 1.00 & 1.00 & 1.00 & 1.00 \\
+0.50 & 4 & $2.9\times 10^{-2}$ & 1.00 & 1.00 & 1.00 & 1.00 \\
+0.50 & 16 & $1.9\times 10^{-3}$ & 1.00 & 1.00 & 1.00 & 1.00 \\
+0.50 & 64 & $1.2\times 10^{-4}$ & 1.00 & 1.00 & 1.00 & 0.99 \\
+0.75 & 4 & $4.9\times 10^{-3}$ & 1.00 & 1.00 & 1.00 & 1.00 \\
+0.75 & 16 & $1.5\times 10^{-4}$ & 1.00 & 1.00 & 1.00 & 1.00 \\
+0.75 & 64 & $4.6\times 10^{-6}$ & 1.00 & 1.00 & 1.00 & 0.96 \\
+\bottomrule\end{tabular}\par\medskip
+\begin{tabular}{@{}rrrrrrrrr@{}}\toprule
+\multicolumn{9}{@{}l}{\emph{Panel B: Median bracket widths on the same draws}} \\
+ & & \multicolumn{5}{c}{DKW sampling band} & \multicolumn{2}{c}{Binomial sampling band} \\
+\cmidrule(lr){3-7}\cmidrule(lr){8-9}
+$H$ & Dates & Floor & Martingale & \textbf{Cantelli} & Rao--Blackwell & \shortstack{Above-floor\\ratio} & \textbf{Cantelli} & Floor \\\midrule
+0.10 & 4 & 0.267 & 2.523 & \textbf{\boldmath 2.120} & 2.215 & 1.2$\times$ & \textbf{\boldmath 1.881} & 0.084 \\
+0.10 & 16 & 0.299 & 1.701 & \textbf{\boldmath 1.234} & 1.321 & 1.5$\times$ & \textbf{\boldmath 1.009} & 0.094 \\
+0.10 & 64 & 0.305 & 1.140 & \textbf{\boldmath 0.732} & 0.817 & 2.0$\times$ & \textbf{\boldmath 0.519} & 0.093 \\
+0.30 & 4 & 0.272 & 1.791 & \textbf{\boldmath 1.353} & 1.436 & 1.4$\times$ & \textbf{\boldmath 1.138} & 0.084 \\
+0.30 & 16 & 0.282 & 1.038 & \textbf{\boldmath 0.670} & 0.745 & 1.9$\times$ & \textbf{\boldmath 0.470} & 0.089 \\
+0.30 & 64 & 0.282 & 0.652 & \textbf{\boldmath 0.411} & 0.489 & 2.9$\times$ & \textbf{\boldmath 0.217} & 0.089 \\
+0.50 & 4 & 0.262 & 1.209 & \textbf{\boldmath 0.830} & 0.904 & 1.7$\times$ & \textbf{\boldmath 0.640} & 0.082 \\
+0.50 & 16 & 0.264 & 0.644 & \textbf{\boldmath 0.410} & 0.480 & 2.6$\times$ & \textbf{\boldmath 0.229} & 0.083 \\
+0.50 & 64 & 0.265 & 0.414 & \textbf{\boldmath 0.302} & 0.372 & 4.0$\times$ & \textbf{\boldmath 0.119} & 0.083 \\
+0.75 & 4 & 0.242 & 0.709 & \textbf{\boldmath 0.461} & 0.522 & 2.1$\times$ & \textbf{\boldmath 0.292} & 0.076 \\
+0.75 & 16 & 0.239 & 0.384 & \textbf{\boldmath 0.277} & 0.340 & 3.9$\times$ & \textbf{\boldmath 0.112} & 0.074 \\
+0.75 & 64 & 0.238 & 0.283 & \textbf{\boldmath 0.245} & 0.308 & 6.6$\times$ & \textbf{\boldmath 0.082} & 0.076 \\
+\bottomrule\end{tabular}
+\smallskip\par\raggedright\scriptsize\emph{Notes:} Bold identifies \RoughCertCV{} Cantelli widths with Dvoretzky--Kiefer--Wolfowitz (DKW) bands or exact binomial order statistics. Rao--Blackwell integrates out auxiliary randomness. The floor measures sampling uncertainty of the conditional monitor alone. The above-floor ratio divides martingale excess width by Cantelli excess width. Residual share is unexplained variance divided by total variance.
+\end{table}

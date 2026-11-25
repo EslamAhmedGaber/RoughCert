@@ -1,0 +1,276 @@
+\section{Conditional risk certificates, tilted Girsanov--H\"older bounds, and Arb certification}\label{sec:certificates}
+
+Mean-square error bounds do not by themselves settle a derivative price or a tail-risk quantile. This
+section constructs the two complementary modes of \RoughCert{} from the exact ledger: conditional-variance
+distributional, option, and smile bounds (\RoughCertCV{}), a static tilted Girsanov--H\"older theorem for
+VIX futures with proved $O(\varepsilon^4)$ dispersion width (\RoughCertTilt{}), and their end-to-end
+169-bit Arb interval-arithmetic verification scheme covering single, curved-$\xi_0$, and mixed rough
+Bergomi models (summarised in Figure~\ref{fig:rates_cond}(a)).
+
+\subsection{Conditional monitors, quantile rates, and variance-option bounds}\label{sec:cond_risk}
+Write $Q_F(\alpha)=\inf\{x\in\R:F(x)\ge\alpha\}$ for the lower $\alpha$-quantile ($0<\alpha<1$) and
+$\ES_\alpha(X)=(1-\alpha)^{-1}\int_\alpha^1 Q_{F_X}(u)\dd u$ for upper-tail expected shortfall. If
+$\norm{X-Y}_2\le\varepsilon$, Wasserstein stability yields sharp quantile bounds $[L_2,U_2]$
+\citep{LiuMaoWangWei2022,HanLiu2026} and expected-shortfall error $|\ES_\alpha(X)-\ES_\alpha(Y)|\le\varepsilon/\sqrt{1-\alpha}$
+\citep{Pichler2013,AcerbiTasche2002}, as used for terminal rough-volatility certificates in
+\citet{AHMED2026111045}. When the surrogate is a conditional expectation $\hat\Lambda=\E[\Lambda_\mu\mid\mathcal{G}]
+=\Gamma(\Pi)\Lambda_\mu$, its residual $R=\Lambda_\mu-\hat\Lambda$ satisfies $\E[R\mid\mathcal{G}]=0$ and
+$\E R^2=P_\mu(\Pi)$, so $\Lambda_\mu$ is a mean-preserving spread of $\hat\Lambda$ \citep{Strassen1965}.
+We recall two sharp consequences (proved in the \hyperref[app:proofs]{proof appendix}):
+
+\begin{proposition}[Martingale-sharp quantiles and convex-order expected shortfall]\label{prop:martingale}
+Let $X$ have law $F$, let $\E[R\mid X]=0$ with $\E R^2\le P$, and fix $\alpha\in(0,1)$.
+\begin{enumerate}[(i)]
+\item Over all such laws, the supremum $U^{\mathrm{m}}$ of $Q_{X+R}(\alpha)$ equals $\sup\{t:C(t)\le P\}$
+  for $P>0$, where $C(t)=0$ if $F(t-)\le\alpha$ and otherwise
+  $C(t)=\int_{(-\infty,t)}(t-x)(\theta-(t-x))_+\dd F(x)$ with $\theta>0$ uniquely solving
+  $\int_{(-\infty,t)}(1-(t-x)/\theta)_+\dd F(x)=F(t-)-\alpha$; reflection for the lower endpoint uses the upper generalised inverse
+  $Q^+_F(\beta)=\inf\{x:F(x)>\beta\}$ since $Q_Y(\alpha)=-Q^+_{-Y}(1-\alpha)$.
+  At $P=0$ both endpoints are $Q_X(\alpha)$. If $F$ has a continuous positive density $f$ at $q=Q_F(\alpha)$, then
+  $U^{\mathrm{m}}-q\sim(3P/(4f(q)))^{1/3}$ as $P\downarrow0$ (compared with $(3P/f(q))^{1/3}$ for $W_2$).
+\item Expected shortfall satisfies $\ES_\alpha(X)\le\ES_\alpha(X+R)\le\ES_\alpha(X)+\sqrt{P\alpha/(1-\alpha)}$.
+\end{enumerate}
+\end{proposition}
+
+Retaining the conditional variance $V=\Var(\Lambda\mid\mathcal{G})$ forbids the worst-case spread from
+concentrating the entire budget $P=\E V$ near the quantile, improving the local quantile width from
+$O(P^{1/3})$ to $O(P^{1/2})$ and yielding sharp conditional option bounds:
+
+\begin{proposition}[Certificates sharp given the conditional variance]\label{prop:condvar}
+Let $X=\E[\Lambda\mid\mathcal{G}]$ and let $v\ge\Var(\Lambda\mid\mathcal{G})$ be finite and $\mathcal{G}$-measurable.
+Let $U,U'$ be independent of $\mathcal{G}$ with $\Pr(U\le y)=y^2/(1+y^2)$ ($y>0$), and set
+$T^+=X+\sqrt{v}\,U$, $T^-=X-\sqrt{v}\,U'$.
+\begin{enumerate}[(i)]
+\item For every $t\in\R$, $\Pr(\Lambda<t)\ge\Pr(T^+<t)$ and $\Pr(\Lambda\le t)\le\Pr(T^-\le t)$, so
+  $Q_{T^-}(\alpha)\le Q_\Lambda(\alpha)\le Q_{T^+}(\alpha)$, with pointwise sharp conditional tail bounds (allowing limiting two-point laws).
+\item From $K$ i.i.d.\ copies of $(X,v,U,U')$, set
+  $m=\min\{r\,:\,\Pr(\mathrm{Bin}(K,\alpha)\le r-1)\ge1-a/2\}$ and
+  $j=\max\{r\,:\,\Pr(\mathrm{Bin}(K,\alpha)\le r-1)\le a/2\}$. Use indices $0,K+1$ with values $-\infty,+\infty$ when a finite endpoint is unavailable.
+  Then the binomial order statistics satisfy
+  $T^-_{(j)}\le Q_\Lambda(\alpha)\le T^+_{(m)}$ with probability at least $1-a$.
+\item \emph{(Local $O(P^{1/2})$ quantile rate.)} If $X$ has density $f$ continuous and positive at
+  $q=Q_X(\alpha)$, and $v=\varepsilon^2 W$ with $W$ bounded, $\E W>0$, and fixed joint law of $(X,W)$, and $\cL(W\mid X=x)$ weakly
+  continuous at $q$, then $Q_{T^\pm}(\alpha)-q=\pm\tfrac{\pi}{2}\varepsilon\,\E[\sqrt{W}\mid X=q]+o(\varepsilon)$
+  as $\varepsilon\downarrow0$ (order $P^{1/2}$ with $P=\varepsilon^2\E W$).
+\item \emph{(Conditional two-moment call bound.)} For every strike $k\in\R$,
+  $\E(X-k)_+\le\E(\Lambda-k)_+\le\E\big[(X-k)_++\tfrac12\big(\sqrt{v+(X-k)^2}-|X-k|\big)\big]$,
+  and a real two-point conditional law attains the upper bound for each fixed strike \citep{Scarf1957,Lo1987}.
+\end{enumerate}
+\end{proposition}
+
+When the traded payoff is a square root of integrated forward variance---as in VIX futures and options---
+concavity of $y\mapsto\sqrt{y}$ reverses Jensen's inequality and nonnegativity sharpens both sides:
+
+\begin{proposition}[Square-root payoffs given conditional variance]\label{prop:root}
+Let $\Lambda\ge0$ be square integrable with $X=\E[\Lambda\mid\mathcal{G}]>0$ a.s.\ and
+$v\ge\Var(\Lambda\mid\mathcal{G})$ $\mathcal{G}$-measurable. Set $\varrho=(1+v/X^2)^{-1/2}$.
+\begin{enumerate}[(i)]
+\item \emph{(Futures bracket.)} $\E[\varrho\sqrt{X}]\le\E\sqrt{\Lambda}\le\E\sqrt{X}$, with width
+  $\E[(1-\varrho)\sqrt{X}]\le\tfrac12\E[vX^{-3/2}]$. Conditionally on $\mathcal{G}$, the lower bound is
+  attained over nonnegative laws with mean $X$ and variance $v$ by the two-point law on $\{0,(X^2+v)/X\}$.
+\item \emph{(Call bracket.)} For every strike $k>0$ and every $\mathcal{G}$-measurable $r>0$, setting
+  $m_r=X+r^2-2kr$,
+  \begin{equation}\label{eq:root_call}
+  \begin{split}
+    \E\big[(\varrho\sqrt{X}-k)_+\big]&\;\le\;\E\big[(\sqrt{\Lambda}-k)_+\big]\\
+    &\;\le\;\E\!\left[\frac{m_r+\sqrt{v+m_r^2}}{4r}\right].
+  \end{split}
+  \end{equation}
+\end{enumerate}
+\end{proposition}
+On $\{X=0\}$ nonnegativity forces $\Lambda=0$ conditionally. Define both futures contributions
+there to be zero. The simpler upper bound on width can be infinite when $X$ approaches zero.
+
+\subsection{Tilted Girsanov--H\"older theorem for VIX futures}\label{sec:tilted}
+Proposition~\ref{prop:root}(i) requires integrating over the conditioning variable $Z$. For any positive
+integral of Wick exponentials, a Cameron--Martin--Girsanov change of measure produces a completely
+static, two-integral futures bracket that requires no Gaussian integration and achieves a fourth-order
+width law in the kernel dispersion.
+
+\begin{theorem}[Tilted Girsanov--H\"older VIX futures certificate]\label{thm:tilted}
+Let $(\mathcal{U},\mathcal{F},a)$ be a finite positive measure space with $0<a(\mathcal U)<\infty$, let $u\mapsto k_u\in\cH$ be
+measurable with $\sup_{u\in\mathcal{U}}\norm{k_u}<\infty$, and set
+$\Lambda=\int_{\mathcal{U}}\cE(k_u)\,a(\dd u)$, where $\cE(k)=\exp(W(k)-\tfrac12\norm{k}^2)$.
+Fix any tilting direction $h\in\cH$, write $d_u=k_u-h$, and define the tilted positive measure and its
+first two moments
+\begin{equation}\label{eq:tilted_moments}
+\begin{split}
+  b_h(\dd u)&=e^{-\frac12\ip{h}{d_u}}a(\dd u),\qquad
+  m_1(h)=\int_{\mathcal{U}} b_h(\dd u),\\
+  m_2(h)&=\iint_{\mathcal{U}^2} e^{\ip{d_u}{d_v}}\,b_h(\dd u)\,b_h(\dd v).
+\end{split}
+\end{equation}
+\begin{enumerate}[(i)]
+\item \emph{(Exact static bracket.)} For every $h\in\cH$,
+  \begin{equation}\label{eq:tilted_bracket}
+  \begin{split}
+    L(h)&:=e^{-\norm{h}^2/8}\,\frac{m_1(h)^{3/2}}{\sqrt{m_2(h)}}\\
+    &\;\le\;\E[\sqrt{\Lambda}]\\
+    &\;\le\;e^{-\norm{h}^2/8}\,\sqrt{m_1(h)}=:U(h).
+  \end{split}
+  \end{equation}
+\item \emph{(Unique optimal tilt.)} The functional $h\mapsto\log U(h)=\tfrac18\norm{h}^2+\tfrac12\log\int
+  e^{-\frac12\ip{h}{k_u}}a(\dd u)$ is strictly convex on $\cH$ and attains its unique global minimum at
+  the self-consistent tilted barycentre $h^\star\in\overline{\mathrm{conv}}\{k_u\}$ solving
+  $\int_{\mathcal{U}}(k_u-h^\star)\,b_{h^\star}(\dd u)=0$.
+\item \emph{(Sharp $O(\varepsilon^4)$ dispersion width.)} If $\sup_{u\in\mathcal{U}}\norm{k_u-h}\le\varepsilon$
+  with bounded $\|h\|$ along the family, for the $a$-barycentre $h=\bar k_a:=a(\mathcal{U})^{-1}\int k_u\,a(\dd u)$ (or for $h=h^\star$), then
+  \begin{equation}\label{eq:eps4_rate}
+  \begin{split}
+    \frac{U(h)-L(h)}{U(h)}&=1-\Big(\frac{m_2(h)}{m_1(h)^2}\Big)^{-1/2}\\
+    &=O(\varepsilon^4)\qquad(\varepsilon\downarrow0).
+  \end{split}
+  \end{equation}
+  On the symmetric two-atom control $k_\pm=h\pm\varepsilon e$ ($\norm{e}=1$, $e\perp h$, equal weights),
+  $m_2/m_1^2=\cosh(\varepsilon^2)$ and $(U-L)/U=\tfrac14\varepsilon^4+O(\varepsilon^8)$.
+\item \emph{(Induced $O(\varepsilon^2)$ Lipschitz option control.)} Setting
+  $\widetilde{V}_h=\sqrt{m_1(h)\cE(h)}$ (which satisfies $\E[\widetilde{V}_h]=U(h)$), every $1$-Lipschitz
+  payoff $g\colon\R_+\to\R$ (in particular calls $(x-k)_+$ and puts $(k-x)_+$) obeys
+  \begin{equation}\label{eq:tilted_opt_lip}
+  \begin{split}
+    \big|\E[g(\sqrt{\Lambda})]-\E[g(\widetilde{V}_h)]\big|
+    &\;\le\;\E\big|\sqrt{\Lambda}-\widetilde{V}_h\big|\\
+    &\;\le\;\sqrt{2\,U(h)\big(U(h)-L(h)\big)}.
+  \end{split}
+  \end{equation}
+\end{enumerate}
+The inequality in (iv) holds for arbitrary $h$. Its right-hand side is $O(\varepsilon^2)$ under (iii) and bounded $U$.
+\end{theorem}
+
+\begin{remark}[Convergence regimes and model classes]\label{rem:regime_sep}
+Theorem~\ref{thm:tilted} clarifies three distinct behaviours that must not be conflated. First,
+$O(P^{1/2})$ in Proposition~\ref{prop:condvar}(iii) governs the width of a conditional-variance
+\emph{quantile} certificate in the local density regime, whereas $O(\varepsilon^4)$ in \eqref{eq:eps4_rate}
+governs the relative width of the tilted \emph{futures} bracket as the forward-kernel dispersion
+$\varepsilon$ shrinks. Second, the option bound \eqref{eq:tilted_opt_lip} degrades from $O(\varepsilon^4)$
+to $O(\varepsilon^2)$ because a strike kink converts an $L^2$ difference in $\sqrt{\Lambda}$ into a linear
+payoff error; consequently, Proposition~\ref{prop:root}(ii) (conditional variance) is far tighter for VIX
+options than \eqref{eq:tilted_opt_lip}. Third, in \emph{mixed} rough Bergomi
+($\xi_T(u)=\xi_0(u)[\lambda\cE(a_1\phi_u)+(1-\lambda)\cE(a_2\phi_u)]$ with $a_1\ne a_2$), the dispersion
+$\norm{(a_1-a_2)\phi_u}$ is $O(1)$ across mixture components, so a single tilt $h$ is loose; conditioning
+on the single shared Gaussian factor $Z=W(h_0)/\norm{h_0}$ in Proposition~\ref{prop:root}, evaluated by Proposition~\ref{prop:arb}(c)--(d), nevertheless gives sub-0.01 volatility-point precision
+(Section~\ref{sec:mixed_rbergomi}).
+\end{remark}
+
+\subsection{Verified Arb integration for Volterra forward variance}\label{sec:arb_theory}
+Under the single or mixed rough Bergomi model on $[T,T+\Delta]$ with $H\in(0,\tfrac12)$, forward-variance
+curve $\xi_0(T+x)>0$, and components $\{(a_r,\lambda_r)\}_{r=1}^m$ ($\lambda_r>0$, $a_r\ge0$, $\sum_r\lambda_r=1$,
+where $a_r=\eta_{\mathrm{P1},r}\sqrt{2H}$ in the convention of \citealp{BayerFrizGatheral2016}), the
+squared VIX index is
+\begin{equation}\label{eq:vix2_def}
+  \Lambda=\mathrm{VIX}_T^2=\frac{1}{\Delta}\int_0^\Delta \xi_0(T+x)\sum_{r=1}^m\lambda_r\cE(a_r\phi_x)\dd x,
+\end{equation}
+where $\phi_x(s)=(T+x-s)^{H-1/2}$ on $s\in[0,T]$ has unit-$a$ covariance
+$C_0(x,y)=\ip{\phi_x}{\phi_y}=\int_0^T(x+r)^{H-1/2}(y+r)^{H-1/2}\dd r$. A crucial structural property of
+\eqref{eq:vix2_def} is that $C_0(x,y)$ is real-analytic across the entire interior $(0,\Delta]^2$,
+including across the diagonal $x=y$: singularities sit only on the boundary edges $x=0$ and $y=0$.
+
+Evaluating \eqref{eq:tilted_bracket} or \eqref{eq:root_call} in floating-point quadrature provides only a
+convergence diagnostic. To obtain \emph{machine-verified} enclosures valid from the continuous-time model
+to the reported price and IV endpoints, \RoughCert{} evaluates kernel products, integration bounds, and
+Black inversions in 169-bit outward-rounded Arb ball arithmetic \citep{Johansson2017,Johansson2018},
+using \RoughCertTilt{} (parts~(a)--(b)) for static futures brackets and \RoughCertCV{} (parts~(a), (c)--(e))
+for general futures, options, smiles, and mixtures.
+
+\begin{proposition}[Rigorous Arb enclosures for rough-Bergomi VIX futures, options, and smiles]\label{prop:arb}
+Let $0<H<\tfrac12$, $\alpha=\tfrac12-H>0$, $T>0$, $\Delta>0$, and let $h_0=\Delta^{-1}\int_0^\Delta\phi_x\dd x$
+be the unweighted kernel barycentre with normalised loading $g_0(x)=\ip{h_0}{\phi_x}/\norm{h_0}$ and
+residual covariance $D_0(x,y)=C_0(x,y)-g_0(x)g_0(y)$.
+\begin{enumerate}[(a)]
+\item \emph{(Pfaff-transformed ${}_2F_1$ inner products.)} For $0\le x\le y\le\Delta$,
+  $C_0(x,y)=\frac{1}{2H}[R^{\mathrm{RL}}(T+x,T+y)-R^{\mathrm{RL}}(x,y)]$, where
+  $R^{\mathrm{RL}}(s,u)=\frac{2H}{H+1/2}s^{H+1/2}u^{H-1/2}{}_2F_1(1,\alpha;H+\tfrac32;s/u)$ (evaluated via
+  its exact $1-s/u$ connection formula for $s/u>\tfrac12$). Moreover,
+  \begin{align}
+    \norm{h_0}^2&=\frac{1}{\Delta^2(H+\tfrac12)^2}\Bigg[\nonumber\\
+      &\qquad\frac{(T+\Delta)^{2H+2}+T^{2H+2}-\Delta^{2H+2}}{2H+2}\nonumber\\
+      &\qquad-\frac{2(T+\Delta)^{H+\frac12}T^{H+\frac32}}{H+\tfrac32}\nonumber\\
+      &\qquad\quad\times{}_2F_1\!\Big(-H-\tfrac12,1;H+\tfrac52;\frac{T}{T+\Delta}\Big)\Bigg],\label{eq:nh2_pfaff}\\
+    \ip{h_0}{\phi_x}&=\frac{1}{\Delta(H+\tfrac12)}\big[I_H(T+x,T+\Delta)\nonumber\\
+      &\qquad-I_H(x,\Delta)-J_H(x)\big],\label{eq:hkx_pfaff}
+  \end{align}
+  where
+  \begin{align*}
+    I_H(b,S)&=\frac{b^{H+\frac12}S^{H+\frac12}}{H+\tfrac12}\\
+    &\quad\times{}_2F_1\!\Big(-H-\tfrac12,1;H+\tfrac32;\frac{b}{S}\Big),\\
+    J_H(x)&=\frac{T^{H+\frac32}(T+x)^{H-\frac12}}{H+\tfrac32}\\
+    &\quad\times{}_2F_1\!\Big(\alpha,1;H+\tfrac52;\frac{T}{T+x}\Big),
+  \end{align*}
+  so the interior hypergeometric arguments lie in $(0,1)$ with no $\Delta-x$ subtraction cancellation.
+\item \emph{(Positive-integral derivative bounds for tilted 2D midpoint quadrature.)} For flat $\xi_0$,
+  $C_0(x,y)$ and $\ip{h_0}{\phi_x}$ are strictly decreasing in $x,y\in[0,\Delta]$, and on $0<x\le y\le\Delta$:
+  \begin{align*}
+    0<-\partial_x C_0(x,y)&\le\min\!\Big(\frac{\alpha}{x}C_0(x,y),\,\frac{x^{2H-1}}{2},\\
+    &\qquad\quad x^{-\alpha}y^{-\alpha}\Big),\\
+    0<\partial_{xx} C_0(x,y)&\le\min\!\Big(\frac{\alpha(\alpha+1)}{x^2}C_0(x,y),\\
+    &\quad\frac{\alpha(\alpha+1)x^{2H-2}}{2\alpha+1},\,\alpha x^{-\alpha-1}y^{-\alpha}\Big).
+  \end{align*}
+  while $0<-\partial_y C_0(x,y)\le\alpha B(1-\alpha,2\alpha)\,y^{2H-1}$ and
+  $0<\partial_{yy}C_0(x,y)\le\alpha(\alpha+1)B(1-\alpha,2\alpha+1)\,y^{2H-2}$, and $-\partial_x\ip{h_0}{\phi_x}\le\min(\frac{\alpha}{x}\ip{h_0}{\phi_x},
+  \frac{\Delta^{H-1/2}}{H+1/2}x^{-\alpha})$. Applying a power-graded 2D midpoint mesh $x_i=\Delta(i/M)^p$
+  on $[x_1,\Delta]^2$ plus an elementary monotone box on the corner strip $[0,x_1]\times[0,\Delta]\cup
+  [x_1,\Delta]\times[0,x_1]$ yields an outward-rounded Arb enclosure of \eqref{eq:tilted_bracket}.
+\item \emph{(Minkowski $L^2$ spatial and $z$-perturbation bounds for conditional variance.)} Conditioning
+  \eqref{eq:vix2_def} on $Z=W(h_0)/\norm{h_0}\sim N(0,1)$ yields
+  \[
+  \begin{aligned}
+    X(z)&=\sum_{r=1}^m\int_0^\Delta\hat\xi_r(x;z)\dd x,\\
+    V(z)&=\norm{\sum_{r=1}^m\int_0^\Delta\hat\xi_r(x;z)\big(\widetilde{\cE}_r(x)-1\big)\dd x}_{L^2}^2,
+  \end{aligned}
+  \]
+  where $\hat\xi_r(x;z)=\Delta^{-1}\lambda_r\xi_0(T+x)\exp(g_r(x)z-\tfrac12 g_r(x)^2)$ and $g_r=a_r g_0$.
+  On any spatial partition $0=x_0<x_1<\dots<x_M=\Delta$ with interior midpoints $x_i^m$, half-widths
+  $h_i=(x_{i+1}-x_i)/2$, cell weights $W_{r,i}(z)=\int_{x_i}^{x_{i+1}}\hat\xi_r(x;z)\dd x$, and kernel matrix
+  $K^{\mathrm{mid}}_{(r,i),(s,j)}=\expmone(a_r a_s D_0(x_i^m,x_j^m))$,
+  \begin{equation}\label{eq:minkowski_x}
+  \begin{split}
+    \sqrt{V(z)}\;\le\;&\sqrt{W(z)^\top K^{\mathrm{mid}} W(z)}\\
+    &+\sum_{r=1}^m W_{r,0}(z)\sqrt{\expmone(a_r^2 D_{0,0}^{\max})}\\
+    &+\sum_{r=1}^m\sum_{i=1}^{M-1} W_{r,i}(z)\,\tau_{r,i},
+  \end{split}
+  \end{equation}
+  where $D_{0,i}^{\max}=C_0(x_i,x_i)-g_0(x_{i+1})^2$,
+  \begin{align*}
+    \bar d_i&=\alpha h_i\sqrt{\frac{x_i^{2H-2}-(T+x_i)^{2H-2}}{2\alpha+1}},\\
+    \tau_{r,i}&=a_r e^{\frac12 a_r^2 D_{0,i}^{\max}}\\
+    &\quad\times\sqrt{1+a_r^2 D_{0,i}^{\max}\exp\!\big(a_r^2\sqrt{D_{0,i}^{\max}}\,\bar d_i\big)}\;\bar d_i.
+  \end{align*}
+  Moreover, on any $z$-panel $J=[z_a,z_b]$ with reference point $\bar z\in J$ and radius
+  $h_J=\max(\bar z-z_a,z_b-\bar z)$, setting $\bar g=\tfrac12(g_{\min}+g_{\max})$,
+  $\Delta_g=\tfrac12(g_{\max}-g_{\min})$, and $S(\bar z)=\sum_{r,i} W_{r,i}(\bar z)\sqrt{\expmone(a_r^2 D_{0,i}^{\max})}$,
+  \begin{align}
+    \sup_{z\in J}\sqrt{V(z)}&\;\le\;e^{\bar g h_J}\big(\sqrt{V(\bar z)}\nonumber\\
+    &\qquad+\expmone(\Delta_g h_J)\,S(\bar z)\big),\label{eq:minkowski_zV}\\
+    \sup_{z\in J}\frac{\sqrt{V(z)}}{X(z)}&\;\le\;e^{\Delta_g h_J}\,\frac{\sqrt{V(\bar z)}+\expmone(\Delta_g h_J)\,S(\bar z)}{X(\bar z)}\nonumber\\
+    &=:\bar\kappa_J.\label{eq:minkowski_zkappa}
+  \end{align}
+\item \emph{(Piecewise-convexity Gaussian integration and tail control.)} On each panel $J_j=[z_j,z_{j+1}]$
+  with exact Gaussian mass $p_j=\Phi(z_{j+1})-\Phi(z_j)$ and conditional mean
+  $\bar z_j=(\varphi(z_j)-\varphi(z_{j+1}))/p_j$, the functions $z\mapsto\sqrt{X(z)}$,
+  $z\mapsto(\underline{\varrho}_j\sqrt{X(z)}-k)_+$ (with $\underline{\varrho}_j=(1+\bar\kappa_{J_j}^2)^{-1/2}$),
+  and $z\mapsto(m_{r_j}(z)+\sqrt{\overline{V}_j+m_{r_j}(z)^2})/(4r_j)$ (for any fixed $r_j>0$ and
+  $\overline{V}_j\ge\sup_{J_j}V$) are all convex in $z$. Hence Jensen at $\bar z_j$ rigorously bounds every
+  panel lower integral from below, while the linear secant through $(z_j,z_{j+1})$ rigorously bounds every
+  panel upper integral from above. Outside $[-Z_{\max},Z_{\max}]$, both futures and call upper tail
+  integrals are bounded by Cauchy--Schwarz by $\sqrt{\E[\Lambda]\cdot\operatorname{erfc}(Z_{\max}/\sqrt{2})}$.
+\item \emph{(Arb-verified Black-76 implied volatility brackets.)} Given verified forward and call enclosures
+  $F\in[F_L,F_U]$ and $C\in[C_L,C_U]$ at strike $K>0$, monotonicity of the undiscounted Black-76 call price
+  $\mathrm{BS}(F,K,T,\sigma)$ in both $F$ and $\sigma$ implies that any $\sigma_L,\sigma_U\ge0$ verified in
+  Arb to satisfy $\mathrm{BS}(F_U,K,T,\sigma_L)\le C_L$ and $\mathrm{BS}(F_L,K,T,\sigma_U)\ge C_U$ rigorously
+  enclose the continuous-time model implied volatility: $\sigma_{\mathrm{IV}}\in[\sigma_L,\sigma_U]$.
+\end{enumerate}
+\end{proposition}
+
+Proposition~\ref{prop:arb} eliminates the two weaknesses of floating-point numerical enclosures: there is
+zero uncertified $Z$-tail truncation (at $Z_{\max}=10$, the Cauchy--Schwarz tail is below
+$2\times10^{-10}$ volatility points for the studied curves and maturities) and controlled interval dependency in $V(z)$ (the Minkowski
+perturbation in \eqref{eq:minkowski_x}--\eqref{eq:minkowski_zkappa} avoids subtracting $X(z)^2$ from
+$\E[\Lambda^2\mid Z=z]$, and evaluating $K^{\mathrm{mid}} W$ across all $N_z$ panels uses a single C-level
+FLINT \texttt{arb\_mat} multiplication).
+
+\paragraph{Epistemic status labels} Throughout Sections~\ref{sec:validation}--\ref{sec:variance_risk},
+each numerical claim carries one of four labels: \lab{Arb-certified} denotes a machine-verified
+outward-rounded interval enclosure of the stated model or comparator (169-bit working precision in these runs) (Proposition~\ref{prop:arb});
+\lab{exact-identity+quadrature} denotes Theorem~\ref{thm:master} evaluated with graded quadrature
+refinement checks; \lab{statistical}$(1-a)$ denotes a Monte Carlo interval with bias covered by the exact
+continuum radius and confidence $1-a$; and \lab{diagnostic} denotes an uncertified reference run.

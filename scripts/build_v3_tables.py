@@ -1,4 +1,4 @@
-"""Build ALL 10 redesigned publication tables (8 main-text + 2 supplement) for RoughCert v3.
+"""Build ALL 10 redesigned publication tables (8 main-text + 2 supplement) for RoughCert v5.
 
 Every numeric interval is outward-rounded directly from verified JSON outputs via
 exact Decimal FLOOR / CEILING rounding. All tables avoid \\resizebox scaling hacks,
@@ -8,6 +8,7 @@ use proper LaTeX math minus signs ($-$), state units in column headers, respect
 from __future__ import annotations
 
 import json
+import math
 from decimal import Decimal, ROUND_CEILING, ROUND_FLOOR
 from pathlib import Path
 import numpy as np
@@ -43,8 +44,16 @@ def fmt_band(lo: float, hi: float, n: int = 5, pct: bool = False) -> str:
     return f"[{fmt_out(lo, n, False)}{suf},\\,{fmt_out(hi, n, True)}{suf}]"
 
 
-def fmt_signed(x: float, n: int, up: bool | None = None, bold_thresh: float | None = None) -> str:
-    """Format signed value with proper LaTeX minus sign and optional >threshold bold."""
+def strong(value: str) -> str:
+    return r"\textbf{\boldmath " + value + "}"
+
+def tick_marker(error: tuple[float, float]) -> str:
+    """A star requires the entire price-error interval to lie beyond a tick."""
+    lo, hi = error
+    return r"$^\star$" if lo > 0.05 or hi < -0.05 else ""
+
+def fmt_signed(x: float, n: int, up: bool | None = None, tick_threshold: float | None = None) -> str:
+    """Format signed value with proper LaTeX minus sign and an optional one-tick marker."""
     if up is None:
         s_raw = f"{abs(x):.{n}f}"
     else:
@@ -55,8 +64,8 @@ def fmt_signed(x: float, n: int, up: bool | None = None, bold_thresh: float | No
         s_raw = format(abs(d), "f")
     sign = "$+$" if x >= 0 else "$-$"
     txt = f"{sign}{s_raw}"
-    if bold_thresh is not None and abs(x) > bold_thresh:
-        return f"\\textbf{{{txt}}}"
+    if tick_threshold is not None and abs(x) > tick_threshold:
+        return txt + r"$^\star$"
     return txt
 
 
@@ -95,9 +104,9 @@ def build_tab1_headline():
         r"\begin{table}[!htbp]\centering\scriptsize\setlength{\tabcolsep}{2.2pt}",
         r"\caption{Headline 169-bit Arb-certified \RoughCertTilt{} VIX futures brackets (volatility points) across eight literature and stress-test parameter cells, audited against BDG~(2023) and lognormal proxies.}\label{tab:vix_headline}",
         r"\begin{tabular}{@{}lrrrrccrrr@{}}\toprule",
-        r" & & & & & \multicolumn{2}{c}{\RoughCertTilt{} (pts)} & \multicolumn{3}{c}{Proxies (pts)} \\",
-        r"\cmidrule(lr){6-7}\cmidrule(lr){8-10}",
-        r"Benchmark & $H$ & $T$ & $\Delta$ & $a$ & $[L,\,U]$ & Width & BDG$_3$ & $\mathrm{BDG}_3\!-\!U$ & $\mathrm{LN}\!-\!L$ \\\midrule",
+        r" & \multicolumn{4}{c}{Contract parameters} & \multicolumn{2}{c}{\textbf{\RoughCertTilt{}} (pts)} & \multicolumn{3}{c}{Expansion and signed gaps (pts)} \\",
+        r"\cmidrule(lr){2-5}\cmidrule(lr){6-7}\cmidrule(lr){8-10}",
+        r"Benchmark & $H$ & $T$ (yr) & $\Delta$ (yr) & $a$ & $[L,\,U]$ & Width & BDG$_3$ & $\mathrm{BDG}_3\!-\!U$ & $\mathrm{LN}\!-\!L$ \\\midrule",
     ]
     for cid, label, h_s, t_s, d_s in order:
         c = by_id[cid]
@@ -108,21 +117,23 @@ def build_tab1_headline():
         ln_gap = -c["L_minus_LN_cert"]
         lines.append(
             f"{label} & {h_s} & {t_s} & {d_s} & {c['a']:.3f} & "
-            f"{fmt_band(L, U, 5)} & {fmt_out(w, 5, True)} & {bdg_mid:.5f} & "
-            f"{fmt_signed(bdg_gap, 5, up=False, bold_thresh=0.05)} & "
-            f"{fmt_signed(ln_gap, 4, up=True, bold_thresh=0.05)} \\\\"
+            f"{strong(fmt_band(L, U, 5))} & {strong(fmt_out(w, 5, True))} & {bdg_mid:.5f} & "
+            f"{fmt_signed(bdg_gap, 5, up=False, tick_threshold=0.05)} & "
+            f"{fmt_signed(ln_gap, 4, up=True, tick_threshold=0.05)} \\\\"
         )
 
+    enc_max = max(max(by_id[cid]["tilted_L_enc_width"], by_id[cid]["tilted_U_enc_width"]) for cid, *_ in order)
+    enc_s = fmt_out(enc_max * 1e3, 1, True)  # e.g. 1.4 (x 10^-3 pts), rounded up
     bd = by_id["BD2022_MLMC_JCF"]
     g = bd["grid500_tilted_arb"]
     gL, gU = g["L_outer_volpts"], g["U_outer_volpts"]
     lines.extend([
         r"\midrule",
         f"BD (2022) 500-cell & 0.10 & 0.50 & 1/12 & 0.500 & "
-        f"{fmt_band(gL, gU, 5)} & {fmt_out(gU - gL, 5, True)} & "
-        r"\multicolumn{3}{c}{MLMC $= 22.18135$ (in grid; outside cont.)} \\",
+        f"{strong(fmt_band(gL, gU, 5))} & {strong(fmt_out(gU - gL, 5, True))} & "
+        r"\multicolumn{3}{c}{MLMC $= 22.18135$ (inside grid band)} \\",
         r"\bottomrule\end{tabular}",
-        r"\smallskip\par\raggedright\scriptsize\emph{Notes:} $a=\eta_{\mathrm{P1}}\sqrt{2H}$; flat $\xi_0=0.235^2$ ($0.234^2$ for BCJ). All intervals are outward-rounded 169-bit Arb enclosures (endpoint radius $\le 1.4\times 10^{-3}$ pts). Bold entries certify separation exceeding one Cboe tick ($0.05$ pts).",
+        r"\smallskip\par\raggedright\scriptsize\emph{Notes:} Bold identifies the tilted interval and width before display rounding. $H$ is the Hurst exponent, $T$ maturity, $\Delta$ the window and $a=\eta_{\mathrm{P1}}\sqrt{2H}$. BDG$_3$ is the third-order expansion; LN is lognormal. Signed gaps use the nearest bound. $^\star$ exceeds one Cboe tick ($0.05$ pts). Endpoint enclosure widths (at most $" + enc_s + r"\times 10^{-3}$ pts) are included.",
         r"\end{table}",
     ])
     write_tex("tab_vix_headline.tex", "\n".join(lines))
@@ -153,9 +164,9 @@ def build_tab2_e14():
         r"\begin{table}[!htbp]\centering\scriptsize\setlength{\tabcolsep}{3.6pt}",
         r"\caption{Complete 15-cell Arb-certified \RoughCert{} VIX futures suite (volatility points, $\Delta=30/365$), benchmarked against JMM~(2018), BDG~(2023), and lognormal proxies.}\label{tab:vix_e14}",
         r"\begin{tabular}{@{}rlcrrrrrr@{}}\toprule",
-        r" & & \multicolumn{2}{c}{\RoughCert{} (pts)} & \multicolumn{3}{c}{JMM (2018) comparison} & \multicolumn{2}{c}{Certified proxy gap (pts)} \\",
+        r" & & \multicolumn{2}{c}{\textbf{\RoughCert{}} (pts)} & \multicolumn{3}{c}{JMM (2018) bounds} & \multicolumn{2}{c}{Certified proxy gap (pts)} \\",
         r"\cmidrule(lr){3-4}\cmidrule(lr){5-7}\cmidrule(lr){8-9}",
-        r"$H$ & $T$ & $[L,\,U]$ & Width & Width & Low gap & Ratio & $\mathrm{BDG}_3-U$ & $\mathrm{LN}-L$ \\\midrule",
+        r"$H$ & $T$ & $[L,\,U]$ & Width & \shortstack{Width\\(pts)} & \shortstack{Lower-bound\\error limit (pts)} & \shortstack{Width\\ratio} & $\mathrm{BDG}_3-U$ & $\mathrm{LN}-L$ \\\midrule",
     ]
 
     for g_idx, (gkey, header) in enumerate(groups):
@@ -166,20 +177,20 @@ def build_tab2_e14():
         sub = [r for r in rows if r["group"] == gkey]
         for r in sub:
             L, U, w = r["best_L"], r["best_U"], r["best_width"]
-            ratio_s = f"{int(round(r['ratio_vs_jmm'])):,}$\\times$"
+            ratio_s = f"{math.floor(r['ratio_vs_jmm']):,}$\\times$"
             if r.get("bdg_minus_U") is not None:
-                bdg_s = fmt_signed(r["bdg_minus_U"], 5, up=False, bold_thresh=0.05)
-                ln_s = fmt_signed(-r["L_minus_LN"], 4, up=True, bold_thresh=0.05)
+                bdg_s = fmt_signed(r["bdg_minus_U"], 5, up=False, tick_threshold=0.05)
+                ln_s = fmt_signed(-r["L_minus_LN"], 4, up=True, tick_threshold=0.05)
             else:
                 bdg_s, ln_s = "---", "---"
             lines.append(
-                f"{r['H']:.2f} & {t_lbl(r['T'])} & {fmt_band(L, U, 5)} & {fmt_out(w, 5, True)} & "
+                f"{r['H']:.2f} & {t_lbl(r['T'])} & {strong(fmt_band(L, U, 5))} & {strong(fmt_out(w, 5, True))} & "
                 f"{fmt_out(r['jmm_width'], 3, True)} & {fmt_out(r['jmm_lo_gap_max'], 4, True)} & {ratio_s} & {bdg_s} & {ln_s} \\\\"
             )
 
     lines.extend([
         r"\bottomrule\end{tabular}",
-        r"\smallskip\par\raggedright\scriptsize\emph{Notes:} Sharpest outward-rounded 169-bit Arb bracket from Theorem~\ref{thm:tilted} and Proposition~\ref{prop:arb}. Low gap $=U-L_{\mathrm{JMM}}$ bounds the JMM lower-bound error; Ratio $=$ JMM width / \RoughCert{} width. Bold marks separation $>0.05$ pts.",
+        r"\smallskip\par\raggedright\scriptsize\emph{Notes:} Bold identifies the narrowest available \RoughCert{} interval and its width. $H$ is the Hurst exponent and $T$ maturity. The JMM error limit is $U-L_{\rm JMM}$; the ratio divides JMM width by \RoughCert{} width. BDG$_3$ is the third-order expansion; LN is lognormal. $^\star$ exceeds one Cboe tick ($0.05$ pts). A dash marks an unevaluated proxy.",
         r"\end{table}",
     ])
     write_tex("tab_vix_e14_15cells.tex", "\n".join(lines))
@@ -195,9 +206,9 @@ def build_tab3_mixed():
         r"\begin{table}[!htbp]\centering\footnotesize\setlength{\tabcolsep}{4.0pt}",
         r"\caption{Mixed rough Bergomi VIX futures (volatility points, $H=0.10$, $\Delta=1/12$, $\xi_0=0.235^2$): \RoughCertCV{} enclosures versus BDG~(2023) mixed weak expansions.}\label{tab:vix_mixed}",
         r"\begin{tabular}{@{}lcrccrrrr@{}}\toprule",
-        r" & & & \multicolumn{2}{c}{\RoughCertCV{} (pts)} & \multicolumn{3}{c}{BDG (2023) mixed (pts)} & \\",
+        r" & & & \multicolumn{2}{c}{\textbf{\RoughCertCV{}} (pts)} & \multicolumn{3}{c}{BDG (2023) mixed (pts)} & \\",
         r"\cmidrule(lr){4-5}\cmidrule(lr){6-8}",
-        r"Regime & $(a_1,a_2,\lambda)$ & $T$ & $[L,\,U]$ & Width & BDG$_0$ & BDG$_3$ & $\mathrm{BDG}_3-U$ & Time (s) \\\midrule",
+        r"Regime & $(a_1,a_2,\lambda)$ & $T$ & $[L,\,U]$ & Width & BDG$_0$ & BDG$_3$ & $\mathrm{BDG}_3-U$ & \shortstack{Setup / solve\\(s)} \\\midrule",
     ]
     for r in rows:
         reg = "Scenario~1" if "scen1" in r["id"] else "Stress"
@@ -207,13 +218,13 @@ def build_tab3_mixed():
         gap = r["bdg3_minus_U"]
         tm = f"{r['setup_s']:.1f} / {r['solve_s']:.1f}"
         lines.append(
-            f"{reg} & {params} & {t_s} & {fmt_band(L, U, 5)} & {fmt_out(w, 5, True)} & "
+            f"{reg} & {params} & {t_s} & {strong(fmt_band(L, U, 5))} & {strong(fmt_out(w, 5, True))} & "
             f"{r['bdg_mixed_order0']:.5f} & {r['bdg_mixed_order3']:.5f} & "
-            f"{fmt_signed(gap, 5, up=False, bold_thresh=0.05)} & {tm} \\\\"
+            f"{fmt_signed(gap, 5, up=False, tick_threshold=0.05)} & {tm} \\\\"
         )
     lines.extend([
         r"\bottomrule\end{tabular}",
-        r"\smallskip\par\raggedright\scriptsize\emph{Notes:} \RoughCertCV{} uses the shared factor $Z=W(h_0)/\norm{h_0}$ (Proposition~\ref{prop:arb}(c)--(d), $M=140$, $N_z=360$). Time reports setup / solve seconds. BDG values and gaps use floating-point quadrature following \citet[Section~4]{BourgeyDeMarcoGobet2023}.",
+        r"\smallskip\par\raggedright\scriptsize\emph{Notes:} Bold identifies the conditional-variance interval and width. $a_1,a_2$ are factor loadings, $\lambda$ is the mixing weight and $T$ is maturity in months. BDG$_0$ and BDG$_3$ denote zeroth- and third-order floating-point expansions. The signed gap compares the third-order value with the certified upper bound.",
         r"\end{table}",
     ])
     write_tex("tab_vix_mixed.tex", "\n".join(lines))
@@ -229,12 +240,12 @@ def build_tab4_smiles():
     mix = load_json(RES / "mixed_split.json")["rows"]
 
     lines = [
-        r"\begin{table}[!htbp]\centering\scriptsize\setlength{\tabcolsep}{2.5pt}",
+        r"\begin{table}[!htbp]\centering\footnotesize\setlength{\tabcolsep}{2.5pt}",
         r"\caption{\RoughCertCV{} Arb-certified VIX call prices (pts) and Black-76 implied volatilities (\%) versus BDG~(2023), LAB~(2026), and lognormal proxies across three smile regimes.}\label{tab:vix_smiles}",
         r"\begin{tabular}{@{}rrccrrccrr@{}}\toprule",
         r" & & \multicolumn{4}{c}{VIX call price (pts)} & \multicolumn{4}{c}{Black-76 implied volatility (\%)} \\",
         r"\cmidrule(lr){3-6}\cmidrule(lr){7-10}",
-        r"$k$ & $K$ & \RoughCertCV{} $[C_L,C_U]$ & Width & BDG$_3$ & LN & \RoughCertCV{} $[\sigma_L,\sigma_U]$ & BDG$_3$ & LAB & LN \\\midrule",
+        r"\shortstack{Log\\moneyness} & \shortstack{Strike\\(pts)} & \textbf{\RoughCertCV{}} & Width & BDG$_3$ & LN & \textbf{\RoughCertCV{}} & BDG$_3$ & LAB & LN \\\midrule",
     ]
 
     # Panel A: Pure rBergomi (BDG Fig. 6 — 5 representative strikes k=-0.4,-0.2,0,+0.2,+0.4)
@@ -250,12 +261,12 @@ def build_tab4_smiles():
         bdg_iv = 0.5 * (s["bdg_iv3_pct"][0] + s["bdg_iv3_pct"][1])
         ln_iv = 0.5 * (s["ln_iv_pct"][0] + s["ln_iv_pct"][1])
         lines.append(
-            f"{k_s} & {s['K_volpts']:.3f} & {fmt_band(s['call_L_volpts'], s['call_U_volpts'], 5)} & "
-            f"{fmt_out(s['call_width_volpts'], 5, True)} & {bdg_c:.5f} & {ln_c:.5f} & "
-            f"{fmt_band(s['iv_L_pct'], s['iv_U_pct'], 2)} & {bdg_iv:.2f} & --- & {ln_iv:.2f} \\\\"
+            f"{k_s} & {s['K_volpts']:.3f} & {strong(fmt_band(s['call_L_volpts'], s['call_U_volpts'], 5))} & "
+            f"{strong(fmt_out(s['call_width_volpts'], 5, True))} & {bdg_c:.5f}{tick_marker((s['bdg_C3_volpts'][0]-s['call_U_volpts'], s['bdg_C3_volpts'][1]-s['call_L_volpts']))} & {ln_c:.5f}{tick_marker((s['ln_call_volpts'][0]-s['call_U_volpts'], s['ln_call_volpts'][1]-s['call_L_volpts']))} & "
+            f"{strong(fmt_band(s['iv_L_pct'], s['iv_U_pct'], 2))} & {bdg_iv:.2f} & --- & {ln_iv:.2f} \\\\"
         )
 
-    # Panel B: Stress Cell (Refined 0.55 pp ATM band from refinement.json + BDG3 + LAB 2026 + LN)
+    # Panel B: Stress Cell (refined ATM band from refinement.json + BDG3 + LAB 2026 + LN)
     lines.append(r"\midrule")
     lines.append(r"\multicolumn{10}{@{}l}{\emph{Panel B: Stress regime (refined grid) --- E14 ($H=0.10$, $T=6$\,m, $\eta_{\mathrm{P1}}=3.0$, $\Delta=30/365$, $\xi_0=0.235^2$)}} \\")
     lines.append(r"\addlinespace[1.5pt]")
@@ -267,9 +278,9 @@ def build_tab4_smiles():
         bdg_iv = 0.5 * (s["bdg_iv3_pct"][0] + s["bdg_iv3_pct"][1])
         ln_iv = 0.5 * (s["ln_iv_pct"][0] + s["ln_iv_pct"][1])
         lines.append(
-            f"{k_s} & {r_opt['K_volpts']:.3f} & {fmt_band(r_opt['call_L_volpts'], r_opt['call_U_volpts'], 5)} & "
-            f"{fmt_out(r_opt['call_width_volpts'], 5, True)} & {bdg_c:.5f} & {ln_c:.5f} & "
-            f"{fmt_band(r_opt['iv_L_pct'], r_opt['iv_U_pct'], 2)} & {bdg_iv:.2f} & {l_iv:.2f} & {ln_iv:.2f} \\\\"
+            f"{k_s} & {r_opt['K_volpts']:.3f} & {strong(fmt_band(r_opt['call_L_volpts'], r_opt['call_U_volpts'], 5))} & "
+            f"{strong(fmt_out(r_opt['call_width_volpts'], 5, True))} & {bdg_c:.5f}{tick_marker((s['bdg_C3_volpts'][0]-r_opt['call_U_volpts'], s['bdg_C3_volpts'][1]-r_opt['call_L_volpts']))} & {ln_c:.5f}{tick_marker((s['ln_call_volpts'][0]-r_opt['call_U_volpts'], s['ln_call_volpts'][1]-r_opt['call_L_volpts']))} & "
+            f"{strong(fmt_band(r_opt['iv_L_pct'], r_opt['iv_U_pct'], 2))} & {bdg_iv:.2f} & {l_iv:.2f} & {ln_iv:.2f} \\\\"
         )
 
     # Panel C: Mixed rough Bergomi (5 representative strikes k=-0.3,-0.2,0,+0.1,+0.3 with root-split BDG3!)
@@ -285,14 +296,14 @@ def build_tab4_smiles():
         sp_c = 0.5 * (mr["split_call"][0] + mr["split_call"][1])
         sp_iv = 0.5 * (mr["split_iv"][0] + mr["split_iv"][1])
         lines.append(
-            f"{k_s} & {ms['K_volpts']:.3f} & {fmt_band(ms['call_L_volpts'], ms['call_U_volpts'], 5)} & "
-            f"{fmt_out(ms['call_width_volpts'], 5, True)} & {sp_c:.5f} & --- & "
-            f"{fmt_band(ms['iv_L_pct'], ms['iv_U_pct'], 2)} & {sp_iv:.2f} & --- & --- \\\\"
+            f"{k_s} & {ms['K_volpts']:.3f} & {strong(fmt_band(ms['call_L_volpts'], ms['call_U_volpts'], 5))} & "
+            f"{strong(fmt_out(ms['call_width_volpts'], 5, True))} & {sp_c:.5f}{tick_marker((mr['split_call'][0]-ms['call_U_volpts'], mr['split_call'][1]-ms['call_L_volpts']))} & --- & "
+            f"{strong(fmt_band(ms['iv_L_pct'], ms['iv_U_pct'], 2))} & {sp_iv:.2f} & --- & --- \\\\"
         )
 
     lines.extend([
         r"\bottomrule\end{tabular}",
-        r"\smallskip\par\raggedright\scriptsize\emph{Notes:} $k=\log(K/F_{\mathrm{mid}})$. Every \RoughCertCV{} IV bracket propagates forward and call uncertainty in 169-bit Arb (Proposition~\ref{prop:arb}(e)). Panel~B uses the refined stress grid (ATM IV width $0.55$\,pp). Panel~C reports Arb root-split BDG$_3$ midpoints.",
+        r"\smallskip\par\raggedright\scriptsize\emph{Notes:} Log moneyness is $\log(K/F_{\rm mid})$. Bold gives certified prices, widths and implied volatilities. BDG$_3$ is the third-order expansion, LAB the direct implied-volatility expansion and LN the lognormal proxy. Dashes mark unavailable comparisons. $^\star$ denotes price separation exceeding one Cboe tick ($0.05$ pts). Panel C uses exercise-boundary splitting.",
         r"\end{table}",
     ])
     write_tex("tab_vix_smiles.tex", "\n".join(lines))
@@ -308,13 +319,15 @@ def build_tab5_competitors():
     q30 = load_json(RES / "bcj_calendar.json")
 
     lines = [
-        r"\begin{table}[!htbp]\centering\scriptsize\setlength{\tabcolsep}{2.6pt}",
+        r"\begin{table}[!htbp]\centering\scriptsize\setlength{\tabcolsep}{3.3pt}",
         r"\caption{Multi-method competitor audit against \RoughCertCV{} across direct IV expansions (LAB~2026), Markovian factor reductions (Bayer--Breneis), and product functional quantisation (BCJ~2023).}\label{tab:competitors}",
         r"\begin{tabular}{@{}lcccccc@{}}\toprule",
         # --- Panel A: LAB 2026 ---
-        r"\multicolumn{7}{@{}l}{\emph{Panel A: Direct implied-volatility expansion \citep[Eq.~(21)]{LiaoAgarwalBourgey2026} below \RoughCertCV{} lower bound}} \\",
+        r"\multicolumn{7}{@{}l}{\emph{Panel A: Direct implied-volatility expansion \citep[Eq.~(21)]{LiaoAgarwalBourgey2026} against \textbf{\RoughCertCV{}}}} \\",
         r"\addlinespace[1.5pt]",
-        r"Regime & $H$ & $T$ & Below & Overlap & Max gap (pp) & Status \\\midrule",
+        r" & & & \multicolumn{3}{c}{Comparison with \textbf{\RoughCertCV{}}} & \\",
+        r"\cmidrule(lr){4-6}",
+        r"Regime & $H$ & Maturity & Strikes below & \shortstack{Strikes\\overlapping} & \shortstack{Max shortfall\\(pp)} & Verdict \\\midrule",
     ]
     for row in lab[:-1]:
         target = load_json(RES / "refinement.json")["grid"]["options"] if row["name"]=="stress" else row["arb"]["options"]
@@ -337,7 +350,7 @@ def build_tab5_competitors():
         r"\midrule",
         r"\multicolumn{7}{@{}l}{\emph{Panel B: Bayer--Breneis Markovian factor thresholds ($T=3$\,m, $a=1.0$, $\Delta=1/12$, $\xi_0=0.235^2$)}} \\",
         r"\addlinespace[1.5pt]",
-        r"Hurst $H$ & Futures $<1$ tick & Band entry & Call $K=18$ & Call $K=22$ & Call $K=26$ & Verification \\\midrule",
+        r"Hurst $H$ & \shortstack{Futures\\within tick} & \shortstack{Futures inside\\reference band} & Call $K=18$ & Call $K=22$ & Call $K=26$ & Verification \\\midrule",
     ])
     for h_key, h_lbl in [(".05", "0.05"), (".10", "0.10"), (".30", "0.30")]:
         obj = fd[h_key]
@@ -345,12 +358,13 @@ def build_tab5_competitors():
         b_th = obj["fixed_band_threshold"]["first_proved"]
         def fmt_th(item):
             if item["minimum_proved"]:
-                return f"\\textbf{{{item['first_proved']}}}"
+                return str(item["first_proved"])
             prev = item["earlier_unresolved"][0]
             return f"{prev} or {item['first_proved']}$^\\dagger$"
-        ver = "Exact min (fut.)" if h_key == ".05" else "All exact mins"
+        exact_all = all(it["minimum_proved"] for it in t_list) and obj["fixed_band_threshold"].get("minimum_proved", True)
+        ver = "All exact minima" if exact_all else "Exact except $^\\dagger$"
         lines.append(
-            f"{h_lbl} & {fmt_th(t_list[0])} & \\textbf{{{b_th}}} & "
+            f"{h_lbl} & {fmt_th(t_list[0])} & {b_th} & "
             f"{fmt_th(t_list[1])} & {fmt_th(t_list[2])} & {fmt_th(t_list[3])} & {ver} \\\\"
         )
 
@@ -372,14 +386,14 @@ def build_tab5_competitors():
         setup_med = float(np.median([z["basis_setup_s"] + z["product_setup_s"] for z in r12]))
         price_med = float(np.median([z["online_s"] for z in r12]))
         lines.append(
-            f"{b} / {st['actual_paths']} & \\multicolumn{{2}}{{c}}{{{fmt_band(e12_lo, e12_hi, 3)}}} & "
-            f"{fmt_band(e30_lo, e30_hi, 3)} & {fmt_band(st['signed_future_error'][0], st['signed_future_error'][1], 3)} & "
+            f"{b} / {st['actual_paths']} & \\multicolumn{{2}}{{c}}{{{fmt_band(e12_lo, e12_hi, 3)}{tick_marker((e12_lo, e12_hi))}}} & "
+            f"{fmt_band(e30_lo, e30_hi, 3)}{tick_marker((e30_lo, e30_hi))} & {fmt_band(*st['signed_future_error'], 3)}{tick_marker(st['signed_future_error'])} & "
             f"{setup_med:.2f} & {price_med:.2f} \\\\"
         )
 
     lines.extend([
         r"\bottomrule\end{tabular}",
-        r"\smallskip\par\raggedright\scriptsize\emph{Notes:} All intervals outward-rounded in 169-bit Arb. Panel~A: shortfalls below \RoughCertCV{} IV lower bound (zero strikes above). Panel~B: bold values are Arb-proved exact minimum factor counts; $^\dagger$one-factor overlap bracket at $H=0.05$ ($N=5$ at $K=18$, $N=1$ at $K=22$). Panel~C: negative errors reflect downward quantiser bias.",
+        r"\smallskip\par\raggedright\scriptsize\emph{Notes:} Panel A counts implied-volatility intervals against the bold reference method; pp means percentage points. Panel B gives minimum factor counts. $^\dagger$ marks unresolved adjacent counts. Panel C gives quantiser minus continuum futures by window and budget. $^\star$ marks an entire error range beyond one Cboe tick ($0.05$ pts).",
         r"\end{table}",
     ])
     write_tex("tab_competitors.tex", "\n".join(lines))
@@ -402,19 +416,29 @@ def build_tab6_common():
     ]
     rows = []
     for (label, verdict), intervals in zip(descriptions, values, strict=True):
-        cells = [fmt_band(*z, digits) if z else "---" for z, digits in zip(intervals, (3,3,2), strict=True)]
-        rows.append((label, "Arb-cert.", *cells, verdict))
+        cells = [fmt_band(*z, digits) if z else "---" for z, digits in zip(intervals, (4,3,2), strict=True)]
+        if not rows:
+            cells = [strong(c) for c in cells]
+        else:
+            for j in (0, 1):
+                if intervals[j] and values[0][j]:
+                    a, b = intervals[j]
+                    lo, hi = values[0][j]
+                    cells[j] += tick_marker((a-hi,b-lo))
+        rows.append((label, "Arb", *cells, verdict))
     lines = [
         r"\begin{table}[!htbp]\centering\scriptsize\setlength{\tabcolsep}{3.4pt}",
         r"\caption{Eight-method comparison on a common curved forward-variance contract ($H=0.10$, $T=3$\,m, $\Delta=1/12$, $\xi_0(t)=0.234^2(1+t)^2$, strike $K=27$ pts).}\label{tab:common}",
         r"\begin{tabular}{@{}lccccr@{}}\toprule",
-        r"Method & Status & Future (pts) & Call $K=27$ (pts) & Black-76 IV (\%) & Verdict vs.\ \RoughCertCV{} \\\midrule",
+        r" & & \multicolumn{3}{c}{Outward-rounded enclosures at the same strike} & \\",
+        r"\cmidrule(lr){3-5}",
+        r"Method & Engine & Futures (pts) & Call (pts) & Black-76 IV (\%) & Against reference \\\midrule",
     ]
     for r in rows:
         lines.append(" & ".join(r) + r" \\")
     lines.extend([
         r"\bottomrule\end{tabular}",
-        r"\smallskip\par\raggedright\scriptsize\emph{Notes:} All intervals outward-rounded in 169-bit Arb. Each method's IV uses its own forward at fixed $K=27$. BDG and LAB Arb enclosures reflect curved-kernel $M=360$ quadrature; refined numerical references sit $0.14$ and $0.13$\,pp below the \RoughCertCV{} IV lower bound.",
+        r"\smallskip\par\raggedright\scriptsize\emph{Notes:} Bold identifies the continuous-time reference. Arb encloses each stated model or approximation. Each implied volatility (IV) uses its own forward at $K=27$. A dash marks an unavailable output. $^\star$ denotes a futures or call separation exceeding $0.05$ pts, the standard futures tick used for comparison.",
         r"\end{table}",
     ])
     write_tex("tab_common.tex", "\n".join(lines))
@@ -443,7 +467,9 @@ def build_tab7_steinstein():
         # --- Panel A: Daily 99% VaR ---
         r"\multicolumn{9}{@{}l}{\emph{Panel A: Daily-close $99\%$ VaR bracket widths in exact sd (empirical coverage in parentheses)}} \\",
         r"\addlinespace[1.5pt]",
-        r"$H$ & Daily err. & Mon.\ err. & Riem.--$W_2$ & Martingale & Cantelli & DKW fl. & Binom.\ / fl. & Daily MC \\\midrule",
+        r" & \multicolumn{2}{c}{RMS error (\% of sd)} & \multicolumn{2}{c}{Baseline width (sd)} & \multicolumn{3}{c}{\textbf{\RoughCertCV{}} and sampling (sd)} & \\",
+        r"\cmidrule(lr){2-3}\cmidrule(lr){4-5}\cmidrule(lr){6-8}",
+        r"$H$ & Daily sum & Monitor & Riemann $W_2$ & Martingale & Cantelli & DKW floor & \shortstack{Binomial width\\and floor} & \shortstack{Daily bias\\(sd)} \\\midrule",
     ]
 
     for r, rd in ((r, next(z for z in e13d if z["H"]==r["H"])) for r in e13):
@@ -451,10 +477,10 @@ def build_tab7_steinstein():
         fl_dkw = e13_fl[hk]["floor_sd"]
         fl_bin = rd["floor_bin_sd"]
         lines.append(
-            f"{r['H']:g} & {100*r['riemann_rel_rms']:.1f}\\% & {100*r['ce_rel_rms']:.1f}\\% & "
-            f"{r['width_a_sd']:.2f} ({r['coverage_a']:.2f}) & {r['width_c_sd']:.2f} ({r['coverage_c']:.2f}) & "
-            f"{r['width_d_sd']:.2f} ({r['coverage_d']:.2f}) & {fl_dkw:.2f} & "
-            f"{rd['width_dbin_sd']:.2f} ({rd['coverage_dbin']:.2f})/{fl_bin:.2f} & "
+            f"{r['H']:.2f} & {100*r['riemann_rel_rms']:.1f}\\% & {100*r['ce_rel_rms']:.1f}\\% & "
+            f"{fmt_out(r['width_a_sd'], 2, True)} ({r['coverage_a']:.2f}) & {fmt_out(r['width_c_sd'], 2, True)} ({r['coverage_c']:.2f}) & "
+            f"{strong(fmt_out(r['width_d_sd'], 2, True))} ({r['coverage_d']:.2f}) & {fmt_out(fl_dkw, 2, True)} & "
+            f"{strong(fmt_out(rd['width_dbin_sd'], 2, True))} ({rd['coverage_dbin']:.2f})/{fmt_out(fl_bin, 2, True)} & "
             f"{fmt_signed(r['naive_q99_bias_sd'], 3)} \\\\"
         )
 
@@ -463,38 +489,38 @@ def build_tab7_steinstein():
         r"\midrule",
         r"\multicolumn{9}{@{}l}{\emph{Panel B: Variance calls $\E(\Lambda-k)_+$ --- certified width / exact price (coverage in parentheses)}} \\",
         r"\addlinespace[1.5pt]",
-        r"$H$ & Strike $k$ & Exact price & Lipschitz & Convex & Scarf--Lo & Exact $\hat\Lambda$ & & Daily MC \\\midrule",
+        r"$H$ & Strike $k$ & Exact price & Lipschitz & Convex & Scarf--Lo & \shortstack{Exact\\monitor law} & & \shortstack{Daily bias\\(\%)} \\\midrule",
     ])
     for r, rc in ((r, next(z for z in e13c if z["H"]==r["H"])) for r in e13):
         for pkey, plbl in [("ATM", r"$\E\Lambda$"), ("mean+2sd", r"$+2\,\mathrm{sd}$")]:
             pr = r["prices"][pkey]
             prc = rc["prices"][pkey]
             lines.append(
-                f"{r['H']:g} & {plbl} & {sci_tex(pr['exact'])} & "
-                f"{pr['lipschitz_width_rel']:.2f} ({pr['coverage']['lipschitz']:.2f}) & "
-                f"{pr['convex_width_rel']:.2f} ({pr['coverage']['convex']:.2f}) & "
-                f"{pr['scarf_width_rel']:.3f} ({pr['coverage']['scarf']:.2f}) & "
-                f"{prc['width_rel']:.3f} ({prc['coverage']:.2f}) & & "
+                f"{r['H']:.2f} & {plbl} & {sci_tex(pr['exact'])} & "
+                f"{fmt_out(pr['lipschitz_width_rel'], 2, True)} ({pr['coverage']['lipschitz']:.2f}) & "
+                f"{fmt_out(pr['convex_width_rel'], 2, True)} ({pr['coverage']['convex']:.2f}) & "
+                f"{strong(fmt_out(pr['scarf_width_rel'], 3, True))} ({pr['coverage']['scarf']:.2f}) & "
+                f"{strong(fmt_out(prc['width_rel'], 3, True))} ({prc['coverage']:.2f}) & & "
                 f"{fmt_signed(100*pr['naive_daily_bias_rel'], 1)}\\% \\\\"
             )
 
     # --- Panel C: Intraday Gaussian-Bridge Refinement ---
     lines.extend([
         r"\midrule",
-        r"\multicolumn{9}{@{}l}{\emph{Panel C: Intraday Gaussian-bridge conditioning refinement for $99\%$ VaR (continuum law unchanged)}} \\",
+        r"\multicolumn{9}{@{}l}{\emph{Panel C: Intraday Gaussian-bridge conditioning refinement for $99\%$ VaR (widths in continuum sd)}} \\",
         r"\addlinespace[1.5pt]",
-        r"$H$ & Pts/day & $\E[V]/\Var$ & & Martingale & Cantelli & DKW fl. & & Coverage \\\midrule",
+        r"$H$ & \shortstack{Observations\\per day} & \shortstack{Residual\\share} & & Martingale & Cantelli & DKW floor & & \shortstack{Cantelli\\coverage} \\\midrule",
     ])
     for br in b05 + b10:
         lines.append(
-            f"{br['H']:g} & {br['per_day']} & {sci_tex(br['residual_share'])} & & "
-            f"{br['width_c_sd']:.2f} & {br['width_d_sd']:.2f} & {br['width_floor_sd']:.2f} & & "
+            f"{br['H']:.2f} & {br['per_day']} & {sci_tex(br['residual_share'])} & & "
+            f"{fmt_out(br['width_c_sd'], 2, True)} & {strong(fmt_out(br['width_d_sd'], 2, True))} & {fmt_out(br['width_floor_sd'], 2, True)} & & "
             f"{br['coverage_d']:.2f} \\\\"
         )
 
     lines.extend([
         r"\bottomrule\end{tabular}",
-        r"\smallskip\par\raggedright\scriptsize\emph{Notes:} $\sigma_0=0.2$, $\nu=0.1$, $T=1/12$, $K=2\times 10^5$, $a=0.01$ ($50$ reps in Panels~A--B; $10$ in Panel~C). Daily/Mon.\ err.: exact RMS error (\% of sd). Daily MC: signed bias vs.\ exact Karhunen--Lo\`eve law.",
+        r"\smallskip\par\raggedright\scriptsize\emph{Notes:} Bold identifies conditional-variance widths, rounded up. Parentheses give empirical coverage. The monitor is conditional expectation; sd is the continuum standard deviation. DKW denotes the Dvoretzky--Kiefer--Wolfowitz sampling floor. The binomial cell gives width (coverage) / floor. Daily bias compares the daily estimate with the reference law. Panels A/B use 50 replications and C uses 10.",
         r"\end{table}",
     ])
     write_tex("tab_e13.tex", "\n".join(lines))
@@ -504,32 +530,35 @@ def build_tab7_steinstein():
 # TABLE 8: Rough Bergomi Integrated Variance Contrast (Redesigned Cleanly)
 # =============================================================================
 def build_tab8_e6c():
-    content = r"""\begin{table}[!htbp]\centering\footnotesize\setlength{\tabcolsep}{4.2pt}
+    content = r"""\begin{table}[!htbp]\centering\footnotesize\setlength{\tabcolsep}{2.7pt}
 \caption{Rough Bergomi one-month integrated variance and volatility from $21$ daily closes: statistical $99\%$ quantile widths (in sd) and median variance-call bounds ($\times 10^4$).}\label{tab:e6c}
 \begin{tabular}{@{}llrcccccc@{}}\toprule
 \multicolumn{9}{@{}l}{\emph{Panel A: $99\%$ quantile widths in exact sd ($21$ daily closes vs.\ $256$-date refinement)}} \\
 \addlinespace[1.5pt]
-Functional & $H$ & Mon.\ err. & Martingale & Cantelli & DKW fl. & Ratio & 256 dates & MC in \\\midrule
+ & & & \multicolumn{4}{c}{21-date quantile widths (sd) and ratio} & \multicolumn{2}{c}{Diagnostics} \\
+\cmidrule(lr){4-7}\cmidrule(lr){8-9}
+Functional & $H$ & \shortstack{Monitor RMS\\(\% of sd)} & Martingale & \textbf{Cantelli} & DKW floor & \shortstack{Width\\ratio} & \shortstack{256 dates\\(sd)} & \shortstack{Monte Carlo\\in band} \\\midrule
 PANEL_A_ROWS
 \midrule
 \multicolumn{9}{@{}l}{\emph{Panel B: Variance-call brackets ($\times 10^4$) vs.\ fine-grid Monte Carlo diagnostic}} \\
 \addlinespace[1.5pt]
-$H$ & Strike & & \multicolumn{2}{c}{Convex order} & \multicolumn{2}{c}{Conditional Scarf--Lo} & Fine MC & \\\midrule
+$H$ & Strike & & \multicolumn{2}{c}{Convex order} & \multicolumn{2}{c}{\textbf{Conditional Scarf--Lo}} & \shortstack{Fine-grid\\estimate} & \\\midrule
 PANEL_B_ROWS
 \bottomrule\end{tabular}
-\smallskip\par\raggedright\scriptsize\emph{Notes:} $\xi_0=0.235^2$, $\eta_{\mathrm{P1}}=1.9$, $T=1/12$, $K=2\times 10^5$, $5$ replications, DKW $a=0.01$. Ratio $=$ Martingale / conditional Cantelli width (singularity-corrected per-sample $V$). MC in: fraction of replications containing the fine-grid diagnostic.
+\smallskip\par\raggedright\scriptsize\emph{Notes:} Bold identifies \RoughCertCV{} conditional Cantelli or Scarf--Lo results. Monitor RMS is root-mean-square error relative to the continuum standard deviation. The width ratio divides martingale by Cantelli width. DKW is the Dvoretzky--Kiefer--Wolfowitz sampling floor. Monte Carlo in band is the fraction of five replications enclosing the fine-grid diagnostic ($200{,}000$ samples per replication).
 \end{table}"""
     raw = load_json(LEG / "E6c_rough_vol_condvar/e6c_results.json")
     rows_a, rows_b = [], []
     for r in sorted(raw,key=lambda r:(r["H"],r["output"])):
-        name = {"IV":"Int. variance","IVol":"Int. volatility"}[r["output"]]
+        name = {"IV":"Integrated variance","IVol":"Integrated volatility"}[r["output"]]
         cells = [name,f"{r['H']:.2f}",f"{100*r['ce_rel_rms']:.0f}\\%",
-                 f"{r['width_c_sd']:.2f}",f"{r['width_d_sd']:.2f}",f"{r['width_floor_sd']:.2f}",
-                 f"{r['ratio_c_d']:.2f}"+r"$\times$",f"{r['e6b_width_sd']:.2f}",f"{r['mc_inside_d']:.2f}"]
+                 f"{fmt_out(r['width_c_sd'], 2, True)}",strong(f"{fmt_out(r['width_d_sd'], 2, True)}"),f"{fmt_out(r['width_floor_sd'], 2, True)}",
+                 f"{r['ratio_c_d']:.2f}"+r"$\times$",f"{fmt_out(r['e6b_width_sd'], 2, True)}",f"{r['mc_inside_d']:.2f}"]
         rows_a.append(" & ".join(cells)+r" \\")
         for label, pr in r.get("prices",{}).items():
             k = r"$\E\,\mathrm{IV}$" if label=="ATM" else r"$+2\,\mathrm{sd}$"
             bands=[r"\multicolumn{2}{c}{"+fmt_band(*(1e4*x for x in pr[key]),3)+"}" for key in ("convex_median","scarf_median")]
+            bands[1] = bands[1].replace("{c}{",r"{c}{\bfseries\boldmath ")
             rows_b.append(" & ".join([f"{r['H']:.2f}",k,"",*bands,f"{1e4*pr['fine_mc_e6b']:.3f}",""])+r" \\")
     content=content.replace("PANEL_A_ROWS","\n".join(rows_a)).replace("PANEL_B_ROWS","\n".join(rows_b))
     write_tex("tab_e6c.tex", content)
@@ -549,7 +578,9 @@ def build_tab_s1_bcj():
         r"\begin{table}[!htbp]\centering\scriptsize\setlength{\tabcolsep}{4.5pt}",
         r"\caption{Complete 18-cell Bonesini--Callegaro--Jacquier (2023, Section~5.3) \RoughCertCV{} VIX futures suite across three forward-variance curves and six maturities ($H=0.10$, $\eta_{\mathrm{P1}}=1.9$, $\Delta=1/12$).}\label{tab:bcj_full}",
         r"\begin{tabular}{@{}rcrrrrr@{}}\toprule",
-        r"Maturity $T$ & \RoughCertCV{} $[L,\,U]$ (pts) & Width (pts) & JMM width (pts) & Tightening & Setup (s) & Solve (s) \\\midrule",
+        r" & \multicolumn{2}{c}{\textbf{\RoughCertCV{}} (pts)} & \multicolumn{2}{c}{JMM comparison} & \multicolumn{2}{c}{Runtime (s)} \\",
+        r"\cmidrule(lr){2-3}\cmidrule(lr){4-5}\cmidrule(lr){6-7}",
+        r"Maturity & Futures interval & Width & Width (pts) & Width ratio & Setup & Solve \\\midrule",
     ]
     for g_i, (ck, title) in enumerate(c_order):
         if g_i > 0:
@@ -559,13 +590,13 @@ def build_tab_s1_bcj():
         sub = sorted([r for r in rows if ck in r["curve"]], key=lambda x: x["T_months"])
         for r in sub:
             lines.append(
-                f"{r['T_months']}m & {fmt_band(r['condvar_L'], r['condvar_U'], 5)} & "
-                f"{fmt_out(r['condvar_width'], 5, True)} & {fmt_out(r['jmm_width'], 3, True)} & "
-                f"{int(round(r['ratio_vs_jmm'])):,}$\\times$ & {r['setup_s']:.1f} & {r['solve_s']:.1f} \\\\"
+                f"{r['T_months']}m & {strong(fmt_band(r['condvar_L'], r['condvar_U'], 5))} & "
+                f"{strong(fmt_out(r['condvar_width'], 5, True))} & {fmt_out(r['jmm_width'], 3, True)} & "
+                f"{math.floor(r['ratio_vs_jmm']):,}$\\times$ & {r['setup_s']:.1f} & {r['solve_s']:.1f} \\\\"
             )
     lines.extend([
         r"\bottomrule\end{tabular}",
-        r"\smallskip\par\raggedright\scriptsize\emph{Notes:} All 18 continuous-time enclosures use Proposition~4(c)--(d) of the main paper ($M=120$, $N_z=310$) and have widths below $0.013$ pts (one standard futures tick is $0.05$ pts). Setup is paid once per $(H,T,\Delta)$ cell.",
+        r"\smallskip\par\raggedright\scriptsize\emph{Notes:} Bold identifies the conditional-variance futures interval and width. Maturity is in months. The width ratio is the JMM bound width divided by the unrounded \RoughCertCV{} width, rounded down. Setup is incurred once per contract cell; solve time is per evaluation.",
         r"\end{table}",
     ])
     write_tex("tab_bcj_full.tex", "\n".join(lines))
@@ -586,10 +617,19 @@ def build_tab_s2_e5c():
     lines = [
         r"\begin{table}[!htbp]\centering\scriptsize\setlength{\tabcolsep}{3.6pt}",
         r"\caption{Paired statistical $95\%$ quantile brackets for $\int_0^1 B_H(s)^2\dd s$ from $n$-point midpoint observations ($K=20{,}000$, $100$ replications).}\label{tab:e5c}",
-        r"\begin{tabular}{@{}rrrcccccccc@{}}\toprule",
-        r" & & & & \multicolumn{4}{c}{DKW median widths} & & \multicolumn{2}{c}{Binomial OS} \\",
-        r"\cmidrule(lr){5-8}\cmidrule(lr){10-11}",
-        r"$H$ & $n$ & $P/\Var$ & Cov.\ (c/d/d'/bin) & Floor & Mart.\ (c) & CV (d) & RB (d') & Excess & CV-bin & Floor \\\midrule",
+        r"\begin{tabular}{@{}rrrrrrr@{}}\toprule",
+        r"\multicolumn{7}{@{}l}{\emph{Panel A: Grid, residual variance and empirical coverage}} \\",
+        r" & & & \multicolumn{4}{c}{Fraction of 100 replications covering the reference quantile} \\",
+        r"\cmidrule(lr){4-7}",
+        r"$H$ & Dates & Residual share & Martingale & Cantelli & Rao--Blackwell & Binomial Cantelli \\\midrule",
+    ]
+    widths = [
+        r"\bottomrule\end{tabular}\par\medskip",
+        r"\begin{tabular}{@{}rrrrrrrrr@{}}\toprule",
+        r"\multicolumn{9}{@{}l}{\emph{Panel B: Median bracket widths on the same draws}} \\",
+        r" & & \multicolumn{5}{c}{DKW sampling band} & \multicolumn{2}{c}{Binomial sampling band} \\",
+        r"\cmidrule(lr){3-7}\cmidrule(lr){8-9}",
+        r"$H$ & Dates & Floor & Martingale & \textbf{Cantelli} & Rao--Blackwell & \shortstack{Above-floor\\ratio} & \textbf{Cantelli} & Floor \\\midrule",
     ]
     paired = {(r["H"], r["n"]): r for r in e5bin}
     for rc in e5c:
@@ -597,15 +637,16 @@ def build_tab_s2_e5c():
         key = f"{rc['H']:g}_{rc['n']}"
         fl_dkw = e5fl[key]["floor"]
         exc = (rc["width_c"] - fl_dkw) / (rc["width_d"] - fl_dkw)
-        covs = f"{rc['coverage_c']:.2f}/{rc['coverage_d']:.2f}/{rc['coverage_d_rb']:.2f}/{rb['coverage_dbin']:.2f}"
-        lines.append(
-            f"{rc['H']:g} & {rc['n']} & {sci_tex(rc['residual_share'])} & {covs} & "
-            f"{fl_dkw:.3f} & {rc['width_c']:.3f} & {rc['width_d']:.3f} & {rc['width_d_rb']:.3f} & "
-            f"{exc:.1f}$\\times$ & {rb['width_dbin']:.3f} & {rb['floor_bin']:.3f} \\\\"
-        )
+        grid = [f"{rc['H']:.2f}",str(rc['n'])]
+        cov = [rc['coverage_c'],rc['coverage_d'],rc['coverage_d_rb'],rb['coverage_dbin']]
+        lines.append(" & ".join([*grid,sci_tex(rc['residual_share']),*(f"{v:.2f}" for v in cov)]) + r" \\")
+        vals = [f"{fmt_out(fl_dkw, 3, True)}",f"{fmt_out(rc['width_c'], 3, True)}",strong(f"{fmt_out(rc['width_d'], 3, True)}"),
+                f"{fmt_out(rc['width_d_rb'], 3, True)}",f"{exc:.1f}"+r"$\times$",strong(f"{fmt_out(rb['width_dbin'], 3, True)}"),f"{fmt_out(rb['floor_bin'], 3, True)}"]
+        widths.append(" & ".join(grid+vals) + r" \\")
+    lines.extend(widths)
     lines.extend([
         r"\bottomrule\end{tabular}",
-        r"\smallskip\par\raggedright\scriptsize\emph{Notes:} Statistical brackets; median widths on identical draws: (c) martingale-sharp; (d) conditional Cantelli (Proposition~2); (d') Rao--Blackwellised; CV-bin: exact binomial order statistics. Floor: sampling band of $\hat\Lambda$ alone; Excess: ratio of (c) to (d) width above floor.",
+        r"\smallskip\par\raggedright\scriptsize\emph{Notes:} Bold identifies \RoughCertCV{} Cantelli widths with Dvoretzky--Kiefer--Wolfowitz (DKW) bands or exact binomial order statistics. Rao--Blackwell integrates out auxiliary randomness. The floor measures sampling uncertainty of the conditional monitor alone. The above-floor ratio divides martingale excess width by Cantelli excess width. Residual share is unexplained variance divided by total variance.",
         r"\end{table}",
     ])
     write_tex("tab_e5c.tex", "\n".join(lines))
@@ -613,7 +654,9 @@ def build_tab_s2_e5c():
 
 def main():
     from build_tables_and_figures import load_jsons, write_macros
+    import build_v4_numbers
     write_macros(*load_jsons())
+    build_v4_numbers.write_all()
     build_tab1_headline()
     build_tab2_e14()
     build_tab3_mixed()

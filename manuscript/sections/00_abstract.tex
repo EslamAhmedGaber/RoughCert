@@ -1,0 +1,22 @@
+\begin{abstract}
+A VIX pricing approximation can reproduce a smile visually and still miss an exchange tick.
+We introduce \RoughCert{}, a certification framework for continuous-time rough-volatility
+futures, options, implied volatilities and conditional variance risk. It combines an exact Gaussian
+Mehler error ledger with two outward-rounded 169-bit Arb engines: a static tilted moment bound
+(\RoughCertTilt{}) and a conditional-variance solver (\RoughCertCV{}). We prove a sharp fourth-order
+relative width law for \RoughCertTilt{} and the monitoring-error rate of the
+Riemann--Liouville driver, including its singular boundary at time zero. At five high
+vol-of-vol cells, the order-three weak futures expansion exceeds the certified
+continuous-time price by more than one Cboe tick ($0.05$ points; at least $\TickFigOne$ ticks in the largest certified separation).
+On a mixed rough Bergomi smile, splitting the expansion integral at the exercise boundary exposes a
+downward implied-volatility bias at all seven strikes. The direct implied-volatility expansion falls below
+the certified band at 52 of 60 literature strikes; an optimised Markovian reduction needs 14 factors for
+sub-tick futures at $H=0.05$; and a 960-path product functional quantiser underprices all 18 literature
+futures by at least $0.208$ points. Integrated-variance brackets remain statistical, while the Arb pricing enclosures require no simulated continuum reference.
+\end{abstract}
+
+\begin{keyword}
+rough volatility \sep VIX derivatives \sep verified interval arithmetic \sep Wiener chaos
+\sep conditional expectation \sep implied-volatility smile
+\JEL C63 \sep G13
+\end{keyword}

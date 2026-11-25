@@ -35,6 +35,32 @@ def checkrows(label,rows,specs):
     assert len(rows)==len(specs),(label,len(rows),len(specs))
     for i,(r,s) in enumerate(zip(rows,specs)):check(f'{label}/{i+1}',r,s)
 
+def v4_extra_checks(g,fd):
+    """Cross-checks added in the v4 audit: printed verdicts, note bounds and labels."""
+    n=0
+    def iv(c):
+        v=[D(x) for x in numbers(c)];assert len(v)==2,c;return v
+    rows={r[0]:r for r in take('tab_common',r'^(\\textbf|Markovian|500-cell|BDG|LAB|Moment|BCJ|JMM)')}
+    ref=next(r for k,r in rows.items() if k.startswith(r'\textbf'))
+    want={'500-cell right grid':{2:'above'},'Moment-matched lognormal':{2:'below',4:'above'},'BCJ quantiser (960 paths)':{2:'below',3:'below',4:'below'}}
+    for key,cols in want.items():
+        r=rows[key]
+        for j,side in cols.items():
+            a,b=iv(r[j]);lo,hi=iv(ref[j])
+            assert (a>hi) if side=='above' else (b<lo),(key,j,r[j],ref[j]);n+=1
+    for key in ('Markovian ($N=12$)','BDG (2023) order-3'):
+        for j in (2,3,4):
+            a,b=iv(rows[key][j]);lo,hi=iv(ref[j]);assert a<=hi and b>=lo,(key,j);n+=1
+    note=(TAB/'tab_vix_headline.tex').read_text(encoding='utf8')
+    m=re.search(r'at most \$([0-9.]+)\\times 10\^\{-3\}\$ pts',note);assert m,'Table 1 note bound missing'
+    enc=max(max(c['tilted_L_enc_width'],c['tilted_U_enc_width']) for c in g)
+    assert D(m.group(1))*D('1e-3')>=D.from_float(enc);n+=1
+    for line in take('tab_competitors',r'^0\.'):
+        d=fd[line[0][1:]]
+        exact=all(x['minimum_proved'] for x in d['tick_thresholds_future_then_calls']) and d['fixed_band_threshold']['minimum_proved']
+        assert ('All exact' in line[-1])==exact and (('dagger' in line[-1])==(not exact)),line;n+=1
+    return n
+
 def main():
     records.clear()
     g=data('week1_gates_results')['gate2']['cells']; f=data('vix_futures_full_suite');o=data('vix_options_smile_suite')
@@ -49,7 +75,7 @@ def main():
     for r,z in zip(tr,f['block_a_e14_15cells'],strict=True):
         assert r[1]=={7/365:'1w',1/52:'1w',1/12:'1m',.25:'3m',.5:'6m'}[z['T']]
         L,U=z['best_L'],z['best_U'];wj=z['jmm_up'][1]-z['jmm_lo'][0];w=U-L
-        check('T2/'+z['id'],r,[z['H'],None,interval([L,U]),up(w),up(wj),up(U-z['jmm_lo'][0]),wj/w,down(z['bdg_F3'][0]-U) if 'bdg_F3' in z else [],up(z['ln_fut'][1]-L) if 'ln_fut' in z else []])
+        check('T2/'+z['id'],r,[z['H'],None,interval([L,U]),up(w),up(wj),up(U-z['jmm_lo'][0]),down(wj/w),down(z['bdg_F3'][0]-U) if 'bdg_F3' in z else [],up(z['ln_fut'][1]-L) if 'ln_fut' in z else []])
     specs=[]
     for z in f['block_d_mixed_rbergomi']:
         L,U=fields(z,'condvar_L condvar_U');specs.append([None,fields(z,'a1 a2 lambda'),z['T_months'],interval([L,U]),up(U-L),z['bdg_mixed_order0'],z['bdg_mixed_order3'],down(z['bdg_mixed_order3']-U),fields(z,'setup_s solve_s')])
@@ -100,33 +126,76 @@ def main():
     specs=[];E=lambda n:legacy('E13_rough_stein_stein','e13'+n)
     for r in E('_results'):
         h=r['H'];d=next(v for v in E('d_results') if v['H']==h)
-        specs.append([h,100*r['riemann_rel_rms'],100*r['ce_rel_rms'],*[fields(r,'width_'+j+'_sd coverage_'+j) for j in 'acd'],E('_floor')[str(h)]['floor_sd'],fields(d,'width_dbin_sd coverage_dbin floor_bin_sd'),r['naive_q99_bias_sd']])
+        specs.append([h,100*r['riemann_rel_rms'],100*r['ce_rel_rms'],*[[up(r['width_'+j+'_sd']),r['coverage_'+j]] for j in 'acd'],up(E('_floor')[str(h)]['floor_sd']),[up(d['width_dbin_sd']),d['coverage_dbin'],up(d['floor_bin_sd'])],r['naive_q99_bias_sd']])
     for r in E('_results'):
         h=r['H'];c=next(z for z in E('c_results') if z['H']==h)
         for k in ('ATM','mean+2sd'):
-            a=r['prices'][k];d=c['prices'][k]; specs.append([h,[] if k=='ATM' else 2,a['exact'],*[[a[j+'_width_rel'],a['coverage'][j]] for j in ('lipschitz','convex','scarf')],fields(d,'width_rel coverage'),[],100*a['naive_daily_bias_rel']])
+            a=r['prices'][k];d=c['prices'][k]; specs.append([h,[] if k=='ATM' else 2,a['exact'],*[[up(a[j+'_width_rel']),a['coverage'][j]] for j in ('lipschitz','convex','scarf')],[up(d['width_rel']),d['coverage']],[],100*a['naive_daily_bias_rel']])
     for r in E('b_results_H0.05')+E('b_results_H0.1'):
-        specs.append([r['H'],r['per_day'],r['residual_share'],[],r['width_c_sd'],r['width_d_sd'],r['width_floor_sd'],[],r['coverage_d']])
+        specs.append([r['H'],r['per_day'],r['residual_share'],[],up(r['width_c_sd']),up(r['width_d_sd']),up(r['width_floor_sd']),[],r['coverage_d']])
     checkrows('T7',take('tab_e13',r'^\d'),specs)
     rs=sorted(legacy('E6c_rough_vol_condvar','e6c_results'),key=lambda z:(z['H'],z['output']));specs=[]
     for r in rs:
-        specs.append([None,r['H'],100*r['ce_rel_rms'],*fields(r,'width_c_sd width_d_sd width_floor_sd'),r['width_c_sd']/r['width_d_sd'],r['e6b_width_sd'],r['mc_inside_d']])
+        specs.append([None,r['H'],100*r['ce_rel_rms'],*map(up,fields(r,'width_c_sd width_d_sd width_floor_sd')),r['width_c_sd']/r['width_d_sd'],up(r['e6b_width_sd']),r['mc_inside_d']])
     for r in rs:
         for k,a in r.get('prices',{}).items():
             specs.append([r['H'],[] if k=='ATM' else 2,[],interval([v*1e4 for v in a['convex_median']]),interval([v*1e4 for v in a['scarf_median']]),a['fine_mc_e6b']*1e4,[]])
-    checkrows('T8',take('tab_e6c',r'^(Int\.|\d)'),specs)
+    checkrows('T8',take('tab_e6c',r'^(Integrated |\d)'),specs)
     specs=[]
     for curve in ('flat','quad','sqrt'):
         for r in sorted((z for z in f['block_c_bcj2023_18cells'] if z['curve']==curve),key=lambda z:z['T_months']):
-            L,U=fields(r,'condvar_L condvar_U');w=U-L;wj=r['jmm_up'][1]-r['jmm_lo'][0];specs.append([r['T_months'],interval([L,U]),up(w),up(wj),wj/w,r['setup_s'],r['solve_s']])
+            L,U=fields(r,'condvar_L condvar_U');w=U-L;wj=r['jmm_up'][1]-r['jmm_lo'][0];specs.append([r['T_months'],interval([L,U]),up(w),up(wj),down(wj/w),r['setup_s'],r['solve_s']])
     checkrows('S1',take('tab_bcj_full',r'^\d'),specs)
     E=lambda n:legacy('E5c_certified_cantelli','e5c_'+n);specs=[]
+    widths=[]
     for r in E('results'):
         h,n=r['H'],r['n'];b=next(v for v in E('binomial') if (v['H'],v['n'])==(h,n));fl=E('floor')[f'{h:g}_{n}']['floor'];c,d,rb=fields(r,'width_c width_d width_d_rb')
-        specs.append([h,n,r['residual_share'],fields(r,'coverage_c coverage_d coverage_d_rb')+[b['coverage_dbin']],fl,c,d,rb,(c-fl)/(d-fl),b['width_dbin'],b['floor_bin']])
-    checkrows('S2',take('tab_e5c',r'^\d'),specs)
-    out={'checked_numeric_tokens':len(records),'rules':{m:sum(r['rule']==m for r in records) for m in ['down','up','nearest']},'records':records}
+        specs.append([h,n,r['residual_share'],*fields(r,'coverage_c coverage_d coverage_d_rb'),b['coverage_dbin']])
+        widths.append([h,n,up(fl),up(c),up(d),up(rb),(c-fl)/(d-fl),up(b['width_dbin']),up(b['floor_bin'])])
+    checkrows('S2',take('tab_e5c',r'^\d'),specs+widths)
+    nx=v4_extra_checks(g,data('factor_decisions'))
+    # Test the full-precision sign, independently of the printer and display rounding.
+    stars=0
+    def marker(cell,lo,hi):
+        nonlocal stars
+        required=lo > .05 or hi < -.05
+        assert (r'$^\star$' in cell)==required,(cell,lo,hi)
+        stars += int(required)
+    for r,z in zip(table[:-1],(g[i] for i in order),strict=True):
+        for j,key in [(8,'bdg_F3_arb'),(9,'ln_fut')]:
+            marker(r[j],z[key][0]-z['tilted_U_outer'],z[key][1]-z['tilted_L_outer'])
+    for r,z in zip(tr,f['block_a_e14_15cells'],strict=True):
+        for j,key in [(7,'bdg_F3'),(8,'ln_fut')]:
+            if key in z:marker(r[j],z[key][0]-z['best_U'],z[key][1]-z['best_L'])
+            else:assert r[j]=='---'
+    rows4=iter(take('tab_vix_smiles',r'^\$[+-]'))
+    for group in ['bdg2023_fig6','e14_stress_smile','mixed_rbergomi_smile']:
+        for i,z in enumerate(o[group]['strikes']):
+            if group=='bdg2023_fig6' and i%2:continue
+            mixed=group=='mixed_rbergomi_smile'
+            if mixed and i not in (0,1,3,4,6):continue
+            row=next(rows4); t=ref[i] if group=='e14_stress_smile' else z
+            for col,bounds in [(4,m[i]['split_call'] if mixed else z['bdg_C3_volpts']), (5,None if mixed else z['ln_call_volpts'])]:
+                if bounds:marker(row[col],bounds[0]-t['call_U_volpts'],bounds[1]-t['call_L_volpts'])
+    for r in take('tab_competitors',r'^[1-9]'):
+        for cell in r[1:4]:
+            ll,uu=map(float,numbers(cell));marker(cell,ll,uu)
+    for i,r in enumerate(take('tab_common',r'^(\\textbf|Markovian|500-cell|BDG|LAB|Moment|BCJ|JMM)')):
+        for j in range(2):
+            if i and vals[i][j]:
+                marker(r[j+2],vals[i][j][0]-vals[0][j][1],vals[i][j][1]-vals[0][j][0])
+    layouts=[('tab_vix_headline',r'^(BD|BCJ|Stress|Base)',(5,6)),('tab_vix_e14_15cells',r'^\d',(2,3)),('tab_vix_mixed',r'^(Stress|Scenario)',(3,4)),('tab_vix_smiles',r'^\$[+-]',(2,3,6)),('tab_bcj_full',r'^\d',(1,2))]
+    for name,pattern,cols in layouts:
+        for row in take(name,pattern):
+            assert [i for i,c in enumerate(row) if r'\textbf{' in c]==list(cols),(name,row)
+    for r in take('tab_competitors',r'^0\.'):assert all(r'\textbf' not in c for c in r)
+    refrow=next(iter(take('tab_common',r'^\\textbf')));assert all(r'\textbf{' in refrow[j] for j in (0,2,3,4))
+    for r in take('tab_e13',r'^\d'):assert r'\textbf' in r[5]
+    for r in take('tab_e6c',r'^Integrated '):assert r'\textbf' in r[4]
+    for r in take('tab_e6c',r'^\d'):assert r'\bfseries' in r[4]
+    for r in take('tab_e5c',r'^\d')[len(specs):]:assert all(r'\textbf' in r[j] for j in (4,7))
+    out={'tick_markers':stars,'v4_extra_checks':nx,'checked_numeric_tokens':len(records),'rules':{m:sum(r['rule']==m for r in records) for m in ['down','up','nearest']},'records':records}
     (RES.parent/'audit/v3_table_cells.json').write_text(json.dumps(out,indent=1))
-    print(out['checked_numeric_tokens'],out['rules'])
+    print(out['checked_numeric_tokens'],out['rules'],'v4 extra checks',nx)
 if __name__=='__main__':main()
 

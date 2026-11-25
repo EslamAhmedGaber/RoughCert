@@ -1,0 +1,55 @@
+{
+ "baseline": "10_QF_VIX_ARB_V2/manuscript/sections/A_proofs.tex",
+ "edits": [
+  {
+   "why": "v3 precision upgrade recorded in the heading",
+   "old": "End-to-end 160-bit Arb certification",
+   "new": "End-to-end Arb certification"
+  },
+  {
+   "why": "the Minkowski step bounded e^{bar g u} by e^{bar g h_J} without stating bar g >= 0",
+   "old": "Taking the supremum over $u\\in[-h_J,h_J]$ proves",
+   "new": "Since $g_r=a_rg_0\\ge0$, also $\\bar g\\ge0$ and $e^{\\bar g u}\\le e^{\\bar g h_J}$; taking the supremum over\r\n$u\\in[-h_J,h_J]$ proves"
+  },
+  {
+   "why": "two-column layout: display broken to fit the 252pt column (symbols unchanged)",
+   "old": "  \\Delta_{ij}^{(m)}(s,u)&=R(s,u)^m-R(s,t_j)^m-R(t_i,u)^m+R(t_i,t_j)^m.\r\n",
+   "new": "  \\Delta_{ij}^{(m)}(s,u)&=R(s,u)^m-R(s,t_j)^m\\\\\r\n  &\\quad-R(t_i,u)^m+R(t_i,t_j)^m.\r\n"
+  },
+  {
+   "why": "two-column layout: display broken to fit the 252pt column (symbols unchanged)",
+   "old": " R_u=-2Hp I_1,\\quad R_s=2H(s^{-p}u^{-p}+p I_1),\\quad\r\n R_{su}=-2Hp\\{s^{-p}u^{-p-1}+(p+1)I_2\\}.\r\n",
+   "new": "\\begin{aligned}\r\n R_u&=-2Hp I_1,\\qquad R_s=2H(s^{-p}u^{-p}+p I_1),\\\\\r\n R_{su}&=-2Hp\\{s^{-p}u^{-p-1}+(p+1)I_2\\}.\r\n\\end{aligned}\r\n"
+  },
+  {
+   "why": "two-column layout: display broken to fit the 252pt column (symbols unchanged)",
+   "old": "  \\E_P[\\sqrt{\\Lambda}]=e^{-\\norm{h}^2/8}\\,\\E_{Q_h}[\\sqrt{\\widetilde{\\Lambda}_h}],\r\n  \\qquad \\E_{Q_h}[\\widetilde{\\Lambda}_h]=m_1(h),\\qquad \\E_{Q_h}[\\widetilde{\\Lambda}_h^2]=m_2(h).\r\n",
+   "new": "\\begin{aligned}\r\n  \\E_P[\\sqrt{\\Lambda}]&=e^{-\\norm{h}^2/8}\\,\\E_{Q_h}[\\sqrt{\\widetilde{\\Lambda}_h}],\\\\\r\n  \\E_{Q_h}[\\widetilde{\\Lambda}_h]&=m_1(h),\\qquad \\E_{Q_h}[\\widetilde{\\Lambda}_h^2]=m_2(h).\r\n\\end{aligned}\r\n"
+  },
+  {
+   "why": "two-column layout: display broken to fit the 252pt column (symbols unchanged)",
+   "old": "\\[\r\n 0\\le r:=m_2/m_1^2-1\r\n",
+   "new": "\\[\r\n\\begin{aligned}\r\n 0\\le r:=m_2/m_1^2-1\r\n"
+  },
+  {
+   "why": "two-column layout: display broken to fit the 252pt column (symbols unchanged)",
+   "old": " \\le \\|\\E_{\\pi_h}d\\|^2+\\tfrac12 e^{\\varepsilon^2}\\varepsilon^4,\\qquad\r\n 0\\le (U-L)/U\\le r/2 .\r\n",
+   "new": " &\\le \\|\\E_{\\pi_h}d\\|^2+\\tfrac12 e^{\\varepsilon^2}\\varepsilon^4,\\\\\r\n 0\\le (U-L)/U&\\le r/2 .\r\n\\end{aligned}\r\n"
+  },
+  {
+   "why": "two-column layout: display broken to fit the 252pt column (symbols unchanged)",
+   "old": "  \\big|\\E_P[g(\\sqrt{\\Lambda})]-\\E_P[g(\\widetilde{V}_h)]\\big|\r\n  &\\le\\E_P\\big|\\sqrt{\\Lambda}-\\widetilde{V}_h\\big|\r\n",
+   "new": "  &\\big|\\E_P[g(\\sqrt{\\Lambda})]-\\E_P[g(\\widetilde{V}_h)]\\big|\\\\\r\n  &\\quad\\le\\E_P\\big|\\sqrt{\\Lambda}-\\widetilde{V}_h\\big|\r\n"
+  },
+  {
+   "why": "two-column layout: display broken to fit the 252pt column (symbols unchanged)",
+   "old": "  &\\le e^{-\\norm{h}^2/8}\\Big(\\E_{Q_h}\\big(\\sqrt{\\widetilde{\\Lambda}_h}-\\sqrt{m_1(h)}\\big)^2\\Big)^{1/2}\\\\\r\n  &=e^{-\\norm{h}^2/8}\\Big(2m_1(h)-2\\sqrt{m_1(h)}\\,\\E_{Q_h}[\\sqrt{\\widetilde{\\Lambda}_h}]\\Big)^{1/2}\\\\\r\n  &=\\sqrt{2\\,U(h)\\big(U(h)-\\E_P[\\sqrt{\\Lambda}]\\big)}\r\n  \\le\\sqrt{2\\,U(h)\\big(U(h)-L(h)\\big)},\r\n",
+   "new": "  &\\quad\\le e^{-\\norm{h}^2/8}\\Big(\\E_{Q_h}\\big(\\sqrt{\\widetilde{\\Lambda}_h}-\\sqrt{m_1(h)}\\big)^2\\Big)^{1/2}\\\\\r\n  &\\quad=e^{-\\norm{h}^2/8}\\Big(2m_1(h)\r\n    -2\\sqrt{m_1(h)}\\,\\E_{Q_h}[\\sqrt{\\widetilde{\\Lambda}_h}]\\Big)^{1/2}\\\\\r\n  &\\quad=\\sqrt{2\\,U(h)\\big(U(h)-\\E_P[\\sqrt{\\Lambda}]\\big)}\\\\\r\n  &\\quad\\le\\sqrt{2\\,U(h)\\big(U(h)-L(h)\\big)},\r\n"
+  },
+  {
+   "why": "two-column layout: display broken to fit the 252pt column (symbols unchanged)",
+   "old": "$-\\partial_x C_0(x,y)=\\alpha\\int_0^T(x+r)^{-\\alpha-1}(y+r)^{-\\alpha}\\dd r>0$ and\r\n$\\partial_{xx}C_0(x,y)=\\alpha(\\alpha+1)\\int_0^T(x+r)^{-\\alpha-2}(y+r)^{-\\alpha}\\dd r>0$.\r\n",
+   "new": "\\[\r\n\\begin{aligned}\r\n  -\\partial_x C_0(x,y)&=\\alpha\\int_0^T(x+r)^{-\\alpha-1}(y+r)^{-\\alpha}\\dd r>0,\\\\\r\n  \\partial_{xx}C_0(x,y)&=\\alpha(\\alpha+1)\\int_0^T(x+r)^{-\\alpha-2}(y+r)^{-\\alpha}\\dd r>0.\r\n\\end{aligned}\r\n\\]\r\n"
+  }
+ ]
+}

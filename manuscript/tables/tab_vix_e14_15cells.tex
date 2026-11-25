@@ -1,0 +1,32 @@
+\begin{table}[!htbp]\centering\scriptsize\setlength{\tabcolsep}{3.6pt}
+\caption{Complete 15-cell Arb-certified \RoughCert{} VIX futures suite (volatility points, $\Delta=30/365$), benchmarked against JMM~(2018), BDG~(2023), and lognormal proxies.}\label{tab:vix_e14}
+\begin{tabular}{@{}rlcrrrrrr@{}}\toprule
+ & & \multicolumn{2}{c}{\textbf{\RoughCert{}} (pts)} & \multicolumn{3}{c}{JMM (2018) bounds} & \multicolumn{2}{c}{Certified proxy gap (pts)} \\
+\cmidrule(lr){3-4}\cmidrule(lr){5-7}\cmidrule(lr){8-9}
+$H$ & $T$ & $[L,\,U]$ & Width & \shortstack{Width\\(pts)} & \shortstack{Lower-bound\\error limit (pts)} & \shortstack{Width\\ratio} & $\mathrm{BDG}_3-U$ & $\mathrm{LN}-L$ \\\midrule
+\multicolumn{9}{@{}l}{\emph{Panel A: Base regime ($\eta_{\mathrm{P1}}=1.9$, flat $\xi_0=0.235^2$)}} \\
+\addlinespace[1.5pt]
+0.05 & 1w & \textbf{\boldmath [23.12106,\,23.12218]} & \textbf{\boldmath 0.00111} & 0.427 & 0.0491 & 385$\times$ & $+$0.00667 & $-$0.0078 \\
+0.05 & 1m & \textbf{\boldmath [22.50405,\,22.50644]} & \textbf{\boldmath 0.00238} & 1.056 & 0.0622 & 443$\times$ & $+$0.00943 & $-$0.0216 \\
+0.05 & 3m & \textbf{\boldmath [21.77897,\,21.78174]} & \textbf{\boldmath 0.00277} & 1.783 & 0.0641 & 645$\times$ & $+$0.01015 & $-$0.0306 \\
+0.10 & 1w & \textbf{\boldmath [22.96234,\,22.96354]} & \textbf{\boldmath 0.00119} & 0.589 & 0.0516 & 494$\times$ & $+$0.00708 & $-$0.0121 \\
+0.10 & 1m & \textbf{\boldmath [22.01917,\,22.02193]} & \textbf{\boldmath 0.00275} & 1.546 & 0.0675 & 563$\times$ & $+$0.01073 & $-$0.0361 \\
+0.10 & 3m & \textbf{\boldmath [20.83240,\,20.83583]} & \textbf{\boldmath 0.00343} & 2.734 & 0.0698 & 799$\times$ & $+$0.01165 & $-$0.0525$^\star$ \\
+0.30 & 1w & \textbf{\boldmath [23.06690,\,23.06697]} & \textbf{\boldmath 0.00006} & 0.442 & 0.0084 & 7,679$\times$ & $+$0.00022 & $-$0.0016 \\
+0.30 & 1m & \textbf{\boldmath [22.01988,\,22.02002]} & \textbf{\boldmath 0.00014} & 1.493 & 0.0126 & 11,449$\times$ & $+$0.00048 & $-$0.0070 \\
+0.30 & 3m & \textbf{\boldmath [20.20115,\,20.20133]} & \textbf{\boldmath 0.00017} & 3.313 & 0.0138 & 19,586$\times$ & $+$0.00060 & $-$0.0129 \\
+\midrule
+\multicolumn{9}{@{}l}{\emph{Panel B: Curved forward variance ($\eta_{\mathrm{P1}}=1.9$, JMM Scenario~2: $\xi_0(t)=0.234^2(1+t)^2$)}} \\
+\addlinespace[1.5pt]
+0.05 & 1m & \textbf{\boldmath [25.21964,\,25.22259]} & \textbf{\boldmath 0.00294} & 1.190 & 0.0948 & 405$\times$ & --- & --- \\
+0.10 & 1m & \textbf{\boldmath [24.68133,\,24.68480]} & \textbf{\boldmath 0.00346} & 1.737 & 0.1042 & 502$\times$ & --- & --- \\
+0.30 & 1m & \textbf{\boldmath [24.66989,\,24.67087]} & \textbf{\boldmath 0.00098} & 1.682 & 0.0346 & 1,731$\times$ & --- & --- \\
+\midrule
+\multicolumn{9}{@{}l}{\emph{Panel C: Stress regime ($\eta_{\mathrm{P1}}=3.0$, $T=6$\,m, flat $\xi_0=0.235^2$)}} \\
+\addlinespace[1.5pt]
+0.05 & 6m & \textbf{\boldmath [18.26959,\,18.28359]} & \textbf{\boldmath 0.01399} & 5.363 & 0.1463 & 383$\times$ & $+$0.05525$^\star$ & $-$0.1920$^\star$ \\
+0.10 & 6m & \textbf{\boldmath [15.54052,\,15.55650]} & \textbf{\boldmath 0.01598} & 8.096 & 0.1516 & 506$\times$ & $+$0.05764$^\star$ & $-$0.3000$^\star$ \\
+0.30 & 6m & \textbf{\boldmath [12.66836,\,12.66937]} & \textbf{\boldmath 0.00101} & 10.860 & 0.0293 & 10,852$\times$ & $+$0.00278 & $-$0.0680$^\star$ \\
+\bottomrule\end{tabular}
+\smallskip\par\raggedright\scriptsize\emph{Notes:} Bold identifies the narrowest available \RoughCert{} interval and its width. $H$ is the Hurst exponent and $T$ maturity. The JMM error limit is $U-L_{\rm JMM}$; the ratio divides JMM width by \RoughCert{} width. BDG$_3$ is the third-order expansion; LN is lognormal. $^\star$ exceeds one Cboe tick ($0.05$ pts). A dash marks an unevaluated proxy.
+\end{table}

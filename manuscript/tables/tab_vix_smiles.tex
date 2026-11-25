@@ -1,0 +1,33 @@
+\begin{table}[!htbp]\centering\footnotesize\setlength{\tabcolsep}{2.5pt}
+\caption{\RoughCertCV{} Arb-certified VIX call prices (pts) and Black-76 implied volatilities (\%) versus BDG~(2023), LAB~(2026), and lognormal proxies across three smile regimes.}\label{tab:vix_smiles}
+\begin{tabular}{@{}rrccrrccrr@{}}\toprule
+ & & \multicolumn{4}{c}{VIX call price (pts)} & \multicolumn{4}{c}{Black-76 implied volatility (\%)} \\
+\cmidrule(lr){3-6}\cmidrule(lr){7-10}
+\shortstack{Log\\moneyness} & \shortstack{Strike\\(pts)} & \textbf{\RoughCertCV{}} & Width & BDG$_3$ & LN & \textbf{\RoughCertCV{}} & BDG$_3$ & LAB & LN \\\midrule
+\multicolumn{10}{@{}l}{\emph{Panel A: Pure rough Bergomi --- BDG~(2023) Fig.~6 ($H=0.10$, $T=3$\,m, $a=1.0$, $\Delta=1/12$, $\xi_0=0.235^2$)}} \\
+\addlinespace[1.5pt]
+$-$0.40 & 13.347 & \textbf{\boldmath [7.84856,\,7.85733]} & \textbf{\boldmath 0.00877} & 7.85998 & 7.84470 & \textbf{\boldmath [113.48,\,114.05]} & 113.21 & --- & 116.88 \\
+$-$0.20 & 16.303 & \textbf{\boldmath [6.10446,\,6.11242]} & \textbf{\boldmath 0.00796} & 6.11170 & 6.12630 & \textbf{\boldmath [113.84,\,114.23]} & 113.58 & --- & 116.88 \\
+$+$0.00 & 19.912 & \textbf{\boldmath [4.47632,\,4.48298]} & \textbf{\boldmath 0.00666} & 4.47993 & 4.51522 & \textbf{\boldmath [114.18,\,114.46]} & 113.93 & --- & 116.88 \\
+$+$0.20 & 24.320 & \textbf{\boldmath [3.07248,\,3.07769]} & \textbf{\boldmath 0.00521} & 3.07340 & 3.11666 & \textbf{\boldmath [114.51,\,114.72]} & 114.28 & --- & 116.88 \\
+$+$0.40 & 29.705 & \textbf{\boldmath [1.96166,\,1.96577]} & \textbf{\boldmath 0.00410} & 1.96102 & 2.00067 & \textbf{\boldmath [114.83,\,115.01]} & 114.62 & --- & 116.88 \\
+\midrule
+\multicolumn{10}{@{}l}{\emph{Panel B: Stress regime (refined grid) --- E14 ($H=0.10$, $T=6$\,m, $\eta_{\mathrm{P1}}=3.0$, $\Delta=30/365$, $\xi_0=0.235^2$)}} \\
+\addlinespace[1.5pt]
+$-$0.36 & 10.883 & \textbf{\boldmath [7.23501,\,7.25033]} & \textbf{\boldmath 0.01532} & 7.26835 & 7.13723$^\star$ & \textbf{\boldmath [126.58,\,127.44]} & 126.14 & 126.18 & 131.61 \\
+$-$0.16 & 13.215 & \textbf{\boldmath [6.22615,\,6.24021]} & \textbf{\boldmath 0.01406} & 6.25308 & 6.16585$^\star$ & \textbf{\boldmath [126.82,\,127.50]} & 126.38 & 126.40 & 131.61 \\
+$+$0.00 & 15.547 & \textbf{\boldmath [5.39485,\,5.40761]} & \textbf{\boldmath 0.01276} & 5.41662 & 5.36336 & \textbf{\boldmath [127.02,\,127.58]} & 126.58 & 126.58 & 131.61 \\
+$+$0.22 & 19.434 & \textbf{\boldmath [4.30816,\,4.31895]} & \textbf{\boldmath 0.01079} & 4.32353 & 4.30982 & \textbf{\boldmath [127.27,\,127.71]} & 126.84 & 126.84 & 131.61 \\
+$+$0.41 & 23.321 & \textbf{\boldmath [3.49377,\,3.50292]} & \textbf{\boldmath 0.00914} & 3.50469 & 3.51549 & \textbf{\boldmath [127.46,\,127.84]} & 127.05 & 127.04 & 131.61 \\
+$+$0.69 & 31.095 & \textbf{\boldmath [2.38736,\,2.39413]} & \textbf{\boldmath 0.00677} & 2.39285 & 2.42679 & \textbf{\boldmath [127.77,\,128.06]} & 127.38 & 127.37 & 131.61 \\
+\midrule
+\multicolumn{10}{@{}l}{\emph{Panel C: Mixed rough Bergomi --- Scenario~1 ($H=0.10$, $T=3$\,m, $a_1=1.4$, $a_2=0.7$, $\lambda=0.3$, $\Delta=1/12$)}} \\
+\addlinespace[1.5pt]
+$-$0.30 & 15.287 & \textbf{\boldmath [6.62323,\,6.63029]} & \textbf{\boldmath 0.00706} & 6.63570 & --- & \textbf{\boldmath [92.95,\,93.33]} & 92.90 & --- & --- \\
+$-$0.20 & 16.895 & \textbf{\boldmath [5.66039,\,5.66732]} & \textbf{\boldmath 0.00692} & 5.67089 & --- & \textbf{\boldmath [93.94,\,94.25]} & 93.87 & --- & --- \\
+$+$0.00 & 20.636 & \textbf{\boldmath [3.91767,\,3.92367]} & \textbf{\boldmath 0.00600} & 3.92401 & --- & \textbf{\boldmath [96.06,\,96.28]} & 95.96 & --- & --- \\
+$+$0.10 & 22.806 & \textbf{\boldmath [3.17187,\,3.17741]} & \textbf{\boldmath 0.00553} & 3.17647 & --- & \textbf{\boldmath [97.18,\,97.38]} & 97.08 & --- & --- \\
+$+$0.30 & 27.855 & \textbf{\boldmath [1.97201,\,1.97679]} & \textbf{\boldmath 0.00477} & 1.97408 & --- & \textbf{\boldmath [99.55,\,99.73]} & 99.45 & --- & --- \\
+\bottomrule\end{tabular}
+\smallskip\par\raggedright\scriptsize\emph{Notes:} Log moneyness is $\log(K/F_{\rm mid})$. Bold gives certified prices, widths and implied volatilities. BDG$_3$ is the third-order expansion, LAB the direct implied-volatility expansion and LN the lognormal proxy. Dashes mark unavailable comparisons. $^\star$ denotes price separation exceeding one Cboe tick ($0.05$ pts). Panel C uses exercise-boundary splitting.
+\end{table}

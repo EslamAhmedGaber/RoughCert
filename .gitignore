@@ -2,5 +2,15 @@ __pycache__/
 *.py[cod]
 .venv/
 /00_references/
-/manuscript/
 /audit/
+/final_package/
+/results/build_qa.json
+/results/v3_red_team_checks.json
+/manuscript/**/*.aux
+/manuscript/**/*.bbl
+/manuscript/**/*.blg
+/manuscript/**/*.log
+/manuscript/**/*.out
+/manuscript/**/*.spl
+/manuscript/*.pdf
+/manuscript/supplement/*.pdf

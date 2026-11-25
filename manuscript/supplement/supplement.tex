@@ -1,0 +1,175 @@
+\documentclass[11pt]{article}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb,amsthm,mathtools}
+\usepackage{booktabs,graphicx,array,xcolor}
+\usepackage[font=small,labelfont=bf]{caption}
+\usepackage{placeins}
+\renewcommand{\topfraction}{0.94}\renewcommand{\bottomfraction}{0.88}\renewcommand{\textfraction}{0.06}
+\renewcommand{\floatpagefraction}{0.80}
+\usepackage[numbers,sort&compress]{natbib}
+\usepackage{microtype}
+\definecolor{cosblue}{HTML}{1F4E8C}
+\usepackage{xurl}
+\usepackage[colorlinks=true,linkcolor=cosblue,citecolor=cosblue,urlcolor=cosblue]{hyperref}
+
+\newcommand{\E}{\mathbb{E}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\RP}{R_\Pi}
+\newcommand{\dd}{\,\mathrm{d}}
+\newcommand{\Var}{\operatorname{Var}}
+\newcommand{\RoughCert}{\textsf{RoughCert}}
+\newcommand{\RoughCertTilt}{\textsf{RoughCert-Tilt}}
+\newcommand{\RoughCertCV}{\textsf{RoughCert-CV}}
+\input{../tables/numbers}
+\input{../tables/v4_numbers}% generated narrative numbers (directed rounding)
+
+\title{\bfseries Supplementary Material:\\ RoughCert: Machine-Verified VIX Derivative Bounds and Conditional Risk Certificates under Rough Volatility}
+\author{Eslam Ahmed \and Mohamed A.\ El-Beltagy \and Ahmed Etman \and Sroor M.\ Elnady}
+\date{}
+
+\begin{document}
+\begingroup
+\centering
+{\Large\bfseries Supplementary Material\par}
+\smallskip
+{\large\bfseries RoughCert: Machine-Verified VIX Derivative Bounds and Conditional Risk Certificates under Rough Volatility\par}
+\medskip
+Eslam Ahmed, Mohamed A. El-Beltagy, Ahmed Etman and Sroor M. Elnady\par
+\endgroup\medskip
+
+\noindent This supplement gives the full curved-futures results, supporting Gaussian-ledger
+checks and numerical verification details for the pricing comparisons.
+\renewcommand{\thesection}{S\arabic{section}}
+\renewcommand{\thetable}{S\arabic{table}}
+\renewcommand{\thefigure}{S\arabic{figure}}
+
+\section{Multi-curve VIX futures benchmarks}\label{sec:supp_bcj}
+Table~\ref{tab:bcj_full} reports all $18$ continuous-time 169-bit Arb \RoughCertCV{} VIX futures
+enclosures across the three forward-variance curves ($\xi_0(t)=0.234^2$, $0.234^2(1+t)^2$, and
+$0.234^2\sqrt{1+t}$) and six maturities ($T\in\{1,2,3,6,9,12\}$ months) of
+\citet[Section~5.3]{BonesiniCallegaroJacquier2023} at $H=0.10$, $\eta_{\mathrm{P1}}=1.9$
+($a\simeq0.84971$). The table uses $\Delta=1/12$. The archive also supplies a complete $30/365$ comparison for all four quantisation budgets. The table compares these enclosures with the exact Arb bounds of
+\citet[Theorem~3.3]{JacquierMartiniMuguruza2018} and reports setup and per-contract solve times separately.
+\IfFileExists{../tables/tab_bcj_full.tex}{\input{../tables/tab_bcj_full}}{}
+\section{Supporting validation and monitoring-rate benchmarks}\label{sec:supp_val}
+
+\subsection{Residual-to-output sandwich validation}
+Across $24$ test configurations spanning Wick exponentials, exceedances, occupation indicators, and
+generic $\tanh(2y)$ functionals, the lower inequality of Theorem~2 recovers $\SandLoOcc$--$\SandHiSmooth\%$ of $P_\rho$
+while the subspace Poincar\'e upper bound overshoots by $\SandOverLo$--$\SandOverHi\%$ wherever the
+gradient is square-integrable (Figure~\ref{fig:supp_sandwich}).
+
+\begin{figure}[!htbp]\centering
+\includegraphics[width=\textwidth]{../figures/fig_v3_s1_sandwich.pdf}
+\caption{Residual-to-output sandwich bounds divided by exact projection error $P_\rho$ across $24$
+subordinated functional tests. Shaded bars span the lower and Poincar\'e upper bounds; the occupation
+indicator has infinite gradient upper bound.}\label{fig:supp_sandwich}
+\end{figure}
+
+\subsection{Continuum coverage and monitoring bias}
+Table~\ref{tab:e5c} records the complete 12-cell paired $95\%$ quantile verification for
+$\int_0^1 B_H(s)^2\dd s$ across $H\in\{0.1,0.3,0.5,0.75\}$ and $n\in\{4,16,64\}$.
+Figure~\ref{fig:supp_coverage} confirms that ordinary order-statistic confidence intervals targeting the
+$n$-point Riemann sum fall below $90\%$ continuum coverage in \EfiveNaiveUnder\ of \EfiveCells\ cells
+($0\%$ in \EfiveNaiveZero\ rough coarse cells), whereas bias-certified intervals maintain coverage
+\EfiveCertMin. Figure~\ref{fig:supp_e5b} contrasts the progressive narrowing from Riemann--$W_2$ to
+conditional-expectation monitoring, martingale-sharp endpoints, conditional Cantelli envelopes, and
+exact binomial order statistics on identical draws.
+
+\IfFileExists{../tables/tab_e5c.tex}{\input{../tables/tab_e5c}}{}
+
+\begin{figure}[!htbp]\centering
+\includegraphics[width=\textwidth]{../figures/fig_v3_s2_coverage.pdf}
+\caption{Empirical coverage (a) and median width (b) of $95\%$ continuum quantile intervals for
+$\int_0^1 B_H(s)^2\dd s$ versus grid size $n$ ($K=20{,}000$). Dashed line marks nominal $0.95$ coverage.}
+\label{fig:supp_coverage}
+\end{figure}
+
+\begin{figure}[!htbp]\centering
+\includegraphics[width=\textwidth]{../figures/fig_v3_s3_layers.pdf}
+\caption{Progressive width reduction across certificate layers for the $95\%$ quantile of
+$\int_0^1 B_H(s)^2\dd s$ on identical samples: Riemann--$W_2$, conditional monitor, martingale-sharp,
+and conditional Cantelli brackets with DKW (solid) and exact binomial order statistics (dashed).}\label{fig:supp_e5b}
+\end{figure}
+
+\subsection{Measured monitoring convergence rates}
+We evaluated the monitoring error $M(\mu_n)$ using Theorem~1 of the main paper and fitted slopes on
+midpoint grids $n=64,128,256,512,1024$. For Wick exponentials the comparison rate is
+$n^{-(1+2H)}$ in the range of Theorem~3: the fitted slopes are $-\SlopeWickA$, $-\SlopeWickB$,
+$-\SlopeWickC$ and $-\SlopeWickD$ at $H=0.1,0.3,0.5,0.7$, against the predicted $-1.2$, $-1.6$, $-2.0$
+and $-2.4$. The kinked exceedance and discontinuous indicator are additional numerical tests, with
+empirical slopes compared against $-(1+2H)$ and $-(1+H)$, respectively
+\citep{Altmeyer2017,NgoOgawa2011}: the exceedance gives $-\SlopeKinkA$, $-\SlopeKinkB$, $-\SlopeKinkC$
+and $-\SlopeKinkD$, the indicator $-\SlopeIndA$, $-\SlopeIndB$, $-\SlopeIndC$ and $-\SlopeIndD$, and the
+generic $\tanh(2y)$ functional $-\SlopeTanhA$, $-\SlopeTanhB$, $-\SlopeTanhC$ and $-\SlopeTanhD$ over the
+same grids.
+\FloatBarrier
+
+\section{Additional pricing and verification details}
+For the mixed smile we bisect $Y(z)-K^2$ on $[-16,16]$ and integrate on the exercised
+side using complex ball quadrature. The unresolved root interval is covered by its length
+times a supremum bound. All three Hermite-weighted terms use the same exercise root.
+For $s_{\max}<8$ and $|z|\ge16$, the absolute integrand, including the normal density,
+is bounded by $A(1+z^2)e^{-z^2/4}/\sqrt{2\pi}$, where
+\[
+ A=K+\sqrt{\bar\xi}\left(1+\sum_j
+ (|\gamma_{1,j}|+|\gamma_{2,j}/s_j|+2|\gamma_{3,j}/s_j^2|)\right).
+\]
+We integrate this majorant over both tails. The tail follows from $\mu_j\le0$,
+$0\le y_j/\sqrt{Y}\le\sqrt{Y}$ and
+$\sqrt{Y}\le\sqrt{\bar\xi}\exp(s_{\max}|z|/2)$. For the independent finite-difference
+calculation the original $100$-node Gauss--Hermite rule and $10^{-4}$ step are passed to the authors'
+function. On the same fixed strikes we invert each price with its own forward.
+
+\paragraph{Functional quantisation}
+On $L=T+\Delta$, put $\omega_j=(j-1/2)\pi/L$. The retained loading is
+$\sqrt{2/L}\int_0^T (T+x-s)^{-p}\cos(\omega_j s)\dd s$, with $p=1/2-H$.
+Writing $b=1-p$, the antiderivative of $t^{-p}e^{-i\omega_jt}$ starting at zero is
+$t^b\,{}_1F_1(b;b+1;-i\omega_jt)/b$. Taking the real part after translation yields
+the loadings used for product quantisation in \citet{BonesiniCallegaroJacquier2023}.
+Scalar Gaussian codepoints satisfy the centroid equations with Voronoi thresholds given
+by adjacent midpoints. Each conditional mean increases with either endpoint.
+Verifying lower and upper sub- and supersolutions maps the entire ordered box into itself.
+Existence follows by the fixed-point theorem on a compact box, and strict log-concavity
+gives uniqueness of the stationary scalar normal quantiser. We recompute the Voronoi
+masses in ball arithmetic. The price integral for every path uses its full deterministic
+variance compensation. Absolute derivatives of a mode on $x>0$ are bounded by
+$\sqrt{2/L}\,x^{-p}$ and $\sqrt{2/L}\,p x^{-p-1}$, respectively, by integrating
+the kernel derivatives. On the first cell the loading variation is bounded by
+$\sqrt{2/L}\,(x_1^{1-p}-x_0^{1-p})/(1-p)$.
+Every online price sum includes the uncertainty of both centroids and masses.
+
+\paragraph{Finite-dimensional kernels and the tilted contrast}
+Writing $r(x)=(w_i e^{-\gamma_i x})_i$, the Gram matrix of the exponential factors has entries
+$G_{ij}=\int_0^T e^{-(\gamma_i+\gamma_j)t}\dd t$.
+The covariance is $r(x)^\top G r(y)$. Componentwise positivity gives the required
+derivative suprema at left endpoints. For the more demanding threshold at $H=0.05$,
+we tilt by $h=0.99\,\Delta^{-1}\int k_x\dd x$ and condition under the new measure on
+the unit vector $e$ proportional to $k_{\Delta/14}-k_\Delta$. The residual loading becomes
+$g(x)=\langle k_x-h,e\rangle$ and its variance comes from the Gram matrix of
+$(I-e\otimes e)(k_x-h)$. Since $e$ is positive in Brownian time, $g$ decreases.
+The weight now includes $\exp(-\langle h,k_x-h\rangle/2)$. For its Gaussian-weighted
+integrand the log derivative is bounded by
+$(|z-g|+\|h\|/2)\|k_x'\|$; the log second derivative is bounded by
+$(|z-g|+\|h\|/2)\|k_x''\|+\|k_x'\|^2$. The same cell and panel remainders then apply.
+The tilted tail uses the bound $\sqrt{m_1\Pr(|Z|>10)}$ before multiplication by
+$e^{-\|h\|^2/8}$. This calculation encloses each price separately.
+
+\paragraph{Simulation check}
+A second program builds the Brownian loadings directly using 224 graded quadrature nodes,
+then factorises the resulting delivery covariance by SVD. It pairs the payoff with the
+conditional lognormal sum on the leading coordinate. The expectation of that control is
+computed by root-split one-dimensional quadrature. We use 48 and 96 delivery nodes and
+$2^{14}$ and $2^{17}$ Sobol paths per scramble, respectively. Twelve independent scrambles
+give replicate standard errors. Discretisation and discarded singular values remain
+numerical approximations. Agreement with the deterministic bands is a diagnostic. A second implementation forms the delivery covariance from a hypergeometric primitive at 130 decimal digits, computes a Cholesky factor at 40 delivery nodes, then samples all 40 Gaussian coordinates with independent scrambles. Its 35 point estimates also fall inside their respective bands.
+
+{\small
+\setlength{\bibsep}{3pt}
+\bibliographystyle{elsarticle-num-names}
+\bibliography{../references}
+}
+\end{document}
+

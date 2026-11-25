@@ -1,0 +1,187 @@
+\section{Gaussian field setting and exact joint error ledger}\label{sec:setting}
+
+Evaluating a continuum volatility functional after discretising the monitoring window, projecting the
+Gaussian driver onto finitely many coordinates, and truncating its Wiener chaos expansion couples three
+sources of approximation error. This section fixes the Hilbert-space representation contract and states
+the exact joint mean-square identity, its two-sided residual-covariance bounds, and the measure-axis
+convergence rate that underpin the financial certificates developed in Section~\ref{sec:certificates}.
+
+\subsection{Subordinated Gaussian functionals and the representation contract}\label{sec:contract}
+Let $\cH$ be a real separable Hilbert space and let $W=(W(h))_{h\in\cH}$ be an isonormal Gaussian process.
+A continuous map $s\mapsto e_s\in\cH$ on a compact interval $\mathcal{I}\subset\R$ defines the centred
+Gaussian field $Y_s=W(e_s)$ with covariance $R(s,u)=\ip{e_s}{e_u}$ and variance $\sigma_s^2=R(s,s)$.
+Fractional Brownian motion for $H\in(0,1)$, the Riemann--Liouville rough-volatility driver
+$W_t^H=\sqrt{2H}\int_0^t(t-s)^{H-1/2}\dd W_s$, and the forward-variance Gaussian field
+$Y_u=\sqrt{2H}\int_0^T(u-s)^{H-1/2}\dd W_s$ on $u\in[T,T+\Delta]$ all fall into this setting; only the
+covariance $R$ enters the error identities below.
+
+\begin{definition}[Subordinated functional]\label{def:output}
+Let $f\colon\mathcal{I}\times\R\to\R$ be measurable with $f(s,\cdot)\in L^2(N(0,\sigma_s^2))$ and
+$\sup_{s\in\mathcal{I}}\norm{f(s,Y_s)}_2<\infty$. For any finite signed Borel measure $\rho$ on
+$\mathcal{I}$, the subordinated output is the $L^2$-valued Bochner integral
+\[
+  \Lambda_\rho=\int_{\mathcal{I}} f(s,Y_s)\,\rho(\dd s).
+\]
+\end{definition}
+
+With $\He_m$ the probabilists' Hermite polynomials and $h_m=\He_m/\sqrt{m!}$, the normalised Hermite
+coefficients $\hat c_m(s)=\E[f(s,\sigma_sZ)h_m(Z)]$ ($Z\sim N(0,1)$) give the Wiener chaos expansion
+$X_s=f(s,Y_s)=\sum_{m\ge0}\hat c_m(s)h_m(Y_s/\sigma_s)$. For $|x|\le\sigma_s\sigma_u$ define the Mehler
+kernel and its order-$N$ truncation
+\begin{equation}\label{eq:mehler_kernel}
+\begin{split}
+  K(s,u;x)&=\sum_{m\ge0}\hat c_m(s)\hat c_m(u)\Big(\frac{x}{\sigma_s\sigma_u}\Big)^m,\\
+  K_N(s,u;x)&=\sum_{m=0}^N\hat c_m(s)\hat c_m(u)\Big(\frac{x}{\sigma_s\sigma_u}\Big)^m.
+\end{split}
+\end{equation}
+At a point with $\sigma_s=0$, use $f(s,0)$ in order zero and zero tensors at positive orders.
+Joint measurability of the scalar coefficients follows by Gaussian integration.
+Each chaos tensor is strongly measurable in a separable tensor power, with norm bounded by
+$\sup_s\|X_s\|_2/\sqrt{m!}$. The partial chaos sums are strongly measurable, and their pointwise
+$L^2$ limit gives the stated Bochner integrand.
+
+By Mehler's formula \citep{Mehler1866,Janson1997}, $K(s,u;x)=\E[f(s,U)f(u,V)]$ whenever $(U,V)$ is
+centred bivariate Gaussian with variances $(\sigma_s^2,\sigma_u^2)$ and covariance $x$; in particular
+$\E[X_sX_u]=K(s,u;R(s,u))$. For the Wick exponential $f(s,y)=\xi_0(s)\exp(\eta y-\tfrac12\eta^2\sigma_s^2)$,
+which governs rough-Bergomi spot and forward variance, $\hat c_m(s)=\xi_0(s)(\eta\sigma_s)^m/\sqrt{m!}$ and
+$K(s,u;x)=\xi_0(s)\xi_0(u)e^{\eta^2x}$. For mixed rough Bergomi, $f(s,y)=\xi_0(s)\sum_{r=1}^m\lambda_r\exp(\eta_r y-\tfrac12\eta_r^2\sigma_s^2)$
+gives
+\[
+  K(s,u;x)=\xi_0(s)\xi_0(u)\sum_{r,q=1}^m\lambda_r\lambda_q e^{\eta_r\eta_q x}.
+\]
+For rough Stein--Stein integrated variance $f(s,y)=(\sigma_0+\nu y)^2$, $K$ is a degree-two polynomial in $x$.
+
+\begin{definition}[Admissible Gaussian representation]\label{def:rep}
+A map $s\mapsto g(s)\in\R^k$ with a standard Gaussian vector $\xi\in\R^k$ is an \emph{admissible
+representation} of $Y$ if $g(s)\cdot\xi=W(\Pi e_s)$ for all $s\in\mathcal{I}$, where $\Pi$ is the
+orthogonal projection of $\cH$ onto a closed subspace $S$ spanned by $\xi$. Its retained and residual
+covariance kernels are
+\[
+  \RP(s,u)=g(s)\cdot g(u),\qquad D(s,u)=R(s,u)-\RP(s,u).
+\]
+\end{definition}
+
+Because orthogonality implies independence for jointly Gaussian variables, Definition~\ref{def:rep} holds
+if and only if $g(s)\cdot\xi=\E[Y_s\mid\xi]$ and the residual field $Y_s-g(s)\cdot\xi$ is independent of
+$\xi$ with positive semidefinite covariance $D$ (the \hyperref[app:proofs]{proof appendix}). A non-orthogonal truncation
+violates this contract and can produce indefinite $R-gg^\top$; every representation used below is
+explicitly verified to be an orthogonal projection.
+
+\subsection{Exact joint error identity and two-sided residual bounds}\label{sec:ledger}
+Let $\Gamma(\Pi)$ denote the second quantisation of $\Pi$ and $J_{\le N}$ the orthogonal projection onto
+Wiener chaoses of order at most $N\in\N_0\cup\{\infty\}$ \citep{Janson1997,Nualart2006}. They commute, so
+$Q=J_{\le N}\Gamma(\Pi)$ is an orthogonal projection of $L^2(\Omega)$. Conditionally on $W(S)$,
+$\Gamma(\Pi)X_s=\E[X_s\mid W(S)]=(S_{D(s,s)}f(s,\cdot))(W(\Pi e_s))$, where $S_v h(y)=\E[h(y+\sqrt{v}\,Z)]$
+smooths $f$ by the residual variance $D(s,s)$. For a target measure $\mu$ and a monitoring measure $\nu$,
+the combined surrogate is $Q\Lambda_\nu$.
+
+\begin{theorem}[Exact joint error identity]\label{thm:master}
+For finite signed Borel measures $\mu,\nu$ on $\mathcal{I}$, any admissible representation satisfying
+Definition~\ref{def:rep}, and any $N\in\N_0\cup\{\infty\}$,
+\begin{equation}\label{eq:master}
+\begin{split}
+  \norm{\Lambda_\mu-Q\Lambda_\nu}_2^2
+  =\iint K(R)\dd\mu\dd\mu&-2\iint K_N(\RP)\dd\mu\dd\nu\\
+  &+\iint K_N(\RP)\dd\nu\dd\nu,
+\end{split}
+\end{equation}
+where $K(R)$ abbreviates $K(s,u;R(s,u))$ and $K_N(\RP)$ abbreviates $K_N(s,u;\RP(s,u))$.
+\end{theorem}
+
+Define the component terms
+\begin{align*}
+  P_\rho&=\norm{\Lambda_\rho-\Gamma(\Pi)\Lambda_\rho}_2^2\\
+  &=\iint\big(K(R)-K(\RP)\big)\dd\rho\dd\rho,\\
+  C_\rho&=\norm{\Gamma(\Pi)\Lambda_\rho-Q\Lambda_\rho}_2^2\\
+  &=\iint\big(K(\RP)-K_N(\RP)\big)\dd\rho\dd\rho,\\
+  M&=\iint K(R)\dd(\mu-\nu)\dd(\mu-\nu),\\
+  M_Q&=\iint K_N(\RP)\dd(\mu-\nu)\dd(\mu-\nu),\\
+  I&=2\iint\big(K(R)-K_N(\RP)\big)\dd(\mu-\nu)\dd\nu.
+\end{align*}
+These yield two equivalent decompositions of \eqref{eq:master}:
+
+\begin{corollary}[Reconciled sequential and orthogonal ledgers]\label{cor:ledgers}
+Under Theorem~\ref{thm:master},
+\[
+  \norm{\Lambda_\mu-Q\Lambda_\nu}_2^2=M+P_\nu+C_\nu+I=M_Q+P_\mu+C_\mu,
+\]
+where $M_Q,P_\mu,C_\mu\ge0$, $0\le M_Q\le M$, and
+$|I|\le2\sqrt{(M-M_Q)(P_\nu+C_\nu)}$. In particular,
+$P_\mu+C_\mu\le\norm{\Lambda_\mu-Q\Lambda_\nu}_2^2\le M+P_\mu+C_\mu$.
+\end{corollary}
+
+In the terminal case $\mu=\delta_T$ with $f(T,y)=A\exp^\diamond(\sigma y)\diamond(1+qy)$,
+Theorem~\ref{thm:master} recovers the exact closed-form chaos truncation tail $R_N=\E|X-X_N|^2$ derived
+in \citet{AHMED2026111045}; the present identity extends that exact error calculus to measure-indexed
+integrated functionals and retains the cross-interaction $I$ between discretisation, projection, and
+chaos truncation.
+
+To diagnose in advance how a representation's residual covariance $D$ converts into output projection error
+$P_\rho$, let $K'(s,u;x)=\partial_x K(s,u;x)$. By Price's theorem \citep{Price1958,Voigtlaender2017Price},
+$K'(s,u;x)=\E[\partial_y f(s,U)\,\partial_y f(u,V)]$.
+
+\begin{theorem}[Two-sided residual-to-output sandwich]\label{thm:sandwich}
+Suppose $f(s,\cdot)$ is weakly differentiable with $\sup_{s\in\mathcal{I}}\norm{\partial_y f(s,Y_s)}_2<\infty$.
+For every finite signed Borel measure $\rho$ and every admissible representation,
+\begin{equation}\label{eq:sandwich}
+\begin{split}
+  \iint c_1(s)c_1(u)D(s,u)\dd\rho\dd\rho
+  &\;\le\;\iint K'(\RP)D\dd\rho\dd\rho\\
+  &\;\le\;P_\rho\;\le\;\iint K'(R)D\dd\rho\dd\rho,
+\end{split}
+\end{equation}
+where $c_1(s)=\E[\partial_y f(s,Y_s)]$. The first two inequalities are equalities whenever $\Lambda_\rho$
+lies in the sum of the zeroth and first Wiener chaoses.
+\end{theorem}
+
+The upper inequality is the subspace Gaussian Poincar\'e bound of \citet{ZahmConstantinePrieurMarzouk2020};
+the lower inequalities follow from Schur-power monotonicity on the positive semidefinite interpolating path
+$R_\theta=\RP+\theta D$ (the \hyperref[app:proofs]{proof appendix}) and extend to non-differentiable square-integrable
+outputs as inequalities of integrated quadratic forms. In that case the middle lower bound means
+the increasing limit of its finite-chaos forms and $c_1(s)=\hat c_1(s)/\sigma_s$ where $\sigma_s>0$ and zero otherwise.
+At zero variance the associated residual vector is zero. This convention covers indicator outputs.
+
+\subsection{Measure-axis convergence rate}\label{sec:rate}
+When a continuous variance integral $\Lambda_\mu=\int_0^T f(s,Y_s)\,g(s)\dd s$ is approximated by an
+$n$-cell Riemann sum $\Lambda_{\mu_n}$ with $\mu_n=\sum_{i=1}^n w_i\delta_{t_i}$ ($t_i\in\text{cell }i$,
+$w_i=\int_{\text{cell}_i}g$), the exact monitoring error $M(\mu_n)=\norm{\Lambda_\mu-\Lambda_{\mu_n}}_2^2$
+is governed by the local covariance regularity of $Y$.
+
+\begin{assumption}[Covariance regularity]\label{ass:K}
+On $[0,T]$, $R$ is continuous with $|R|\le\bar s$, and there exist constants $c_R,A_R,A_R'>0$ such that:
+\emph{(K1)} $\norm{e_s-e_u}^2\le c_R|s-u|^{2H}$;
+\emph{(K2)} for $0<s<u$ and $p=1/2-H$, the mixed derivative satisfies
+\[
+ |\partial_{su}R|\le A_R\{(u-s)^{-1-2p}+s^{-p}u^{-1-p}\}.
+\]
+The transposed bound holds on $0<u<s$. \emph{(K3)} on the open off-diagonal triangles,
+$|\partial_sR|\le A'_R(s^{-2p}+|s-u|^{-2p})$.
+The derivatives there are continuous. For $H=1/2$ we treat Brownian covariance separately.
+\end{assumption}
+
+For fractional Brownian motion the off-diagonal kernel derivatives follow directly from
+$2R=s^{2H}+u^{2H}-|u-s|^{2H}$. The endpoint term in (K2) also covers the
+Riemann--Liouville field, as shown in the \hyperref[app:proofs]{proof appendix}.
+
+\begin{theorem}[Measure-axis distance rate]\label{thm:rate}
+Let $f(s,y)=\xi_0\exp(\eta y-\tfrac12\eta^2\sigma_s^2)$, let
+$g$ be bounded measurable on $[0,T]$, and let $\mu_n$ be any cell-matched discretisation on a uniform
+partition of width $h=T/n$. Under Assumption~\ref{ass:K} with $0<H<1/2$, or for Brownian covariance at $H=1/2$,
+\begin{equation}\label{eq:rate}
+\begin{split}
+  M(\mu_n)=\norm{\Lambda_\mu-\Lambda_{\mu_n}}_2^2
+  \;\le\;&C(H,T,\norm{g}_\infty,\bar s,c_R,A_R,A_R')\\
+  &\times\xi_0^2\,\eta^2 e^{\eta^2\bar s}(1+\eta^2\bar s)\,n^{-(1+2H)}.
+\end{split}
+\end{equation}
+A finite linear combination has the same exponent by the triangle inequality in $L^2$, with the coefficient-dependent constant obtained by summing the individual RMS bounds. At the Brownian boundary $H=\tfrac12$ with $g\equiv1$ and left-point sampling,
+$\lim_{n\to\infty} n^2 M(\mu_n)=\xi_0^2 T^2(e^{\eta^2 T}-1)/3$.
+\end{theorem}
+
+Theorem~\ref{thm:rate} (proved in the \hyperref[app:proofs]{proof appendix}) contrasts with the $O(n^{-1})$ variance
+error observed for signed first-chaos energy discrepancies of deterministic integrands
+\citep{AHMED2026111045}: because $M(\mu_n)$ is a squared $L^2$ distance rather
+than a difference of squared norms, the rate $n^{-(1+2H)}$ holds uniformly across in-cell node placements
+without endpoint vanishing conditions. The WIS solution approximation studied by \citet{ErdoganLordSchieven2024WIS} concerns a different error criterion. For $H=0.10$, the RMS monitoring error decays only as
+$n^{-0.60}$, explaining quantitatively why daily grids leave substantial continuum bias in rough-volatility
+variance swaps and why conditional expectation is essential.

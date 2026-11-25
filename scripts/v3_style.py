@@ -148,7 +148,7 @@ def save_figure(fig, out_dir: Path, stem: str, also_png: bool = True) -> list[Pa
         box=src[0].rect
         page=out.new_page(width=72*TEXTWIDTH_IN,height=72*TEXTWIDTH_IN*box.height/box.width)
         page.show_pdf_page(page.rect,src,0)
-        out.save(pdf_path,garbage=4,deflate=True)
+        out.save(pdf_path,garbage=4,deflate=True,no_new_id=True)
         paths=[pdf_path]
         if also_png:
             png_dir=out_dir.parents[1]/"audit"/"figure_previews"

@@ -1,0 +1,75 @@
+\section{Scope, limitations, and conclusions}\label{sec:scope}
+
+\subsection{When a continuum certificate decides a pricing or risk question}
+Rough volatility produces both the sharpest and the widest brackets in this study. The exact joint error
+ledger of Theorem~\ref{thm:master} identifies the reason before any derivative is priced: the
+computable residual variance share $P_\mu/\Var(\Lambda_\mu)$ measures how much continuum randomness is
+left unexplained by the retained Gaussian coordinates. For $\mathrm{VIX}_T^2$, every forward variance $\xi_T(u)$
+integrates the same past Brownian history on $[0,T]$ through a Volterra kernel analytic across the
+diagonal $u=v$, so a single Gaussian direction leaves under $\ShareVIXBase\%$ of $\Var(\mathrm{VIX}_T^2)$ in
+standard rough-Bergomi regimes ($\ShareVIXStress\%$ under six-month $\eta_{\mathrm{P1}}=3$ stress). Paired with
+Theorem~\ref{thm:tilted} or Proposition~\ref{prop:root} and 169-bit Arb ball arithmetic
+(Proposition~\ref{prop:arb}), that low residual share delivers machine-verified futures, option, and
+implied-volatility brackets in their corresponding units: the widest of the $61$ certified VIX futures
+brackets reported here is $\MaxFutW$ points, below one Cboe tick. For spot integrated variance
+$\int_0^T v_t\dd t$ in the same model, fresh rough innovations arrive throughout $[0,T]$, leaving up to
+$\ShareIVHi\%$ of variance unexplained by daily closes; the resulting brackets serve as rigorous validation
+envelopes rather than quoting tools.
+
+This yields a concrete workflow for volatility desks and model validators:
+\begin{enumerate}
+\item Compute the residual variance share $P_\mu/\Var(\Lambda_\mu)$ for the target contract and
+  proposed Gaussian conditioning space.
+\item For VIX futures and options (single or mixed rough Bergomi, flat or curved $\xi_0$), evaluate
+  \RoughCertTilt{} (Theorem~\ref{thm:tilted}) or \RoughCertCV{} (Proposition~\ref{prop:arb}). Use fast
+  closed-form expansions (such as \citealp{BourgeyDeMarcoGobet2023}, \citealp{LiaoAgarwalBourgey2026}, or
+  moment-matched lognormal proxies) inside calibration loops only at parameter cells where
+  \RoughCert{} has certified their bias to lie below the desk's tick or implied-volatility tolerance; switch to
+  the certified one-factor solver or a verified Markovian factor count wherever the certificate flags a
+  violation.
+\item When auditing a published Monte Carlo or multilevel benchmark, verify both the continuum target
+  and the exact discrete-grid target to separate sampling error from forward-window discretisation bias.
+\end{enumerate}
+
+\subsection{Methodological boundaries and honest caveats}
+Four boundaries delimit the scope of the present results:
+\begin{itemize}
+\item \emph{Epistemic distinction between Arb-certified and audited-quadrature results.} Every VIX
+  futures, call, put, and Black-76 implied-volatility interval in Sections~\ref{sec:vix_futures}--\ref{sec:vix_options}
+  encloses its stated target in the archived data, with zero uncertified
+  Gaussian tail truncation and explicit outward rounding. By contrast, the paired quadratic quantile
+  benchmarks (Section~\ref{sec:validation}) and the spot integrated-variance studies
+  (Section~\ref{sec:variance_risk}) carry \lab{exact-identity+quadrature} and \lab{statistical}$(1-a)$
+  labels whose underlying kernel integrals use graded Gauss--Legendre refinement checks rather than
+  interval arithmetic.
+\item \emph{Separation of asymptotic regimes.} The $O(P^{1/2})$ rate of Proposition~\ref{prop:condvar}(iii)
+  describes conditional-variance quantile widths in the local density regime; the $O(\varepsilon^4)$ rate
+  of Theorem~\ref{thm:tilted}(iii) describes the relative futures width in the forward-kernel dispersion
+  $\varepsilon$; and the $O(\varepsilon^2)$ option bound \eqref{eq:tilted_opt_lip} explains why VIX
+  options require conditional variance rather than a static tilt. None of these asymptotic rates replaces
+  finite-parameter Arb verification.
+\item \emph{Single-driver scope.} All theorems here concern subordinated functionals of one Gaussian
+  driver (including mixed rough Bergomi with a shared Brownian motion). Joint SPX--VIX derivatives driven
+  by two correlated Brownian motions $(W^{(1)},W^{(2)})$ involve both integrated variance and stochastic
+  integrals $\int_0^T\sqrt{v_s}\dd W_s^{(1)}$ and require a separate two-field conditional Monte Carlo
+  framework.
+\item \emph{Model prices versus market calibration.} All numerical benchmarks evaluate declared
+  rough-volatility models at published literature parameters; separating model-pricing error from
+  market-calibration misfit requires external market-data inputs beyond the scope of this study.
+\end{itemize}
+
+\subsection{Conclusions}
+We have introduced \RoughCert{}, an exact Gaussian error calculus and machine-verified certification
+framework linking continuum functional approximation to deterministic derivative bounds and conditional risk
+certificates. Combining the reconciled Mehler error ledger (Theorem~\ref{thm:master}), conditional-variance
+square-root bounds (Proposition~\ref{prop:root}), the static \RoughCertTilt{} Girsanov--H\"older theorem with
+sharp $O(\varepsilon^4)$ dispersion width (Theorem~\ref{thm:tilted}), and outward-rounded 169-bit Arb
+certification via Pfaff ${}_2F_1$ inner products and Minkowski $L^2$ perturbation bounds
+(\RoughCertCV{}, Proposition~\ref{prop:arb}) yields sampling-free continuous-time enclosures narrower than
+one Cboe tick across pure, curved-$\xi_0$, and mixed rough Bergomi regimes. Head-to-head audits against
+2022--2026 benchmarks machine-verify where order-three weak expansions exceed one full exchange tick on
+futures and induce systematic downward implied-volatility bias, quantify direct implied-volatility shortfalls at $52$ of the $60$
+published LAB strikes, establish minimum Markovian factor counts for the recorded fits, certify the sign of
+the functional-quantiser bias, disentangle
+continuum prices from $500$-cell right-rectangle multilevel Monte Carlo targets, and certify steep
+upward-sloping VIX smiles in mixed rough Bergomi without simulation.

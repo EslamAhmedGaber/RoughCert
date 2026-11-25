@@ -1,0 +1,33 @@
+\begin{table}[!htbp]\centering\scriptsize\setlength{\tabcolsep}{3.3pt}
+\caption{Multi-method competitor audit against \RoughCertCV{} across direct IV expansions (LAB~2026), Markovian factor reductions (Bayer--Breneis), and product functional quantisation (BCJ~2023).}\label{tab:competitors}
+\begin{tabular}{@{}lcccccc@{}}\toprule
+\multicolumn{7}{@{}l}{\emph{Panel A: Direct implied-volatility expansion \citep[Eq.~(21)]{LiaoAgarwalBourgey2026} against \textbf{\RoughCertCV{}}}} \\
+\addlinespace[1.5pt]
+ & & & \multicolumn{3}{c}{Comparison with \textbf{\RoughCertCV{}}} & \\
+\cmidrule(lr){4-6}
+Regime & $H$ & Maturity & Strikes below & \shortstack{Strikes\\overlapping} & \shortstack{Max shortfall\\(pp)} & Verdict \\\midrule
+LAB author grid & 0.10 & 1\,m & 10/10 & 0/10 & 0.487 & All below \\
+LAB author grid & 0.10 & 3\,m & 10/10 & 0/10 & 0.236 & All below \\
+LAB author grid & 0.10 & 6\,m & 10/10 & 0/10 & 0.140 & All below \\
+LAB author grid & 0.23 & 1\,m & 10/10 & 0/10 & 0.021 & All below \\
+LAB author grid & 0.23 & 3\,m & 8/10 & 2/10 & 0.008 & 2 overlap \\
+LAB author grid & 0.23 & 6\,m & 4/10 & 6/10 & 0.002 & 6 overlap \\
+Stress ($\eta_{\mathrm{P1}}=3$) & 0.10 & 6\,m & 6/6 & 0/6 & 0.435 & All below \\
+\midrule
+\multicolumn{7}{@{}l}{\emph{Panel B: Bayer--Breneis Markovian factor thresholds ($T=3$\,m, $a=1.0$, $\Delta=1/12$, $\xi_0=0.235^2$)}} \\
+\addlinespace[1.5pt]
+Hurst $H$ & \shortstack{Futures\\within tick} & \shortstack{Futures inside\\reference band} & Call $K=18$ & Call $K=22$ & Call $K=26$ & Verification \\\midrule
+0.05 & 14 & 19 & 5 or 6$^\dagger$ & 1 or 2$^\dagger$ & 1 & Exact except $^\dagger$ \\
+0.10 & 7 & 11 & 2 & 1 & 5 & All exact minima \\
+0.30 & 2 & 9 & 1 & 2 & 2 & All exact minima \\
+\midrule
+\multicolumn{7}{@{}l}{\emph{Panel C: BCJ~(2023) product functional quantisation signed futures errors (pts) and median runtimes (s)}} \\
+\addlinespace[1.5pt]
+Budget / Paths & \multicolumn{2}{c}{18-cell ($\Delta=1/12$)} & 18-cell ($30/365$) & Stress (pts) & Setup (s) & Price (s) \\\midrule
+50 / 48 & \multicolumn{2}{c}{[$-$2.077,\,$-$0.321]$^\star$} & [$-$2.092,\,$-$0.322]$^\star$ & [$-$1.239,\,$-$1.219]$^\star$ & 0.12 & 0.07 \\
+100 / 96 & \multicolumn{2}{c}{[$-$1.851,\,$-$0.280]$^\star$} & [$-$1.863,\,$-$0.282]$^\star$ & [$-$1.184,\,$-$1.164]$^\star$ & 0.12 & 0.14 \\
+500 / 480 & \multicolumn{2}{c}{[$-$1.450,\,$-$0.216]$^\star$} & [$-$1.458,\,$-$0.216]$^\star$ & [$-$0.994,\,$-$0.972]$^\star$ & 0.14 & 0.71 \\
+1000 / 960 & \multicolumn{2}{c}{[$-$1.406,\,$-$0.208]$^\star$} & [$-$1.412,\,$-$0.209]$^\star$ & [$-$0.965,\,$-$0.942]$^\star$ & 0.17 & 1.42 \\
+\bottomrule\end{tabular}
+\smallskip\par\raggedright\scriptsize\emph{Notes:} Panel A counts implied-volatility intervals against the bold reference method; pp means percentage points. Panel B gives minimum factor counts. $^\dagger$ marks unresolved adjacent counts. Panel C gives quantiser minus continuum futures by window and budget. $^\star$ marks an entire error range beyond one Cboe tick ($0.05$ pts).
+\end{table}

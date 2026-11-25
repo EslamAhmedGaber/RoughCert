@@ -115,14 +115,14 @@ def write_macros(g, f, o):
         f"\\newcommand{{\\ArbBDDisjointGap}}{{{num(cells['BD2022_MLMC_JCF']['grid500_tilted_arb']['L_outer_volpts'] - cells['BD2022_MLMC_JCF']['tilted_U_outer'],6,False)}}}",
         f"\\newcommand{{\\ArbEFourteenMaxW}}{{{num(max_e14_w,5,True)}}}",
         f"\\newcommand{{\\ArbEFourteenBaseMaxW}}{{{num(max_e14_base_w,5,True)}}}",
-        f"\\newcommand{{\\ArbJMMRatioLo}}{{{int(round(min_jmm_ratio)):,}}}".replace(",", "{,}"),
-        f"\\newcommand{{\\ArbJMMRatioHi}}{{{int(round(max_jmm_ratio)):,}}}".replace(",", "{,}"),
+        f"\\newcommand{{\\ArbJMMRatioLo}}{{{math.floor(min_jmm_ratio):,}}}".replace(",", "{,}"),
+        f"\\newcommand{{\\ArbJMMRatioHi}}{{{math.floor(max_jmm_ratio):,}}}".replace(",", "{,}"),
         f"\\newcommand{{\\ArbBCJMaxW}}{{{num(max_bcj_w,5,True)}}}",
-        f"\\newcommand{{\\ArbBCJRatioLo}}{{{int(round(min_bcj_ratio)):,}}}".replace(",", "{,}"),
-        f"\\newcommand{{\\ArbBCJRatioHi}}{{{int(round(max_bcj_ratio)):,}}}".replace(",", "{,}"),
+        f"\\newcommand{{\\ArbBCJRatioLo}}{{{math.floor(min_bcj_ratio):,}}}".replace(",", "{,}"),
+        f"\\newcommand{{\\ArbBCJRatioHi}}{{{math.floor(max_bcj_ratio):,}}}".replace(",", "{,}"),
         f"\\newcommand{{\\ArbMixScenMaxW}}{{{num(max_mix_s1_w,5,True)}}}",
         f"\\newcommand{{\\ArbMixAllMaxW}}{{{num(max_mix_all_w,5,True)}}}",
-        f"\\newcommand{{\\ArbMixMaxBDGGap}}{{{max_mix_bdg_gap:.5f}}}",
+        f"\\newcommand{{\\ArbMixMaxBDGGap}}{{{num(max_mix_bdg_gap,5,False)}}}",
     ]
     (TAB_DIR / "vix_arb_numbers.tex").write_text("\n".join(lines) + "\n", encoding="utf-8")
 

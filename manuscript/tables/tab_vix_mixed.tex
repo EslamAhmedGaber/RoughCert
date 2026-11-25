@@ -1,0 +1,14 @@
+\begin{table}[!htbp]\centering\footnotesize\setlength{\tabcolsep}{4.0pt}
+\caption{Mixed rough Bergomi VIX futures (volatility points, $H=0.10$, $\Delta=1/12$, $\xi_0=0.235^2$): \RoughCertCV{} enclosures versus BDG~(2023) mixed weak expansions.}\label{tab:vix_mixed}
+\begin{tabular}{@{}lcrccrrrr@{}}\toprule
+ & & & \multicolumn{2}{c}{\textbf{\RoughCertCV{}} (pts)} & \multicolumn{3}{c}{BDG (2023) mixed (pts)} & \\
+\cmidrule(lr){4-5}\cmidrule(lr){6-8}
+Regime & $(a_1,a_2,\lambda)$ & $T$ & $[L,\,U]$ & Width & BDG$_0$ & BDG$_3$ & $\mathrm{BDG}_3-U$ & \shortstack{Setup / solve\\(s)} \\\midrule
+Scenario~1 & (1.4,\,0.7,\,0.3) & 1m & \textbf{\boldmath [21.86821,\,21.87169]} & \textbf{\boldmath 0.00347} & 21.70815 & 21.88995 & $+$0.01826 & 1.8 / 5.2 \\
+Scenario~1 & (1.4,\,0.7,\,0.3) & 3m & \textbf{\boldmath [20.63299,\,20.63780]} & \textbf{\boldmath 0.00481} & 20.47861 & 20.65502 & $+$0.01722 & 1.6 / 5.2 \\
+Scenario~1 & (1.4,\,0.7,\,0.3) & 6m & \textbf{\boldmath [19.69027,\,19.69553]} & \textbf{\boldmath 0.00525} & 19.54665 & 19.71098 & $+$0.01546 & 1.5 / 5.0 \\
+Stress & (1.6,\,0.7,\,0.4) & 3m & \textbf{\boldmath [19.85257,\,19.85950]} & \textbf{\boldmath 0.00692} & 19.65869 & 19.88916 & $+$0.02966 & 1.6 / 5.0 \\
+Stress & (1.6,\,0.7,\,0.4) & 6m & \textbf{\boldmath [18.75046,\,18.75762]} & \textbf{\boldmath 0.00716} & 18.57762 & 18.78286 & $+$0.02523 & 1.4 / 4.8 \\
+\bottomrule\end{tabular}
+\smallskip\par\raggedright\scriptsize\emph{Notes:} Bold identifies the conditional-variance interval and width. $a_1,a_2$ are factor loadings, $\lambda$ is the mixing weight and $T$ is maturity in months. BDG$_0$ and BDG$_3$ denote zeroth- and third-order floating-point expansions. The signed gap compares the third-order value with the certified upper bound.
+\end{table}

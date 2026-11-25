@@ -1,0 +1,19 @@
+\begin{table}[!htbp]\centering\scriptsize\setlength{\tabcolsep}{2.2pt}
+\caption{Headline 169-bit Arb-certified \RoughCertTilt{} VIX futures brackets (volatility points) across eight literature and stress-test parameter cells, audited against BDG~(2023) and lognormal proxies.}\label{tab:vix_headline}
+\begin{tabular}{@{}lrrrrccrrr@{}}\toprule
+ & \multicolumn{4}{c}{Contract parameters} & \multicolumn{2}{c}{\textbf{\RoughCertTilt{}} (pts)} & \multicolumn{3}{c}{Expansion and signed gaps (pts)} \\
+\cmidrule(lr){2-5}\cmidrule(lr){6-7}\cmidrule(lr){8-10}
+Benchmark & $H$ & $T$ (yr) & $\Delta$ (yr) & $a$ & $[L,\,U]$ & Width & BDG$_3$ & $\mathrm{BDG}_3\!-\!U$ & $\mathrm{LN}\!-\!L$ \\\midrule
+Stress (E14) & 0.10 & 0.50 & 30/365 & 1.342 & \textbf{\boldmath [15.53706,\,15.55718]} & \textbf{\boldmath 0.02011} & 15.61414 & $+$0.05696$^\star$ & $-$0.2965$^\star$ \\
+BDG (2023) Fig.~1 & 0.10 & 0.50 & 1/12 & 1.500 & \textbf{\boldmath [14.05216,\,14.08195]} & \textbf{\boldmath 0.02978} & 14.16307 & $+$0.08112$^\star$ & $-$0.4304$^\star$ \\
+BD (2022) \S3.3 & 0.10 & 0.50 & 1/12 & 0.500 & \textbf{\boldmath [22.17993,\,22.18038]} & \textbf{\boldmath 0.00044} & 22.18192 & $+$0.00154 & $-$0.0076 \\
+BDG (2023) Fig.~6 & 0.10 & 0.25 & 1/12 & 1.000 & \textbf{\boldmath [19.90857,\,19.91515]} & \textbf{\boldmath 0.00657} & 19.93666 & $+$0.02152 & $-$0.0978$^\star$ \\
+BCJ (2023) \S5.3 & 0.10 & 0.50 & 1/12 & 0.850 & \textbf{\boldmath [19.81201,\,19.81546]} & \textbf{\boldmath 0.00345} & 19.82707 & $+$0.01161 & $-$0.0581$^\star$ \\
+Base ($H=0.10$) & 0.10 & 1/12 & 30/365 & 0.850 & \textbf{\boldmath [22.01885,\,22.02193]} & \textbf{\boldmath 0.00307} & 22.03265 & $+$0.01073 & $-$0.0358 \\
+Base ($H=0.05$) & 0.05 & 1/12 & 30/365 & 0.601 & \textbf{\boldmath [22.50390,\,22.50644]} & \textbf{\boldmath 0.00254} & 22.51588 & $+$0.00943 & $-$0.0214 \\
+Stress ($H=0.30$) & 0.30 & 0.50 & 30/365 & 2.324 & \textbf{\boldmath [12.66828,\,12.66937]} & \textbf{\boldmath 0.00108} & 12.67214 & $+$0.00278 & $-$0.0680$^\star$ \\
+\midrule
+BD (2022) 500-cell & 0.10 & 0.50 & 1/12 & 0.500 & \textbf{\boldmath [22.18102,\,22.18141]} & \textbf{\boldmath 0.00039} & \multicolumn{3}{c}{MLMC $= 22.18135$ (inside grid band)} \\
+\bottomrule\end{tabular}
+\smallskip\par\raggedright\scriptsize\emph{Notes:} Bold identifies the tilted interval and width before display rounding. $H$ is the Hurst exponent, $T$ maturity, $\Delta$ the window and $a=\eta_{\mathrm{P1}}\sqrt{2H}$. BDG$_3$ is the third-order expansion; LN is lognormal. Signed gaps use the nearest bound. $^\star$ exceeds one Cboe tick ($0.05$ pts). Endpoint enclosure widths (at most $1.4\times 10^{-3}$ pts) are included.
+\end{table}

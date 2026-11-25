@@ -1,6 +1,6 @@
 # RoughCert
 
-Research code and synthetic benchmark data for *RoughCert: Machine-Verified VIX Derivative Bounds and Conditional Risk Certificates under Rough Volatility*, by Eslam Ahmed, Mohamed A. El-Beltagy, Ahmed Etman and Sroor M. Elnady. Version `v3.0.0` accompanies the audited Quantitative Finance manuscript.
+Research code and synthetic benchmark data for *RoughCert: Machine-Verified VIX Derivative Bounds and Conditional Risk Certificates under Rough Volatility*, by Eslam Ahmed, Mohamed A. El-Beltagy, Ahmed Etman and Sroor M. Elnady. Version `v5.0.0` accompanies the audited Quantitative Finance manuscript.
 
 ## Reproduce the published displays
 
@@ -11,7 +11,7 @@ python -m pip install -r requirements.txt
 python reproduce.py
 ```
 
-The script rebuilds the eight main tables, two supplementary tables and nine vector figures from the recorded JSON inputs. It verifies 1,151 printed numeric entries and 164 properties of the figures. Tables and figures appear in `manuscript/tables/` and `manuscript/figures/`. Machine-readable checks appear in `audit/`. The display rebuild works offline after installing the dependencies.
+The script rebuilds the eight main tables, two supplementary tables and nine vector figures from the recorded JSON inputs. It verifies 1,175 printed numeric entries and 164 properties of the figures. Tables and figures appear in `manuscript/tables/` and `manuscript/figures/`. Machine-readable checks appear in `audit/`. The display rebuild works offline after installing the dependencies.
 
 ## Numerical experiments
 
@@ -27,4 +27,8 @@ The script rebuilds the eight main tables, two supplementary tables and nine vec
 
 For a short arithmetic check, run `python scripts/adversarial_checks.py`. For the external comparison drivers (including LAB, BDG and the Bayer–Breneis optimiser), run `python fetch_references.py` first. It obtains the specific upstream files listed in `upstream_sources.json` and checks each SHA-256 digest before use. Upstream licenses and attribution remain with their respective authors.
 
-To repeat a numerical experiment, run its driver from the repository root in a separate checkout. Drivers can overwrite their recorded JSON outputs. Historical drivers write beside their own source under `legacy/05_EXPERIMENTS/`, while the v3 display scripts read the frozen inputs under `results/legacy_inputs/`. The two directories let readers compare a rerun with the deposited data. Elapsed times depend on the machine. Arb containment, floating-point quadrature and statistical coverage are identified separately in the paper.
+To repeat a numerical experiment, run its driver from the repository root in a separate checkout. Drivers can overwrite their recorded JSON outputs. Historical drivers write beside their own source under `legacy/05_EXPERIMENTS/`, while the display scripts read the frozen inputs under `results/legacy_inputs/`. The two directories let readers compare a rerun with the deposited data. Elapsed times depend on the machine. Arb containment, floating-point quadrature and statistical coverage are identified separately in the paper.
+
+## Manuscript sources
+
+The one-column and two-column editions share the article in `manuscript/main.tex`. Build either wrapper with pdfLaTeX and BibTeX. The independent supplement is in `manuscript/supplement/`. The statistical risk tables report empirical coverage separately from the deterministic Arb price intervals. The release notes describe the rounding and comparison conventions.

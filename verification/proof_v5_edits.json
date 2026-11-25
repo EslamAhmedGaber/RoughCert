@@ -1,0 +1,56 @@
+[
+  {
+    "file": "manuscript/sections/A_proofs.tex",
+    "old": "\\paragraph{Proposition~\\ref{prop:arb} (End-to-end Arb certification).}",
+    "new": "\\paragraph{Proposition~\\ref{prop:arb} (End-to-end Arb certification)}",
+    "why": "Remove duplicate heading punctuation"
+  },
+  {
+    "file": "manuscript/sections/A_proofs.tex",
+    "old": "\\paragraph{Theorem~\\ref{thm:tilted} (Tilted Girsanov--H\\\"older VIX futures certificate).}",
+    "new": "\\paragraph{Theorem~\\ref{thm:tilted} (Tilted Girsanov--H\\\"older VIX futures certificate)}",
+    "why": "Remove duplicate heading punctuation"
+  },
+  {
+    "file": "manuscript/sections/A_proofs.tex",
+    "old": "\\paragraph{Propositions~\\ref{prop:martingale}, \\ref{prop:condvar}, and \\ref{prop:root}.}",
+    "new": "\\paragraph{Propositions~\\ref{prop:martingale}, \\ref{prop:condvar}, and \\ref{prop:root}}",
+    "why": "Remove duplicate heading punctuation"
+  },
+  {
+    "file": "manuscript/sections/A_proofs.tex",
+    "old": "\\paragraph{Theorem~\\ref{thm:rate}.}",
+    "new": "\\paragraph{Theorem~\\ref{thm:rate}}",
+    "why": "Remove duplicate heading punctuation"
+  },
+  {
+    "file": "manuscript/sections/A_proofs.tex",
+    "old": "\\paragraph{Theorem~\\ref{thm:sandwich}.}",
+    "new": "\\paragraph{Theorem~\\ref{thm:sandwich}}",
+    "why": "Remove duplicate heading punctuation"
+  },
+  {
+    "file": "manuscript/sections/A_proofs.tex",
+    "old": "\\paragraph{Theorem~\\ref{thm:master} and Corollary~\\ref{cor:ledgers}.}",
+    "new": "\\paragraph{Theorem~\\ref{thm:master} and Corollary~\\ref{cor:ledgers}}",
+    "why": "Remove duplicate heading punctuation"
+  },
+  {
+    "file": "manuscript/sections/A_proofs.tex",
+    "old": "\\paragraph{Admissible representation equivalence (Section~\\ref{sec:contract}).}",
+    "new": "\\paragraph{Admissible representation equivalence (Section~\\ref{sec:contract})}",
+    "why": "Remove duplicate heading punctuation"
+  },
+  {
+    "file": "manuscript/sections/A_proofs.tex",
+    "old": "$m\\mapsto(m+\\sqrt{\\overline{V}_j+m^2})/(4r_j)$ is increasing and convex (second derivative",
+    "new": "$m\\mapsto(m+\\sqrt{\\overline{V}_j+m^2})/(4r_j)$ is nondecreasing and convex (for $\\overline V_j=0$ it equals $m_+/(2r_j)$; otherwise its second derivative is",
+    "why": "Include the zero-variance kink in the Scarf--Lo proof"
+  },
+  {
+    "file": "manuscript/sections/A_proofs.tex",
+    "old": "For $x,y\\in[x_i,x_{i+1}]$ with $|x-y|\\le h_i$, the mean value theorem gives",
+    "new": "For $x,y\\in[x_i,x_{i+1}]$ with $|x-y|\\le h_i$, put $u=\\min(x,y)$ and $v=\\max(x,y)$. The mean value theorem gives",
+    "why": "Name the ordered endpoints in the loading perturbation bound"
+  }
+]

@@ -1,0 +1,17 @@
+\begin{table}[!htbp]\centering\scriptsize\setlength{\tabcolsep}{3.4pt}
+\caption{Eight-method comparison on a common curved forward-variance contract ($H=0.10$, $T=3$\,m, $\Delta=1/12$, $\xi_0(t)=0.234^2(1+t)^2$, strike $K=27$ pts).}\label{tab:common}
+\begin{tabular}{@{}lccccr@{}}\toprule
+ & & \multicolumn{3}{c}{Outward-rounded enclosures at the same strike} & \\
+\cmidrule(lr){3-5}
+Method & Engine & Futures (pts) & Call (pts) & Black-76 IV (\%) & Against reference \\\midrule
+\textbf{\RoughCertCV{} (continuum)} & Arb & \textbf{\boldmath [26.8389,\,26.8441]} & \textbf{\boldmath [5.078,\,5.085]} & \textbf{\boldmath [96.95,\,97.14]} & Reference \\
+Markovian ($N=12$) & Arb & [26.8359,\,26.8417] & [5.077,\,5.086] & [96.97,\,97.19] & Overlaps on all three \\
+500-cell right grid & Arb & [26.8450,\,26.8489] & [5.079,\,5.085] & [96.92,\,97.07] & Future above \\
+BDG (2023) order-3 & Arb & [26.8125,\,26.9046] & [5.012,\,5.148] & [95.00,\,98.64] & Overlaps on all three \\
+LAB (2026) direct IV & Arb & --- & --- & [96.66,\,96.99] & IV overlaps \\
+Moment-matched lognormal & Arb & [26.7636,\,26.7838]$^\star$ & [5.082,\,5.159] & [98.40,\,98.72] & Future below; IV above \\
+BCJ quantiser (960 paths) & Arb & [26.4061,\,26.4132]$^\star$ & [4.532,\,4.538]$^\star$ & [91.28,\,91.45] & Below on all three \\
+JMM (2018) bounds & Arb & [26.7216,\,30.2303] & --- & --- & Contains futures band \\
+\bottomrule\end{tabular}
+\smallskip\par\raggedright\scriptsize\emph{Notes:} Bold identifies the continuous-time reference. Arb encloses each stated model or approximation. Each implied volatility (IV) uses its own forward at $K=27$. A dash marks an unavailable output. $^\star$ denotes a futures or call separation exceeding $0.05$ pts, the standard futures tick used for comparison.
+\end{table}

@@ -1,0 +1,74 @@
+\section{Variance risk and integrated variance: when certificates stay wide}\label{sec:variance_risk}
+
+The sub-tick VIX bounds of Sections~\ref{sec:vix_futures}--\ref{sec:vix_options} raise a natural question:
+does the same framework produce equally tight bounds for realised-variance derivatives under rough
+volatility? Examining two spot-variance functionals---integrated variance in the tractable rough
+Stein--Stein model and integrated variance in rough Bergomi---demonstrates that the answer is no, and
+shows how the exact residual share $P_\mu/\Var(\Lambda_\mu)$ diagnoses the contrast before any simulation.
+
+\subsection{Rough Stein--Stein variance risk against an exact characteristic-function law}\label{sec:case_steinstein}
+Here the conditional-variance principle behind \RoughCertCV{} supplies statistical risk brackets. Their sampling uncertainty is distinct from the deterministic Arb pricing enclosures. In the rough Stein--Stein model, spot volatility is Gaussian, $\sigma_t=\sigma_0+\nu W_t^H$ with $W^H$
+Riemann--Liouville fractional Brownian motion, and the characteristic function of integrated variance
+$\Lambda=\int_0^T\sigma_t^2\dd t$ is known in closed form \citep{AbiJaber2022}. Because $\Lambda$ is a
+quadratic subordinated functional, both the conditional-expectation monitor $\hat\Lambda=\E[\Lambda\mid\mathcal{G}]$
+and the conditional variance $V=\Var(\Lambda\mid\mathcal{G})$ given $n$ monitoring dates are explicit
+quadratic forms in the whitened observations,
+$\hat\Lambda=d_0+\ell^\top\xi+\xi^\top A\xi$ and $V=c_0+b^\top\xi+\xi^\top\Omega\xi$, computed once by
+graded quadrature. We test one month of daily closes ($T=1/12$, $n=21$, $\sigma_0=0.2$, $\nu=0.1$,
+$H\in\{0.05,0.10,0.30\}$) on the $99\%$ quantile (value at risk of a short variance swap) and calls
+$\E(\Lambda-k)_+$ at $k=\E\Lambda$ and $k=\E\Lambda+2\,\mathrm{sd}$ ($50$ replications of $K=2\times10^5$
+daily paths, DKW level $a=0.01$, \lab{statistical}$(0.99)$). An independent Karhunen--Lo\`eve expansion
+($2{,}500$ nodes, Fourier inversion) provides the reference law, matching the exact mean to $10^{-9}$ and
+the ledger variance to within \EthirteenKLvar\% (omitted tail share $5.8\times10^{-6}$ at $H=0.05$).
+
+Table~\ref{tab:e13} shows that daily monitoring leaves substantial continuum bias: the exact RMS error of
+the daily Riemann sum is \EthirteenRiLo--\EthirteenRiHi\% of $\mathrm{sd}(\Lambda)$, biasing standard
+daily Monte Carlo by \EthirteenNaiveLo\ to \EthirteenNaiveHi\ standard deviations on the $99\%$ quantile
+and by \EthirteenPriceBiasLo\% to \EthirteenPriceBiasHi\% on calls. Every certified bracket attained
+empirical coverage \EthirteenCovMin. Conditioning on daily closes with conditional variance and exact
+binomial order statistics (Proposition~\ref{prop:condvar}(ii)) shrank the $99\%$ VaR brackets to
+\EthirteendLo--\EthirteendHi\ standard deviations (sampling floor \EthirteendFloorHi), and computing
+$\E(\hat\Lambda-k)_+$ from its quadratic-form characteristic function shrank ATM call brackets to
+\EthirteencAtmLo--\EthirteencAtmHi\% of the exact price.
+
+For $H\le0.10$, daily closes alone still leave $\ResShareDailyLo$--$\ResShareDailyHi\%$ of $\Var(\Lambda)$
+unexplained. Simulating
+intraday volatility paths conditionally on the daily closes via an exact Gaussian bridge leaves the
+continuum law of $\Lambda$ unchanged while refining $\mathcal{G}$ (Table~\ref{tab:e13}, Panel~C): moving from one
+to \EthirteenbMaxDaya\ points per day reduces the residual share from \EthirteenbSaOne\% to
+\EthirteenbSaEight\% ($H=0.05$) and from \EthirteenbSbOne\% to \EthirteenbSbEight\% ($H=0.10$), cutting
+the estimated conditional Cantelli $99\%$ bracket width from approximately \EthirteenbDaOne\ to \EthirteenbDaEight\ standard
+deviations ($H=0.05$) and from \EthirteenbDbOne\ to \EthirteenbDbEight\ ($H=0.10$) while preserving
+$1.00$ coverage. Thus the ledger quantifies the reduction in the residual variance from each tested monitoring refinement before
+pricing a portfolio.
+
+\input{tables/tab_e13}%
+
+\subsection{Rough Bergomi integrated variance: the structural contrast with VIX}\label{sec:case_iv}
+For one-month integrated variance $\mathrm{IV}=\int_0^{1/12} v_t\dd t$ and integrated volatility
+$\mathrm{IVol}=\int_0^{1/12}\sqrt{v_t}\dd t$ under rough Bergomi ($\xi_0=0.235^2$, $\eta_{\mathrm{P1}}=1.9$,
+$H\in\{0.05,0.10,0.30\}$), the spot variance path is integrated directly rather than smoothed by a forward
+expectation. Conditioning on the $n=21$ daily closes requires a singularity-corrected per-sample rule for
+$V(\xi)=\iint\hat X_s\hat X_u(e^{\eta^2 D(s,u)}-1)\dd s\dd u$ (maximum relative per-sample audit difference
+\EsixcAudit, added conservatively to $v$; \lab{statistical}$(0.99)$ over $K=2\times10^5$ paths).
+
+Table~\ref{tab:e6c} summarises the outcome. Although conditional variance narrows the $99\%$ quantile
+brackets by factors \EsixcRatio\ over martingale-sharp bounds and the conditional Scarf--Lo bound narrows
+variance-call brackets by factors \EsixcPriceGainLo--\EsixcPriceGainHi\ over convex-order bounds (with
+fine-grid Monte Carlo diagnostics lying inside \EsixcInside/\EsixcCells\ quantile brackets and
+\EsixcPriceIn/\EsixcPriceN\ call brackets), the absolute widths remain $\EsixcWidthLo$--$\EsixcWidthHi$ standard deviations
+on daily-close quantiles. The separate 256-date quantile widths appear in Table~\ref{tab:e6c}, Panel~A. These brackets serve as model
+validation envelopes, not quoting intervals.
+
+The exact residual share explains why rough Bergomi produces both the narrowest and the widest brackets in
+this study. On the VIX forward window $[T,T+\Delta]$, every forward variance $\xi_T(u)$ averages the same
+past Brownian history on $[0,T]$ through a kernel smooth across the diagonal, so a single Gaussian
+direction leaves at most $\ShareVIXBase\%$ of $\Var(\mathrm{VIX}_T^2)$ in base regimes ($\ShareVIXStress\%$
+in six-month $\eta_{\mathrm{P1}}=3$ stress). On spot integrated variance $\int_0^T v_t\dd t$, by contrast, fresh rough
+innovations arrive at every instant $t\in[0,T]$, so even $21$ daily closes leave up to $\ShareIVHi\%$ of
+$\Var(\mathrm{IV})$ unexplained at $H=0.05$. Roughness alone therefore does not determine certifiability;
+the computable residual share $P_\mu/\Var(\Lambda_\mu)$ separates tractable low-rank functionals from
+path-dominated ones before any simulation is launched.
+
+\input{tables/tab_e6c}%
+\ifTwoColumn\else\FloatBarrier\fi

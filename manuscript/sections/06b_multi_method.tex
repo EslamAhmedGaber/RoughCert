@@ -1,0 +1,102 @@
+\section{Comparing expansions, factor reductions, and quantisers}\label{sec:methods_vtwo}
+A deterministic \RoughCert{} enclosure supports two decisions. For a method value enclosed in $[A,B]$ and a
+continuous-model bracket $[L,U]$, the signed pricing error lies in $[A-U,B-L]$. The method is certified
+tick-accurate when that interval fits inside $[-0.05,0.05]$, and certified biased when it lies strictly on
+one side of zero, which is the disjointness used throughout this section; calls use the same $0.05$-point
+price tolerance, and implied-volatility differences are measured in percentage points.
+
+\subsection{The exercise boundary and direct implied volatility}\label{sec:direct_expansion}
+In the mixed expansion of \citet[Theorem~3.1]{BourgeyDeMarcoGobet2023}, let
+$y_j(z)=\bar\xi\,\lambda_j\exp(\mu_j+s_jz)$ and $Y(z)=y_1(z)+y_2(z)$, where
+$\bar\xi=\Delta^{-1}\int_T^{T+\Delta}\xi_0(u)\dd u$. For a fixed strike $K>0$, $Y(z)=K^2$ has a unique root
+for positive amplitudes. The weak derivative of the call under a shift in component $j$ is
+$y_j(z)\mathbf{1}_{\{Y(z)>K^2\}}/(2\sqrt{Y(z)})$. Integrating against the normal density times
+$\gamma_{1,j}+\gamma_{2,j}z/s_j+\gamma_{3,j}(z^2-1)/s_j^2$ and adding the proxy call evaluates the
+published coefficient expression rigorously (the exercise boundary has zero normal mass; the original mixed
+theorem states its remainder for smooth payoffs).
+
+At $k=-0.20$, the authors' implementation---$100$-node Gauss--Hermite quadrature with $10^{-4}$
+finite-difference derivatives---yields $93.326\%$, whereas splitting
+the integral at exercise in Arb gives $[93.8671,93.8672]\%$ against a \RoughCertCV{} band of
+$[93.9407,94.2487]\%$. At $k=+0.10$ the corresponding values are $96.768\%$, $[97.0817,97.0818]\%$, and
+$[97.1870,97.3764]\%$. All seven root-split IVs fall strictly below the lower edge, with edge separations of $\MixSplitSepLo$ to
+$\MixSplitSepHi$ percentage points, while that $100$-node implementation adds a separate strike-dependent
+kink oscillation (Figure~\ref{fig:methoderrors}(a)).
+
+For a single kernel, equation~(21) of \citet{LiaoAgarwalBourgey2026} gives the direct IV formula
+\[
+ \widehat\sigma(K)=\frac{v}{2}+\frac{\gamma_2}{2vT}+\frac{3\gamma_3}{8vT}
+                 -\frac{\gamma_3\log(S/K)}{v^3T^2},
+ \qquad v=\frac{\norm{h_0^{(a)}}}{\sqrt{T}},
+\]
+where $S$ is the zeroth-order VIX forward and $h_0^{(a)}$ is the barycentre with amplitude $a$. Fixing
+physical strikes via the order-three forward on the authors' $\Delta=30/365$ window and enclosing both
+the direct formula and the continuous model in 169-bit Arb establishes a downward IV bias at all $30$
+strikes for $H=0.10$, at $22$ of $30$ strikes for $H=0.23$, and at all $6$ stress strikes
+(Table~\ref{tab:competitors}, Panel~A; the remaining eight comparisons overlap, with zero strikes above).
+
+\begin{figure}[!htbp]\centering
+\includegraphics[width=\textwidth]{figures/fig_v3_05_mixed_and_markov.pdf}
+\caption{(a) Mixed-smile IV deviations from the continuum midpoint. (b) Absolute futures-error enclosures and midpoints for $N=1,\ldots,19$. Circles mark one-tick accuracy and diamonds mark containment in the fixed continuum band.}\label{fig:methoderrors}
+\end{figure}
+
+\subsection{Markovian factor count and product quantisation}\label{sec:factor_counts}
+We evaluate the geometric Gaussian rule and numerical $L^2$ kernel optimisation of
+\citet{BayerBreneis2023}, freezing the returned positive nodes and weights at their recorded decimal values.
+For $K_N(t)=\sum_j w_j e^{-\gamma_j t}$, the finite model has exact covariance
+\[
+ C_N(x,y)=\sum_{i,j} w_i w_j e^{-\gamma_i x-\gamma_j y}\,\frac{1-e^{-(\gamma_i+\gamma_j)T}}{\gamma_i+\gamma_j},
+\]
+with the quotient read as $T$ when $\gamma_i+\gamma_j=0$, enabling verified \RoughCertCV{} enclosures of every $N$-factor model. On the flat
+three-month contract ($a=1$, $\Delta=1/12$, $\xi_0=0.235^2$), the Arb-proved minimum optimised factor counts
+achieving $<0.05$-point futures error are $14$, $7$, and $2$ for $H=0.05$, $0.10$, and $0.30$
+(Figure~\ref{fig:methoderrors}(b); Table~\ref{tab:competitors}, Panel~B), with every smaller integer proved
+outside. For full containment inside the fixed continuum band ($M=144$, $N_z=320$), the proved minimum
+orders are $19$, $11$, and $9$ (with every smaller integer proved disjoint from that fixed band). At $H=0.05$, conditioning the
+tilted residual on the contrast $k_{\Delta/14}-k_\Delta$ cleanly separates the $13$-factor error
+$[-0.0671,-0.0611]$ from the $14$-factor error $[-0.0496,-0.0453]$. On the three fixed-strike calls
+($K\in\{18,22,26\}$), all minimum orders are exact at $H=0.10$ and $0.30$, while at $H=0.05$ two strikes
+leave a one-factor overlap bracket ($N\in\{5,6\}$ at $K=18$ and $N\in\{1,2\}$ at $K=22$, noted explicitly in
+Table~\ref{tab:competitors}). These thresholds apply to the recorded fitting horizon $T+\Delta$, nodes, and
+weights rather than all possible positive exponential sums.
+
+The functional quantiser of \citet[Remark~4.9]{BonesiniCallegaroJacquier2023} expands the Brownian input in
+cosines on $[0,T+\Delta]$ while retaining continuous Gaussian variance compensation. Using their Table~1
+allocations at budgets $100$ and $1000$ (and declared allocations $(6,4,2)$ and $(10,4,3,2,2)$ at $50$ and
+$500$), we enclose both scalar normal centroids and delivery integrals in Arb. Even at $960$ product paths,
+all $18$ literature futures prices are underestimated by at least $0.208$ points on $\Delta=1/12$ (and by
+$0.209$--$1.412$ points on $\Delta=30/365$; Table~\ref{tab:competitors}, Panel~C; Figure~\ref{fig:scoreboard}(b)).
+A separate forward-field Karhunen--Lo\`eve diagnostic in the archive assesses basis choice across two
+delivery grids.
+
+\input{tables/tab_competitors}%
+
+\subsection{Common curved contract scoreboard and numerical refinements}\label{sec:curved_score}
+Table~\ref{tab:common} and Figure~\ref{fig:scoreboard}(a) compare all eight methods on a single curved
+forward-variance contract ($H=0.10$, $T=3$\,m, $\Delta=1/12$, $a=1.9\sqrt{2H}$, $\xi_0(t)=0.234^2(1+t)^2$,
+strike $K=27$). The $12$-factor futures, call and IV enclosures each overlap the continuum band.
+The $500$-cell forward lies $0.00098$--$0.00999$ points above it. The lognormal future is more than one
+tick low, while its IV is $1.26$--$1.76$ percentage points high. The $960$-path BCJ future is
+$0.425$--$0.438$ points low and its IV is $5.51$--$5.86$ percentage points low. The BDG and LAB
+curved-kernel IV enclosures both overlap the continuum interval. Their numerical point evaluations,
+$96.821\%$ and $96.827\%$, lie approximately $0.14$ and $0.13$ percentage points below its lower edge;
+the certified comparisons leave the sign unresolved.
+
+\begin{figure}[!htbp]\centering
+\includegraphics[width=\textwidth]{figures/fig_v3_06_scoreboard_and_quantizer.pdf}
+\caption{(a) Curved contract at $K=27$. Bars enclose absolute futures errors, diamonds indicate enclosure half-widths, and row labels give signed IV differences from the continuum in percentage points. (b) BCJ quantisation error across four budgets and the largest 18-cell \RoughCertCV{} width.}\label{fig:scoreboard}
+\end{figure}
+
+\input{tables/tab_common}%
+
+Finally, two targeted refinements sharpen the stress regime. First, optimising the scalar tilt
+$h=0.98646905\,h_0$ in \RoughCertTilt{} cuts the flat stress futures width from $0.01968$ to $0.01447$ points
+on the same $320$-cell grid (and from $0.03003$ to $0.02092$ points at $a=1.5$ with $h=0.98331070\,h_0$),
+improving both endpoints rigorously. Second, refining the \RoughCertCV{} stress smile mesh from $200\times 420$
+to $320\times 620$ reduces the ATM IV width from $\StressATMOld$ to $\StressATMNew$ percentage points
+(Table~\ref{tab:vix_smiles}, Panel~B). Two independent simulation diagnostics---a Brownian-kernel SVD
+control-variate QMC check ($12$ scrambled Sobol nets per design, at $48$ delivery nodes with $2^{14}$ points and $96$ delivery
+nodes with $2^{17}$ points) and a $130$-decimal-digit Cholesky
+sampler at $40$ delivery nodes---place all \SimChecks/\SimChecks\ forward, call, and IV estimates inside the
+corresponding \RoughCert{} intervals.
+\ifTwoColumn\else\FloatBarrier\fi

@@ -1,0 +1,35 @@
+\begin{table}[!htbp]\centering\scriptsize\setlength{\tabcolsep}{4.5pt}
+\caption{Complete 18-cell Bonesini--Callegaro--Jacquier (2023, Section~5.3) \RoughCertCV{} VIX futures suite across three forward-variance curves and six maturities ($H=0.10$, $\eta_{\mathrm{P1}}=1.9$, $\Delta=1/12$).}\label{tab:bcj_full}
+\begin{tabular}{@{}rcrrrrr@{}}\toprule
+ & \multicolumn{2}{c}{\textbf{\RoughCertCV{}} (pts)} & \multicolumn{2}{c}{JMM comparison} & \multicolumn{2}{c}{Runtime (s)} \\
+\cmidrule(lr){2-3}\cmidrule(lr){4-5}\cmidrule(lr){6-7}
+Maturity & Futures interval & Width & Width (pts) & Width ratio & Setup & Solve \\\midrule
+\multicolumn{7}{@{}l}{\emph{Flat: $\xi_0(t)=0.234^2$}} \\
+\addlinespace[1.5pt]
+1m & \textbf{\boldmath [21.93371,\,21.93672]} & \textbf{\boldmath 0.00300} & 1.537 & 513$\times$ & 1.5 & 1.9 \\
+2m & \textbf{\boldmath [21.23665,\,21.24063]} & \textbf{\boldmath 0.00397} & 2.236 & 563$\times$ & 1.4 & 2.0 \\
+3m & \textbf{\boldmath [20.75374,\,20.75824]} & \textbf{\boldmath 0.00450} & 2.719 & 605$\times$ & 1.2 & 1.9 \\
+6m & \textbf{\boldmath [19.81108,\,19.81634]} & \textbf{\boldmath 0.00526} & 3.660 & 696$\times$ & 1.2 & 1.8 \\
+9m & \textbf{\boldmath [19.19753,\,19.20313]} & \textbf{\boldmath 0.00560} & 4.272 & 763$\times$ & 1.1 & 1.8 \\
+12m & \textbf{\boldmath [18.73692,\,18.74272]} & \textbf{\boldmath 0.00580} & 4.731 & 816$\times$ & 1.2 & 1.8 \\
+\midrule
+\multicolumn{7}{@{}l}{\emph{Quadratic: $\xi_0(t)=0.234^2(1+t)^2$}} \\
+\addlinespace[1.5pt]
+1m & \textbf{\boldmath [24.70355,\,24.70714]} & \textbf{\boldmath 0.00359} & 1.729 & 482$\times$ & 1.4 & 1.8 \\
+2m & \textbf{\boldmath [25.69160,\,25.69679]} & \textbf{\boldmath 0.00519} & 2.700 & 520$\times$ & 1.2 & 1.9 \\
+3m & \textbf{\boldmath [26.83822,\,26.84453]} & \textbf{\boldmath 0.00631} & 3.509 & 556$\times$ & 1.1 & 1.9 \\
+6m & \textbf{\boldmath [30.57324,\,30.58201]} & \textbf{\boldmath 0.00877} & 5.638 & 642$\times$ & 1.1 & 1.8 \\
+9m & \textbf{\boldmath [34.42605,\,34.43682]} & \textbf{\boldmath 0.01077} & 7.648 & 710$\times$ & 1.0 & 1.8 \\
+12m & \textbf{\boldmath [38.28434,\,38.29695]} & \textbf{\boldmath 0.01261} & 9.653 & 765$\times$ & 1.0 & 1.9 \\
+\midrule
+\multicolumn{7}{@{}l}{\emph{Square-root: $\xi_0(t)=0.234^2\sqrt{1+t}$}} \\
+\addlinespace[1.5pt]
+1m & \textbf{\boldmath [22.59372,\,22.59685]} & \textbf{\boldmath 0.00312} & 1.582 & 507$\times$ & 1.3 & 1.8 \\
+2m & \textbf{\boldmath [22.27056,\,22.27479]} & \textbf{\boldmath 0.00423} & 2.343 & 554$\times$ & 1.2 & 1.9 \\
+3m & \textbf{\boldmath [22.13011,\,22.13499]} & \textbf{\boldmath 0.00488} & 2.897 & 594$\times$ & 1.2 & 1.8 \\
+6m & \textbf{\boldmath [22.07992,\,22.08588]} & \textbf{\boldmath 0.00596} & 4.077 & 684$\times$ & 1.1 & 1.9 \\
+9m & \textbf{\boldmath [22.21477,\,22.22135]} & \textbf{\boldmath 0.00658} & 4.941 & 751$\times$ & 1.0 & 1.8 \\
+12m & \textbf{\boldmath [22.40104,\,22.40807]} & \textbf{\boldmath 0.00703} & 5.654 & 804$\times$ & 1.0 & 1.8 \\
+\bottomrule\end{tabular}
+\smallskip\par\raggedright\scriptsize\emph{Notes:} Bold identifies the conditional-variance futures interval and width. Maturity is in months. The width ratio is the JMM bound width divided by the unrounded \RoughCertCV{} width, rounded down. Setup is incurred once per contract cell; solve time is per evaluation.
+\end{table}

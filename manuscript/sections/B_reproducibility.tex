@@ -1,0 +1,13 @@
+\section{Reproducibility and software archive}\label{app:repro}
+
+The \href{\ReleaseURL}{\RoughCert{} \ReleaseTag} archive uses Python~3.12 and python-flint~0.9.0 at 169-bit precision.
+Run \path{python reproduce.py} to rebuild the ten tables and nine figures from the recorded JSON data. The numerical drivers in \path{scripts/} can be rerun separately.
+
+\begin{itemize}
+\item \path{arb_vix_core.py} and \path{run_week1_gates.py} evaluate the two-atom and Pfaff controls and the eight futures benchmarks, including the 500-cell target.
+\item \path{arb_vix_options.py} implements Proposition~\ref{prop:arb}(c)--(e) for single and mixed models, curved forward variance and discrete windows.
+\item \path{run_vix_futures_full_suite.py} generates the 15-cell E14 study, BDG parameter sweeps, the 18 BCJ contracts and the mixed term structure.
+\item \path{run_vix_options_smile_suite.py} generates the pure, stress, multilevel, direct-expansion and mixed option benchmarks.
+\end{itemize}
+
+The archive records strikes, factor coefficients, grids and timings. The independent BDG check uses the authors' \path{rbergomi.py} at commit \texttt{7822b00a}. Lower and upper endpoints are rounded outwards and tabulated widths upwards. Coverage, proxy midpoints and elapsed times are descriptive estimates. Verdicts use unrounded data.

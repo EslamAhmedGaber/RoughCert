@@ -1,0 +1,36 @@
+\begin{table}[!htbp]\centering\scriptsize\setlength{\tabcolsep}{3.5pt}
+\caption{Rough Stein--Stein one-month integrated variance ($n=21$ daily closes): statistical $99\%$ VaR brackets (in exact sd), variance-call widths (relative to exact price), and intraday Gaussian-bridge refinement.}\label{tab:e13}
+\begin{tabular}{@{}rrrcccccr@{}}\toprule
+\multicolumn{9}{@{}l}{\emph{Panel A: Daily-close $99\%$ VaR bracket widths in exact sd (empirical coverage in parentheses)}} \\
+\addlinespace[1.5pt]
+ & \multicolumn{2}{c}{RMS error (\% of sd)} & \multicolumn{2}{c}{Baseline width (sd)} & \multicolumn{3}{c}{\textbf{\RoughCertCV{}} and sampling (sd)} & \\
+\cmidrule(lr){2-3}\cmidrule(lr){4-5}\cmidrule(lr){6-8}
+$H$ & Daily sum & Monitor & Riemann $W_2$ & Martingale & Cantelli & DKW floor & \shortstack{Binomial width\\and floor} & \shortstack{Daily bias\\(sd)} \\\midrule
+0.05 & 42.7\% & 37.0\% & 8.50 (1.00) & 5.39 (1.00) & \textbf{\boldmath 3.45} (1.00) & 0.38 & \textbf{\boldmath 2.61} (1.00)/0.06 & $+$0.315 \\
+0.10 & 25.0\% & 23.0\% & 5.70 (1.00) & 3.72 (1.00) & \textbf{\boldmath 1.99} (1.00) & 0.41 & \textbf{\boldmath 1.45} (1.00)/0.07 & $+$0.165 \\
+0.30 & 7.7\% & 6.5\% & 2.54 (1.00) & 1.59 (1.00) & \textbf{\boldmath 0.71} (1.00) & 0.39 & \textbf{\boldmath 0.37} (1.00)/0.06 & $+$0.093 \\
+\midrule
+\multicolumn{9}{@{}l}{\emph{Panel B: Variance calls $\E(\Lambda-k)_+$ --- certified width / exact price (coverage in parentheses)}} \\
+\addlinespace[1.5pt]
+$H$ & Strike $k$ & Exact price & Lipschitz & Convex & Scarf--Lo & \shortstack{Exact\\monitor law} & & \shortstack{Daily bias\\(\%)} \\\midrule
+0.05 & $\E\Lambda$ & $4.7\times 10^{-4}$ & 2.74 (1.00) & 1.04 (1.00) & \textbf{\boldmath 0.751} (1.00) & \textbf{\boldmath 0.177} (1.00) & & $+$11.1\% \\
+0.05 & $+2\,\mathrm{sd}$ & $2.3\times 10^{-5}$ & 55.10 (1.00) & 20.67 (1.00) & \textbf{\boldmath 12.923} (1.00) & \textbf{\boldmath 1.702} (1.00) & & $+$61.0\% \\
+0.10 & $\E\Lambda$ & $5.2\times 10^{-4}$ & 1.78 (1.00) & 0.80 (1.00) & \textbf{\boldmath 0.589} (1.00) & \textbf{\boldmath 0.083} (1.00) & & $+$6.0\% \\
+0.10 & $+2\,\mathrm{sd}$ & $2.8\times 10^{-5}$ & 32.97 (1.00) & 14.60 (1.00) & \textbf{\boldmath 9.900} (1.00) & \textbf{\boldmath 0.756} (1.00) & & $+$28.6\% \\
+0.30 & $\E\Lambda$ & $3.8\times 10^{-4}$ & 1.01 (1.00) & 0.71 (1.00) & \textbf{\boldmath 0.632} (1.00) & \textbf{\boldmath 0.011} (1.00) & & $+$3.7\% \\
+0.30 & $+2\,\mathrm{sd}$ & $1.7\times 10^{-5}$ & 21.82 (1.00) & 15.04 (1.00) & \textbf{\boldmath 13.366} (1.00) & \textbf{\boldmath 0.123} (1.00) & & $+$17.5\% \\
+\midrule
+\multicolumn{9}{@{}l}{\emph{Panel C: Intraday Gaussian-bridge conditioning refinement for $99\%$ VaR (widths in continuum sd)}} \\
+\addlinespace[1.5pt]
+$H$ & \shortstack{Observations\\per day} & \shortstack{Residual\\share} & & Martingale & Cantelli & DKW floor & & \shortstack{Cantelli\\coverage} \\\midrule
+0.05 & 1 & $1.4\times 10^{-1}$ & & 5.39 & \textbf{\boldmath 3.46} & 0.38 & & 1.00 \\
+0.05 & 2 & $7.1\times 10^{-2}$ & & 4.12 & \textbf{\boldmath 2.30} & 0.39 & & 1.00 \\
+0.05 & 4 & $3.5\times 10^{-2}$ & & 3.16 & \textbf{\boldmath 1.59} & 0.41 & & 1.00 \\
+0.05 & 8 & $1.7\times 10^{-2}$ & & 2.46 & \textbf{\boldmath 1.15} & 0.40 & & 1.00 \\
+0.10 & 1 & $5.3\times 10^{-2}$ & & 3.72 & \textbf{\boldmath 1.99} & 0.42 & & 1.00 \\
+0.10 & 2 & $2.4\times 10^{-2}$ & & 2.82 & \textbf{\boldmath 1.38} & 0.42 & & 1.00 \\
+0.10 & 4 & $1.1\times 10^{-2}$ & & 2.18 & \textbf{\boldmath 1.02} & 0.42 & & 1.00 \\
+0.10 & 8 & $4.8\times 10^{-3}$ & & 1.73 & \textbf{\boldmath 0.80} & 0.43 & & 1.00 \\
+\bottomrule\end{tabular}
+\smallskip\par\raggedright\scriptsize\emph{Notes:} Bold identifies conditional-variance widths, rounded up. Parentheses give empirical coverage. The monitor is conditional expectation; sd is the continuum standard deviation. DKW denotes the Dvoretzky--Kiefer--Wolfowitz sampling floor. The binomial cell gives width (coverage) / floor. Daily bias compares the daily estimate with the reference law. Panels A/B use 50 replications and C uses 10.
+\end{table}

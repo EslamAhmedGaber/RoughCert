@@ -1,0 +1,27 @@
+\begin{table}[!htbp]\centering\footnotesize\setlength{\tabcolsep}{2.7pt}
+\caption{Rough Bergomi one-month integrated variance and volatility from $21$ daily closes: statistical $99\%$ quantile widths (in sd) and median variance-call bounds ($\times 10^4$).}\label{tab:e6c}
+\begin{tabular}{@{}llrcccccc@{}}\toprule
+\multicolumn{9}{@{}l}{\emph{Panel A: $99\%$ quantile widths in exact sd ($21$ daily closes vs.\ $256$-date refinement)}} \\
+\addlinespace[1.5pt]
+ & & & \multicolumn{4}{c}{21-date quantile widths (sd) and ratio} & \multicolumn{2}{c}{Diagnostics} \\
+\cmidrule(lr){4-7}\cmidrule(lr){8-9}
+Functional & $H$ & \shortstack{Monitor RMS\\(\% of sd)} & Martingale & \textbf{Cantelli} & DKW floor & \shortstack{Width\\ratio} & \shortstack{256 dates\\(sd)} & \shortstack{Monte Carlo\\in band} \\\midrule
+Integrated variance & 0.05 & 44\% & 7.38 & \textbf{\boldmath 6.00} & 0.88 & 1.23$\times$ & 3.96 & 1.00 \\
+Integrated volatility & 0.05 & 38\% & 5.91 & \textbf{\boldmath 4.16} & 0.54 & 1.42$\times$ & 2.65 & 1.00 \\
+Integrated variance & 0.10 & 30\% & 6.12 & \textbf{\boldmath 4.60} & 1.12 & 1.33$\times$ & 3.16 & 1.00 \\
+Integrated volatility & 0.10 & 24\% & 4.36 & \textbf{\boldmath 2.72} & 0.62 & 1.60$\times$ & 1.99 & 1.00 \\
+Integrated variance & 0.30 & 7\% & 2.64 & \textbf{\boldmath 1.65} & 0.96 & 1.60$\times$ & 1.42 & 1.00 \\
+Integrated volatility & 0.30 & 7\% & 1.93 & \textbf{\boldmath 0.98} & 0.56 & 1.98$\times$ & 0.89 & 1.00 \\
+\midrule
+\multicolumn{9}{@{}l}{\emph{Panel B: Variance-call brackets ($\times 10^4$) vs.\ fine-grid Monte Carlo diagnostic}} \\
+\addlinespace[1.5pt]
+$H$ & Strike & & \multicolumn{2}{c}{Convex order} & \multicolumn{2}{c}{\textbf{Conditional Scarf--Lo}} & \shortstack{Fine-grid\\estimate} & \\\midrule
+0.05 & $\E\,\mathrm{IV}$ &  & \multicolumn{2}{c}{[10.362,\,22.828]} & \multicolumn{2}{c}{\bfseries\boldmath [10.362,\,17.512]} & 12.265 &  \\
+0.05 & $+2\,\mathrm{sd}$ &  & \multicolumn{2}{c}{[0.859,\,13.037]} & \multicolumn{2}{c}{\bfseries\boldmath [0.859,\,6.729]} & 2.064 &  \\
+0.10 & $\E\,\mathrm{IV}$ &  & \multicolumn{2}{c}{[11.898,\,23.209]} & \multicolumn{2}{c}{\bfseries\boldmath [11.898,\,18.427]} & 13.552 &  \\
+0.10 & $+2\,\mathrm{sd}$ &  & \multicolumn{2}{c}{[1.319,\,12.335]} & \multicolumn{2}{c}{\bfseries\boldmath [1.319,\,7.068]} & 2.494 &  \\
+0.30 & $\E\,\mathrm{IV}$ &  & \multicolumn{2}{c}{[9.107,\,14.147]} & \multicolumn{2}{c}{\bfseries\boldmath [9.107,\,13.256]} & 9.824 &  \\
+0.30 & $+2\,\mathrm{sd}$ &  & \multicolumn{2}{c}{[0.925,\,5.755]} & \multicolumn{2}{c}{\bfseries\boldmath [0.925,\,4.822]} & 1.415 &  \\
+\bottomrule\end{tabular}
+\smallskip\par\raggedright\scriptsize\emph{Notes:} Bold identifies \RoughCertCV{} conditional Cantelli or Scarf--Lo results. Monitor RMS is root-mean-square error relative to the continuum standard deviation. The width ratio divides martingale by Cantelli width. DKW is the Dvoretzky--Kiefer--Wolfowitz sampling floor. Monte Carlo in band is the fraction of five replications enclosing the fine-grid diagnostic ($200{,}000$ samples per replication).
+\end{table}

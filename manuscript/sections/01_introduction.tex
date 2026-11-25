@@ -1,0 +1,83 @@
+\section{Introduction}\label{sec:intro}
+
+Fast VIX derivative approximations under rough volatility---moment-matched lognormal proxies
+\citep{BayerFrizGatheral2016,JacquierMartiniMuguruza2018}, weak expansions in the forward-window length
+\citep{BourgeyDeMarcoGobet2023}, functional quantisation \citep{BonesiniCallegaroJacquier2023}, and
+implied-volatility expansions \citep{LiaoAgarwalBourgey2026}---enable real-time calibration loops that
+full path simulation cannot match. Yet asymptotic error orders do not tell a volatility desk or model
+validator whether an approximation lies within one Cboe futures tick ($0.05$ volatility points;
+\citealp{CBOE2024VIX}) at concrete calibrated parameters, and Monte Carlo confidence intervals quantify
+only sampling noise around a \emph{discretised} forward-window target \citep{BourgeyDeMarco2022},
+leaving continuum discretisation bias uncertified.
+
+This paper asks a direct decision question: \emph{when can a machine-verified deterministic interval for
+the continuous-time model decide whether a fast VIX approximation is valid to within exchange tick
+tolerance, and why does the same model yield wide bounds for integrated variance?} We answer both through
+\RoughCert{}, a framework for verified pricing and conditional risk bounds built on an exact error calculus for
+subordinated Gaussian functionals
+\[
+  \Lambda_\rho=\int_{\mathcal{I}} f(s,Y_s)\,\rho(\dd s),
+\]
+where $Y_s=W(e_s)$ is a centred Gaussian field (fractional Brownian motion, Riemann--Liouville spot
+volatility, or the rough-Bergomi forward-variance field) and $\rho$ is a finite signed Borel measure.
+
+\paragraph{Contributions}
+We establish four linked theoretical and financial results:
+\begin{enumerate}
+\item \textbf{Exact joint Mehler error ledger and measure-axis rate (Section~\ref{sec:setting}).}
+  Theorem~\ref{thm:master} and Corollary~\ref{cor:ledgers} express the combined monitoring, orthogonal
+  projection, and Wiener chaos truncation mean-square error of $\Lambda_\rho$ as exact two-dimensional
+  Mehler kernel integrals, extending the closed-form terminal chaos tail calculus of
+  \citet{AHMED2026111045} to measure-indexed functionals while preserving the cross-stage interaction
+  term $I$. Theorem~\ref{thm:sandwich} brackets projection error from both sides by residual-covariance
+  integrals (complementing the subspace Poincar\'e upper bound of \citealp{ZahmConstantinePrieurMarzouk2020}),
+  and Theorem~\ref{thm:rate} proves the $O(n^{-(1+2H)})$ uniform cell-matched monitoring rate for
+  exponential variance functionals.
+\item \textbf{Conditional-variance risk certificates and a tilted Girsanov--H\"older VIX theorem
+  (Section~\ref{sec:certificates}).}
+  For conditional-expectation monitors, Propositions~\ref{prop:martingale}--\ref{prop:root} convert the
+  exact residual into martingale-sharp quantile bounds, convex-order expected-shortfall bounds,
+  conditional-variance quantile envelopes with exact binomial order statistics (improving local quantile
+  width from $O(P^{1/3})$ to $O(P^{1/2})$), and sharp two-moment square-root futures bounds and conditional option brackets.
+  For any positive integral of Wick exponentials, Theorem~\ref{thm:tilted} introduces a static tilted
+  Girsanov--H\"older VIX futures bracket $L(h)\le\E\sqrt{\Lambda}\le U(h)$ requiring zero Gaussian
+  integration, establishes its unique strictly convex optimal tilt $h^\star$, proves its sharp
+  $O(\varepsilon^4)$ relative dispersion width (constant $\tfrac14$ on the symmetric two-atom control), and derives the
+  accompanying $O(\varepsilon^2)$ Lipschitz option control explaining why VIX options require conditional
+  variance rather than a single tilt.
+\item \textbf{End-to-end 169-bit Arb certification via \RoughCertTilt{} and \RoughCertCV{}
+  (Proposition~\ref{prop:arb}).}
+  Every rough-Bergomi VIX futures, call, put, and Black-76 implied-volatility bound is evaluated in
+  outward-rounded 169-bit Arb ball arithmetic \citep{Johansson2017,Johansson2018} using
+  Pfaff-transformed ${}_2F_1$ inner products, positive-integral second-derivative remainder bounds
+  (\RoughCertTilt{}), a Minkowski $L^2$ spatial and $z$-perturbation lemma evaluated across all Gaussian
+  panels via one C-level FLINT \texttt{arb\_mat} multiplication (\RoughCertCV{}), piecewise-convexity
+  Jensen/secant integration with rigorous Cauchy--Schwarz tail bounds ($<2\times10^{-10}$ points at
+  $Z_{\max}=10$), and Arb-verified Black-76 inversion propagating forward-price uncertainty.
+\item \textbf{Head-to-head \RoughCert{} audits of modern rough-volatility benchmarks
+  (Sections~\ref{sec:vix_futures}--\ref{sec:variance_risk}).}
+  On VIX futures, \RoughCert{} brackets remain strictly below $0.05$ volatility points across all
+  tested pure, curved-$\xi_0$, and mixed rough Bergomi regimes ($\ArbJMMRatioLo\times$ to $\ArbJMMRatioHi\times$ narrower
+  than \citealp[Theorem~3.3]{JacquierMartiniMuguruza2018}). They establish that the order-three weak
+  expansion of \citet{BourgeyDeMarcoGobet2023} exceeds the continuous rough-Bergomi futures price by
+  $+\ArbStressBDGGap$ points ($\TickStress$ ticks) in our stress cell and by $+\ArbFigOneBDGGap$ points ($\TickFigOne$
+  ticks) on BDG's own Figure~1 extreme cell ($a=1.5$), with five distinct cells above one tick in total.
+  They also show that BDG's inflated forward pushes its Black-76 IVs below the continuum band by
+  $\FigSixIVGapLo$--$\FigSixIVGapHi$ percentage points in the Figure~6 smile and by
+  $\StressIVGapLo$--$\StressIVGapHi$ percentage points in the stress smile, disentangle the continuous
+  target from the $500$-cell right-rectangle target of \citet{BourgeyDeMarco2022}, certify a mixed rough
+  Bergomi VIX smile that rises by at least $\MixSkew$ percentage points across the sampled strikes, and compare
+  the direct implied-volatility expansion, Markovian factor reductions, and functional quantisers on a
+  common curved target. The residual share explains why spot integrated variance in rough Stein--Stein
+  \citep{AbiJaber2022} and rough Bergomi requires finer conditioning.
+\end{enumerate}
+
+\paragraph{Organisation}
+Section~\ref{sec:setting} fixes the Gaussian representation contract, exact joint error ledger, and
+measure-axis rate. Section~\ref{sec:certificates} develops the conditional risk bounds, the tilted
+Girsanov--H\"older theorem, and the 169-bit Arb certification machinery. Section~\ref{sec:validation}
+validates every component on analytic controls and exact-law benchmarks. Sections~\ref{sec:vix_futures}
+and~\ref{sec:vix_options} present the head-to-head Arb audits for VIX futures, options, and implied-volatility
+smiles. Section~\ref{sec:methods_vtwo} compares expansions, factor reductions and quantisers. Section~\ref{sec:variance_risk} contrasts these with variance risk and spot integrated variance,
+and Section~\ref{sec:scope} delineates scope and conclusions. Full proofs and software reproducibility
+details appear in Appendices~\ref{app:proofs}--\ref{app:repro}; supporting validation and pricing implementation details are provided in the Supplementary Material.

@@ -1,0 +1,273 @@
+\section{Proofs}\label{app:proofs}
+
+\paragraph{Admissible representation equivalence (Section~\ref{sec:contract})}
+For jointly Gaussian variables, orthogonality in $L^2$ is independence. If $g(s)\cdot\xi=W(\Pi e_s)$,
+then $\E[W((\Id-\Pi)e_s)W(h)]=\ip{(\Id-\Pi)e_s}{h}=0$ for every $h\in S$, so $Y_s-g(s)\cdot\xi$ is
+independent of $\xi$, $g(s)\cdot\xi=\E[Y_s\mid\xi]$, and $\Cov(Y_s-g(s)\cdot\xi,Y_u-g(u)\cdot\xi)=
+\ip{(\Id-\Pi)e_s}{(\Id-\Pi)e_u}=R(s,u)-\RP(s,u)=D(s,u)\succeq0$. Conversely, $\Cov(Y_s-g(s)\cdot\xi,\xi)=0$
+implies that $g(s)\cdot\xi$ is the orthogonal projection of $Y_s$ onto $\mathrm{span}(\xi)\subset L^2$,
+which equals $W(\Pi e_s)$ for the projection $\Pi$ onto the corresponding subspace of $\cH$.
+
+\paragraph{Theorem~\ref{thm:master} and Corollary~\ref{cor:ledgers}}
+The $m$-th Wiener chaos component of $\Lambda_\rho$ is the multiple integral $I_m(F_m(\rho))$, where
+$F_m(\rho)=\int\hat c_m(s)\sigma_s^{-m}(m!)^{-1/2}e_s^{\otimes m}\rho(\dd s)$ is a Bochner integral in
+$\cH^{\hat\otimes m}$. Because $Q=J_{\le N}\Gamma(\Pi)$ retains $m\le N$ and maps $e_s^{\otimes m}$ to
+$(\Pi e_s)^{\otimes m}$, chaos orthogonality and $\ip{e_s^{\otimes m}}{(\Pi e_u)^{\otimes m}}=\RP(s,u)^m$
+yield $\E[\Lambda_\mu\,Q\Lambda_\nu]=\sum_{m\le N}\iint\hat c_m(s)\hat c_m(u)(\sigma_s\sigma_u)^{-m}\RP(s,u)^m\dd\mu\dd\nu
+=\iint K_N(\RP)\dd\mu\dd\nu$, and similarly $\E[(Q\Lambda_\nu)^2]=\iint K_N(\RP)\dd\nu\dd\nu$ and
+$\E[\Lambda_\mu^2]=\iint K(R)\dd\mu\dd\mu$. Summation and integration commute because
+$\sum_m|\hat c_m(s)\hat c_m(u)|\le\norm{f(s,Y_s)}_2\norm{f(u,Y_u)}_2$ is bounded and $\mu,\nu$ have finite
+total variation. Expanding $\norm{\Lambda_\mu-Q\Lambda_\nu}_2^2$ gives \eqref{eq:master}. For
+Corollary~\ref{cor:ledgers}, write $d=\Lambda_\mu-\Lambda_\nu$: polarising
+$\Lambda_\mu-Q\Lambda_\nu=d+(\Id-Q)\Lambda_\nu$ gives $M+P_\nu+C_\nu+I$, while Pythagoras on
+$\Lambda_\mu-Q\Lambda_\nu=(\Id-Q)\Lambda_\mu+Qd$ gives $M_Q+P_\mu+C_\mu\ge0$ with $0\le M_Q\le M$.
+Because $Qd\perp(\Id-Q)\Lambda_\nu$, $I=2\ip{(\Id-Q)d}{(\Id-Q)\Lambda_\nu}$ and Cauchy--Schwarz yields
+$|I|\le2\sqrt{(M-M_Q)(P_\nu+C_\nu)}$.
+
+\paragraph{Theorem~\ref{thm:sandwich}}
+Put $d_s=(\Id-\Pi)e_s$ and $e_{\theta,s}=\Pi e_s\oplus\sqrt{\theta}\,d_s\in\cH\oplus\cH$ for
+$\theta\in[0,1]$, so $\ip{e_{\theta,s}}{e_{\theta,u}}=\RP(s,u)+\theta D(s,u)=:R_\theta(s,u)$ satisfies
+$0\preceq\RP\preceq R_\theta\preceq R$. With $\gamma_m(s)=\hat c_m(s)\sigma_s^{-m}$,
+$R(s,u)^m-\RP(s,u)^m=\int_0^1 m R_\theta(s,u)^{m-1}D(s,u)\dd\theta$. By induction on $k$ using
+$B^{\circ k}-A^{\circ k}=(B-A)\circ B^{\circ(k-1)}+A\circ(B^{\circ(k-1)}-A^{\circ(k-1)})$ and the
+Schur product theorem \citep{Schur1911}, the kernels
+$\gamma_m(s)\gamma_m(u)(R_\theta^{m-1}-\RP^{m-1})D$ and $\gamma_m(s)\gamma_m(u)(R^{m-1}-R_\theta^{m-1})D$
+are finite sums of tensor Gram products in $\cH^{\otimes m}$, so their integrals against $\rho\otimes\rho$
+are nonnegative squared Bochner norms. Summing over $m\ge1$ (justified by dominated convergence via the
+uniform derivative bound $\sup_s\norm{\partial_y f(s,Y_s)}_2<\infty$) and integrating over $\theta\in[0,1]$
+proves the two inner inequalities of \eqref{eq:sandwich}; retaining only the $m=1$ term gives the
+first-chaos lower bound, with equality when all $m\ge2$ components vanish.
+
+\paragraph{Theorem~\ref{thm:rate}}
+Expand $M(\mu_n)=\sum_{m\ge1}m!\,c_m^2\,Q_m$ with $c_m=\xi_0\eta^m/m!$ and squared chaos norms
+$Q_m=\norm{\int_0^T e_s^{\otimes m}(\mu-\mu_n)(\dd s)}^2$.
+Partition $[0,T]$ into uniform cells $I_i=[(i-1)h,ih]$ ($i=1,\dots,n$, $h=T/n$), so that
+\begin{align*}
+  Q_m&=\sum_{i,j=1}^n \iint_{I_i\times I_j}\Delta_{ij}^{(m)}(s,u)\,g(s)g(u)\dd s\dd u,\\
+  \Delta_{ij}^{(m)}(s,u)&=R(s,u)^m-R(s,t_j)^m\\
+  &\quad-R(t_i,u)^m+R(t_i,t_j)^m.
+\end{align*}
+For adjacent cells $|i-j|\le1$,
+$\norm{a^{\otimes m}-b^{\otimes m}}\le m(\norm{a}\vee\norm{b})^{m-1}\norm{a-b}$ and (K1) yield
+$|\Delta_{ij}^{(m)}|\le m^2\bar s^{m-1}c_R h^{2H}$, contributing at most
+$3n h^2\norm{g}_\infty^2 m^2\bar s^{m-1}c_R h^{2H}=O(m^2\bar s^{m-1}n^{-(1+2H)})$. For
+non-adjacent cells apply the fundamental theorem twice to $R^m$. Integration over each anchored
+rectangle and Fubini cost at most $h^2\|g\|_\infty^2$ times the integral of
+$|\partial_{su}R^m|$ over the full cell pair. Write $d=u-s\ge h$ on the upper triangle.
+In $mR^{m-1}R_{su}$ the diagonal singularity has integral $O(h^{-2p})$.
+The endpoint correction is integrable even on cell $i=1$, since
+$\int_0^T u^{-1-p}\int_0^u s^{-p}\dd s\dd u=(1-p)^{-1}\int_0^T u^{-2p}\dd u$.
+For $m\ge2$ the remaining term is $m(m-1)R^{m-2}R_sR_u$. Its absolute integral, apart from
+the coefficient, is bounded by a constant times the integral of
+$s^{-2p}u^{-2p}+(s^{-2p}+u^{-2p})d^{-2p}+d^{-4p}$.
+The first term is integrable on the square. In the middle term use $u\ge s$ and integrate in
+$(s,d)$. In the last term use $d^{-4p}\le h^{-2p}d^{-2p}$.
+These estimates also justify taking the improper limit at an endpoint node by continuity and
+absolute integrability. Reflection covers $j=1$. Thus $h^2 h^{-2p}=h^{1+2H}$.
+For $\bar s>0$ summing $m^2\bar s^{m-1}$ against $\xi_0^2\eta^{2m}/m!$ gives the asserted
+constant after absorbing $1/\bar s$. When $\bar s=0$ the field is deterministic.
+
+For the Riemann--Liouville process, scaling the squared kernel difference at $s<u$ gives
+\[
+ \|e_u-e_s\|^2\le d^{2H}\left[1+2H\int_0^\infty
+       \big((1+v)^{-p}-v^{-p}\big)^2\dd v\right].
+\]
+The integral converges at zero since $2p<1$ and at infinity by the mean value theorem.
+Put $I_j=\int_0^s v^{-p}(v+d)^{-p-j}\dd v$.
+Here $R=2HI_0$ and differentiation at fixed $s$ or $u$ gives
+\[
+\begin{aligned}
+ R_u&=-2Hp I_1,\qquad R_s=2H(s^{-p}u^{-p}+p I_1),\\
+ R_{su}&=-2Hp\{s^{-p}u^{-p-1}+(p+1)I_2\}.
+\end{aligned}
+\]
+For $j=1,2$, $I_j\le d^{1-2p-j}B(1-p,2p+j-1)$.
+This proves (K2)--(K3), including the need for the boundary term as $s\downarrow0$ with $u$ fixed.
+At $H=\tfrac12$ with $g\equiv1$
+and $t_i=(i-1)h$, all $i\ne j$ double increments vanish because $e^{\eta^2(s\wedge u)}$ depends only on
+$\min(s,u)$, while each diagonal cell $I_i$ satisfies
+$\iint_{I_i^2}(e^{\eta^2(s\wedge u)}-e^{\eta^2 t_i})\dd s\dd u=\eta^2 e^{\eta^2 t_i}h^3/3+O(h^4)$; summing
+over $i=1,\dots,n$ yields $n^2 M(\mu_n)\to\xi_0^2 T^2(e^{\eta^2 T}-1)/3$.
+
+\paragraph{Propositions~\ref{prop:martingale}, \ref{prop:condvar}, and \ref{prop:root}}
+For Proposition~\ref{prop:martingale}(i), fix $t$ and $P>0$. Moving mass $m<w$ from an atom $x<t$ of
+mass $w$ to or above $t$ while keeping conditional mean $x$ requires variance at least
+$(t-x)^2 wm/(w-m)$ (by Jensen applied separately above and below $t$, attained by the two-point law on
+$\{t,(wx-mt)/(w-m)\}$). For general $F$, let $p(x)$ be the conditional fraction moved to $t$ and $d=t-x>0$.
+The conditional cost $d^2p/(1-p)$ is convex. Minimising it pointwise after subtracting
+$\theta^2p$ gives $p=(1-d/\theta)_+$. Integrating the mass constraint gives the stated
+equation, strictly increasing on its positive range. The binary kernel at $t$ and
+$x-dp/(1-p)$ realises the cost measurably. For a strict budget slack one can move slightly
+more mass to ensure $\Pr(Y<t)<\alpha$. At positive cost, decreasing $t$ strictly decreases
+the cost, so a binding budget gives the same supremum by approximation. At a zero-cost
+plateau a positive budget permits an arbitrarily small extra transfer from below whenever
+needed. Expansion at $t=q+h$ gives $\theta\sim2h$ and
+$C(q+h)\sim f(q)\theta^3/6$. Part (ii) follows
+from convex-order monotonicity of $\ES_\alpha$ \citep{Strassen1965}, subadditivity, and
+$(1-\alpha)\ES_\alpha(R)=\int_0^1 Q_R(u)(\mathbf{1}_{u>\alpha}-(1-\alpha))\dd u\le\mathrm{sd}(R)\sqrt{\alpha(1-\alpha)}$.
+For Proposition~\ref{prop:condvar}, Cantelli's inequality $\Pr(R\ge d\mid\mathcal{G})\le v/(v+d^2)$ ($d>0$),
+attained by a $\mathcal{G}$-measurable two-point law, gives (i); exact binomial coverage
+$\Pr(T^+_{(m)}<Q_{T^+}(\alpha))\le\Pr(\mathrm{Bin}(K,\alpha)\ge m)\le a/2$ gives (ii); substituting
+$t-X=\varepsilon y$ into $\Delta(t)=\E[\mathbf{1}\{X<t\}v/(v+(t-X)^2)]$ and applying dominated convergence
+locally (the rescaled integrand is bounded by a constant times $\min(1,\|W\|_\infty/y^2)$ and the contribution outside a fixed neighbourhood is $O(\varepsilon^2)$) with $\int_0^\infty W/(W+y^2)\dd y=\tfrac{\pi}{2}\sqrt{W}$ gives (iii); and conditional application of the
+Scarf--Lo two-moment call bound \citep{Scarf1957,Lo1987} gives (iv).
+For Proposition~\ref{prop:root}(i), conditional Jensen gives $\E\sqrt{\Lambda}\le\E\sqrt{X}$; for the lower
+bound, set $a=(X^2+v)/X$ and observe that $\sqrt{y}\ge\sqrt{a}(\tfrac32 y/a-\tfrac12 y^2/a^2)$ for all
+$y\ge0$ (since $t-\tfrac32 t^2+\tfrac12 t^4=\tfrac12 t(t-1)^2(t+2)\ge0$ for $t=\sqrt{y/a}$), with equality
+at $y\in\{0,a\}$. Taking conditional expectations and using $\E[\Lambda^2\mid\mathcal{G}]\le aX$ gives
+$\E[\sqrt{\Lambda}\mid\mathcal{G}]\ge X/\sqrt{a}=\varrho\sqrt{X}$, attained by the two-point law on
+$\{0,a\}$, and $1-(1+u)^{-1/2}\le u/2$ gives the width bound. For (ii), conditional Jensen on
+$y\mapsto(y-k)_+$ gives the lower bound; the concave tangent $\sqrt{y}\le r+(y-r^2)/(2r)$ implies
+$(\sqrt{y}-k)_+\le(y-(2kr-r^2))_+/(2r)$, and applying Proposition~\ref{prop:condvar}(iv) conditionally
+yields \eqref{eq:root_call}.
+
+\paragraph{Theorem~\ref{thm:tilted} (Tilted Girsanov--H\"older VIX futures certificate)}
+(i) For any $h\in\cH$ and $d_u=k_u-h$, elementary algebra gives
+$\cE(k_u)=\cE(h)\cE(d_u)e^{-\ip{h}{d_u}}$ and $\sqrt{\cE(h)}=e^{-\norm{h}^2/8}\cE(h/2)$. Define the
+tilted probability measure $\dd Q_h/\dd P=\cE(h/2)$. By Cameron--Martin--Girsanov, the shifted process
+$\widetilde{W}(f)=W(f)-\tfrac12\ip{h}{f}$ is isonormal Gaussian under $Q_h$, and
+$\cE(d_u)e^{-\ip{h}{d_u}}=\widetilde{\cE}(d_u)e^{-\frac12\ip{h}{d_u}}$, where
+$\widetilde{\cE}(d_u)=\exp(\widetilde{W}(d_u)-\tfrac12\norm{d_u}^2)$ satisfies
+$\E_{Q_h}[\widetilde{\cE}(d_u)]=1$ and $\E_{Q_h}[\widetilde{\cE}(d_u)\widetilde{\cE}(d_v)]=e^{\ip{d_u}{d_v}}$.
+Writing $\widetilde{\Lambda}_h=\int_{\mathcal{U}}\widetilde{\cE}(d_u)\,b_h(\dd u)$ with
+$b_h(\dd u)=e^{-\frac12\ip{h}{d_u}}a(\dd u)$, we obtain the exact identity
+\[
+\begin{aligned}
+  \E_P[\sqrt{\Lambda}]&=e^{-\norm{h}^2/8}\,\E_{Q_h}[\sqrt{\widetilde{\Lambda}_h}],\\
+  \E_{Q_h}[\widetilde{\Lambda}_h]&=m_1(h),\qquad \E_{Q_h}[\widetilde{\Lambda}_h^2]=m_2(h).
+\end{aligned}
+\]
+Jensen's inequality under $Q_h$ gives $\E_{Q_h}[\sqrt{\widetilde{\Lambda}_h}]\le\sqrt{m_1(h)}$, while
+H\"older's inequality with exponents $(3/2,3)$ applied to
+$\widetilde{\Lambda}_h=\widetilde{\Lambda}_h^{1/3}\cdot\widetilde{\Lambda}_h^{2/3}$ gives
+$m_1(h)\le(\E_{Q_h}\sqrt{\widetilde{\Lambda}_h})^{2/3} m_2(h)^{1/3}$, i.e.,
+$\E_{Q_h}[\sqrt{\widetilde{\Lambda}_h}]\ge m_1(h)^{3/2}/\sqrt{m_2(h)}$. Multiplying by
+$e^{-\norm{h}^2/8}$ proves \eqref{eq:tilted_bracket}.
+
+(ii) Put $A=a(\mathcal U)>0$, $K=\sup\|k_u\|$ and $\pi_h=b_h/m_1(h)$.
+On every bounded ball the first two derivatives of the Laplace integrand in unit directions
+are bounded by constants depending only on $K$ and the radius. Taylor's formula with an
+integrable uniform remainder gives Fr\'echet derivatives
+\[
+ \nabla\log U=(h-\E_{\pi_h}k)/4,\qquad
+ \nabla^2\log U=I/4+\operatorname{Cov}_{\pi_h}(k)/8 .
+\]
+The functional is norm-continuous, strongly convex and hence weakly lower semicontinuous.
+Its lower bound $\|h\|^2/8-K\|h\|/4+\log(A)/2$ makes every minimising sequence bounded.
+Weak sequential compactness on Hilbert balls yields a minimiser, and strong convexity gives
+uniqueness. Its zero gradient identifies it with the tilted Bochner mean. Each closed
+half-space containing the kernel family contains that mean, proving the closed-convex-hull assertion.
+
+(iii) With $d=k-h$, Taylor's inequality for $|t|\le\varepsilon^2$ gives
+\[
+\begin{aligned}
+ 0\le r:=m_2/m_1^2-1
+ &\le \|\E_{\pi_h}d\|^2+\tfrac12 e^{\varepsilon^2}\varepsilon^4,\\
+ 0\le (U-L)/U&\le r/2 .
+\end{aligned}
+\]
+The first term vanishes at the optimum. At the $a$-mean subtract unity from the tilt density
+in the numerator and bound the normalising denominator below by $e^{-b}$, with
+$b=\|h\|\varepsilon/2$. This gives
+$\|\E_{\pi_h}d\|\le\varepsilon e^b(e^b-1)\le
+\tfrac12\|h\|\varepsilon^2 e^{2b}$, uniformly quartic for bounded $\|h\|$.
+On the two-atom control
+$k_\pm=h\pm\varepsilon e$ with $e\perp h$, $b_h=a$, $m_2/m_1^2=\frac12(e^{\varepsilon^2}+e^{-\varepsilon^2})=\cosh(\varepsilon^2)$,
+and $1-\cosh(\varepsilon^2)^{-1/2}=\frac14\varepsilon^4+O(\varepsilon^8)$.
+
+(iv) Set $\widetilde{V}_h=\sqrt{m_1(h)\cE(h)}$, so $\E_P[\widetilde{V}_h]=e^{-\norm{h}^2/8}\sqrt{m_1(h)}=U(h)$.
+For every $1$-Lipschitz payoff $g\colon\R_+\to\R$, transforming to $Q_h$ via $\dd Q_h/\dd P=\cE(h/2)$ and
+applying Cauchy--Schwarz under $Q_h$ gives
+\begin{align*}
+  &\big|\E_P[g(\sqrt{\Lambda})]-\E_P[g(\widetilde{V}_h)]\big|\\
+  &\quad\le\E_P\big|\sqrt{\Lambda}-\widetilde{V}_h\big|
+  =e^{-\norm{h}^2/8}\,\E_{Q_h}\big|\sqrt{\widetilde{\Lambda}_h}-\sqrt{m_1(h)}\big|\\
+  &\quad\le e^{-\norm{h}^2/8}\Big(\E_{Q_h}\big(\sqrt{\widetilde{\Lambda}_h}-\sqrt{m_1(h)}\big)^2\Big)^{1/2}\\
+  &\quad=e^{-\norm{h}^2/8}\Big(2m_1(h)
+    -2\sqrt{m_1(h)}\,\E_{Q_h}[\sqrt{\widetilde{\Lambda}_h}]\Big)^{1/2}\\
+  &\quad=\sqrt{2\,U(h)\big(U(h)-\E_P[\sqrt{\Lambda}]\big)}\\
+  &\quad\le\sqrt{2\,U(h)\big(U(h)-L(h)\big)},
+\end{align*}
+using $\E_{Q_h}[\widetilde{\Lambda}_h]=m_1(h)$ and $\E_P[\sqrt{\Lambda}]\ge L(h)$ from (i). This proves
+\eqref{eq:tilted_opt_lip}. The order is $O(\varepsilon^2)$ for the centred families in (iii) with bounded $U$.
+
+\paragraph{Proposition~\ref{prop:arb} (End-to-end Arb certification)}
+(a) Integrating $\phi_x(r)=(x+r)^{H-1/2}$ over $x\in[0,\Delta]$ gives
+$h_0(r)=\frac{1}{\Delta(H+1/2)}[(r+\Delta)^{H+1/2}-r^{H+1/2}]$. Expanding
+$\norm{h_0}^2=\int_0^T h_0(r)^2\dd r$ and $\ip{h_0}{\phi_x}=\int_0^T h_0(r)(x+r)^{H-1/2}\dd r$ produces
+Euler-type beta integrals $\int_0^b(d+u)^{H+1/2}u^{H-1/2}\dd u$. Applying Pfaff's linear transformation
+${}_2F_1(a,b;c;w)=(1-w)^{-a}{}_2F_1(a,c-b;c;\frac{w}{w-1})$ transforms the negative-argument forms in
+$-T/\Delta$ or $-x/(\Delta-x)$ into \eqref{eq:nh2_pfaff}--\eqref{eq:hkx_pfaff} with $d+b=S$ and
+arguments $b/S\in(0,1)$ below $1$ at interior evaluation points, avoiding both analytic-continuation branch cuts and
+$\Delta-x$ subtraction loss.
+
+(b) Because $\alpha=\tfrac12-H>0$, differentiating $C_0(x,y)=\int_0^T(x+r)^{-\alpha}(y+r)^{-\alpha}\dd r$
+under the integral sign gives
+\[
+\begin{aligned}
+  -\partial_x C_0(x,y)&=\alpha\int_0^T(x+r)^{-\alpha-1}(y+r)^{-\alpha}\dd r>0,\\
+  \partial_{xx}C_0(x,y)&=\alpha(\alpha+1)\int_0^T(x+r)^{-\alpha-2}(y+r)^{-\alpha}\dd r>0.
+\end{aligned}
+\]
+Each three-way minimum follows from three elementary pointwise majorisations of the integrand:
+(1) $(x+r)^{-1}\le x^{-1}$ yields $\frac{\alpha}{x}C_0$;
+(2) for $y\ge x$, $(y+r)^{-\alpha}\le(x+r)^{-\alpha}$ integrated to $\infty$ yields
+$\alpha\int_0^\infty(x+r)^{-2\alpha-1}\dd r=\frac12 x^{2H-1}$ (and for $-\partial_y C_0$ with general
+$x\le y$, replacing $x$ by $0$ gives $\alpha\int_0^\infty r^{-\alpha}(y+r)^{-\alpha-1}\dd r=\alpha B(1-\alpha,2\alpha)y^{2H-1}$);
+(3) $(y+r)^{-\alpha}\le y^{-\alpha}$ yields $\alpha y^{-\alpha}\int_0^\infty(x+r)^{-\alpha-1}\dd r=x^{-\alpha}y^{-\alpha}$.
+Analogous estimates bound $\partial_{xx}C_0$, $\partial_{yy}C_0$, and the derivatives of
+$\ip{h_0}{\phi_x}=\Delta^{-1}\int_0^\Delta C_0(x,y)\dd y$. On each cell $B_{ij}$ of the power-graded mesh
+on $[x_1,\Delta]^2$, the 2D midpoint remainder is bounded by
+$\frac{|B_{ij}|}{6}(h_i^2\sup|\partial_{xx}G|+h_j^2\sup|\partial_{yy}G|)$ for $G=\exp(E)$, with
+$|\partial_{xx}G|\le G_{\max}(|\partial_{xx}E|+|\partial_x E|^2)$.
+
+On $B_{ii}$ both $x+r$ and $y+r$ exceed $x_i+r$, so the same second bound uses
+$x_i$ in both factors irrespective of their order. Since $h_0(r)\le\Delta^{-p}/(1-p)$
+with $p=\alpha$, integration of $p(x+r)^{-p-1}$ and $p(p+1)(x+r)^{-p-2}$
+gives the stated loading bounds. The first derivatives of $C$ and of $-\tfrac32\langle
+h,k_x\rangle$ have opposite signs, as do their second derivatives. The larger individual
+magnitude therefore bounds each difference. Applying the one-dimensional midpoint bound
+in succession gives the factor $1/6$ for half-widths.
+
+(c) Write $R(z)=\Lambda-X(z)=\sum_{r=1}^m\int_0^\Delta\hat\xi_r(x;z)(\widetilde{\cE}_r(x)-1)\dd x$, where
+$\widetilde{\cE}_r(x)=\exp(a_r W_\perp(\phi_x)-\tfrac12 a_r^2 D_0(x,x))$ is independent of $z$ and
+$\sqrt{V(z)}=\norm{R(z)}_{L^2(\widetilde{P})}$. Splitting $R(z)$ into the midpoint sum
+$\sum_{r,i\ge1}W_{r,i}(z)(\widetilde{\cE}_r(x_i^m)-1)$, the corner integral on $[0,x_1]$, and the
+remaining cell integrals $\int_{x_i}^{x_{i+1}}\hat\xi_r(x;z)(\widetilde{\cE}_r(x)-\widetilde{\cE}_r(x_i^m))\dd x$
+yields \eqref{eq:minkowski_x} via Minkowski's integral inequality in $L^2(\widetilde{P})$, provided that
+$\norm{\widetilde{\cE}_r(x)-\widetilde{\cE}_r(x_i^m)}_2\le\tau_{r,i}$ on $[x_i,x_{i+1}]$. To prove this
+bound, let $A=D_0(x,x)$, $B=D_0(y,y)$, $C=D_0(x,y)$, and
+$d_0^2=A+B-2C=\norm{\phi_x^\perp-\phi_y^\perp}^2\le\norm{\phi_x-\phi_y}^2$.
+For $x,y\in[x_i,x_{i+1}]$ with $|x-y|\le h_i$, put $u=\min(x,y)$ and $v=\max(x,y)$. The mean value theorem gives
+$0\le(u+r)^{-\alpha}-(v+r)^{-\alpha}\le\alpha h_i(x_i+r)^{-\alpha-1}$, so
+$d_0\le\alpha h_i(\int_0^T(x_i+r)^{-2\alpha-2}\dd r)^{1/2}=\bar d_i$. Using
+$e^u+e^v-2=(u+v)+(e^u-1-u)+(e^v-1-v)\le(u+v)+\frac12 e^{\max(u_+,v_+)}(u^2+v^2)$ for
+$u=a_r^2(A-C)$, $v=a_r^2(B-C)$ (with $|A-C|\le\sqrt{A}\,d_0$, $|B-C|\le\sqrt{B}\,d_0$, and
+$A,B,C\le D_{0,i}^{\max}$) yields
+$\norm{\widetilde{\cE}_r(x)-\widetilde{\cE}_r(y)}_2^2=e^{a_r^2 C}(e^u+e^v-2)\le\tau_{r,i}^2$.
+For \eqref{eq:minkowski_zV}--\eqref{eq:minkowski_zkappa}, set $u=z-\bar z\in[-h_J,h_J]$ and write
+$e^{-\bar g u}R(z)-R(\bar z)=\sum_r\int_0^\Delta(e^{(g_r(x)-\bar g)u}-1)\hat\xi_r(x;\bar z)(\widetilde{\cE}_r(x)-1)\dd x$.
+Since $|e^t-1|\le\expmone(|t|)\le\expmone(\Delta_g h_J)$ for all $|t|\le\Delta_g h_J$, Minkowski's
+inequality gives
+$\norm{R(z)}_2\le e^{\bar g u}(\norm{R(\bar z)}_2+\expmone(\Delta_g h_J)S(\bar z))$.
+Since $g_r=a_rg_0\ge0$, also $\bar g\ge0$ and $e^{\bar g u}\le e^{\bar g h_J}$; taking the supremum over
+$u\in[-h_J,h_J]$ proves \eqref{eq:minkowski_zV}. Dividing by $X(z)$ and noting
+that $X(z)\ge e^{g_{\min}u}X(\bar z)$ for $u\ge0$ while $X(z)\ge e^{g_{\max}u}X(\bar z)$ for $u<0$---with
+$\bar g-g_{\min}=g_{\max}-\bar g=\Delta_g$ in both cases---proves \eqref{eq:minkowski_zkappa}.
+
+(d) Because $X(z)=\sum_r\int_0^\Delta w_r(x)e^{g_r(x)z-\frac12 g_r(x)^2}\dd x$ is a positive mixture of
+exponentials in $z$, H\"older's inequality implies that $\log X(z)$ is convex, so $\sqrt{X(z)}=e^{\frac12\log X(z)}$
+is convex in $z$ and $X(z)$ is convex in $z$. Hence $(\underline{\varrho}_j\sqrt{X(z)}-k)_+$ is convex, and
+for any fixed $r_j>0$ and $\overline{V}_j\ge0$, the Scarf--Lo majorant
+$m\mapsto(m+\sqrt{\overline{V}_j+m^2})/(4r_j)$ is nondecreasing and convex (for $\overline V_j=0$ it equals $m_+/(2r_j)$; otherwise its second derivative is
+$\overline{V}_j/(4r_j(\overline{V}_j+m^2)^{3/2})\ge0$), so its composition with the convex map
+$z\mapsto m_{r_j}(z)$ is convex on $J_j$. Jensen's inequality under $\cL(Z\mid Z\in J_j)$ (mean $\bar z_j$)
+and the linear secant inequality on $J_j$ therefore rigorously bracket every panel integral. For the
+Gaussian tail $|Z|>Z_{\max}$, $0\le(\sqrt{\Lambda}-k)_+\le\sqrt{\Lambda}$ and Cauchy--Schwarz give
+$\E[\sqrt{\Lambda}\mathbf{1}_{|Z|>Z_{\max}}]\le\sqrt{\E[\Lambda]\cdot\Pr(|Z|>Z_{\max})}
+=\sqrt{\E[\Lambda]\cdot\operatorname{erfc}(Z_{\max}/\sqrt{2})}$.
+
+(e) The undiscounted Black-76 call price $\mathrm{BS}(F,K,T,\sigma)$ has $\partial_F\mathrm{BS}=\Phi(d_1)>0$
+and $\partial_\sigma\mathrm{BS}=F\sqrt{T}\varphi(d_1)>0$. Thus if $F\in[F_L,F_U]$, $C\in[C_L,C_U]$, and
+$\mathrm{BS}(F_U,K,T,\sigma_L)\le C_L\le C=\mathrm{BS}(F,K,T,\sigma_{\mathrm{IV}})\le\mathrm{BS}(F_U,K,T,\sigma_{\mathrm{IV}})$,
+then $\sigma_L\le\sigma_{\mathrm{IV}}$; symmetrically $\sigma_{\mathrm{IV}}\le\sigma_U$.

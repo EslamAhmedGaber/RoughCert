@@ -7,6 +7,7 @@ unified Quantitative Finance visual system (v3_style.py) at exact print width
 from __future__ import annotations
 
 import json
+import math
 from pathlib import Path
 
 import numpy as np
@@ -67,11 +68,11 @@ def build_fig1():
         ax_pipe.add_patch(patch)
         ax_pipe.text(
             x + w / 2, y + h * 0.72, title,
-            ha="center", va="center", fontsize=6.25, fontweight="bold", color=title_c, zorder=3,
+            ha="center", va="center", fontsize=7.2, fontweight="bold", color=title_c, zorder=3,
         )
         ax_pipe.text(
             x + w / 2, y + h * 0.29, body,
-            ha="center", va="center", fontsize=5.35, color=PALETTE["ink"], linespacing=1.24, zorder=3,
+            ha="center", va="center", fontsize=6.75, color=PALETTE["ink"], linespacing=1.24, zorder=3,
         )
 
     def arrow(x0, y0, x1, y1, color=PALETTE["roughcert"]):
@@ -84,31 +85,31 @@ def build_fig1():
     # Top input box
     box(
         0.02, 0.76, 0.96, 0.20,
-        "1. Continuous Model & Mehler Ledger",
-        "Single or mixed rBergomi, curved $\\xi_0(t)$\nCompute residual share $P/\\mathrm{Var}(\\Lambda)$",
+        "Continuous model and Mehler ledger",
+        "Single or mixed model, curved $\\xi_0(t)$\nCompute residual share $P/\\mathrm{Var}(\\Lambda)$",
         fc="#F8FAFC", ec=PALETTE["ink"], title_c=PALETTE["ink"],
     )
 
     # Middle dual branches: RoughCert-Tilt vs RoughCert-CV
     box(
         0.02, 0.40, 0.45, 0.25,
-        "2a. RoughCert-Tilt",
-        "Static Girsanov–Hölder\nNo $Z$-quadrature; $O(\\varepsilon^4)$",
+        "RoughCert-Tilt",
+        "Static tilt\nWidth $O(\\varepsilon^4)$",
         fc=PALETTE["roughcert_light"], ec=PALETTE["roughcert"], title_c=PALETTE["roughcert"], lw=1.1,
     )
     box(
         0.53, 0.40, 0.45, 0.25,
-        "2b. RoughCert-CV",
-        "Cond. var. + Minkowski $L^2$\nFutures, options and IV",
+        "RoughCert-CV",
+        "Conditional variance\nCalls, futures, IV",
         fc=PALETTE["roughcert_light"], ec=PALETTE["roughcert"], title_c=PALETTE["roughcert"], lw=1.1,
     )
 
     # Bottom Arb engine & certified verdict
     box(
         0.02, 0.03, 0.96, 0.26,
-        "3. 169-bit Arb Ball Engine & Verdict",
-        "Pfaff ${}_2F_1$ products + convex panels + tail $<2\\times10^{-10}$\n"
-        "$\\Rightarrow$ Verified $[L,U]$, IV band & $\\leq 1$ tick ($0.05$ pts) test",
+        "169-bit Arb verification",
+        "Kernel products and bounded tails\n"
+        "Price and IV intervals; $0.05$-point test",
         fc="#F0FDFA", ec=PALETTE["roughcert"], title_c=PALETTE["roughcert"], lw=1.2,
     )
 
@@ -119,8 +120,8 @@ def build_fig1():
     arrow(0.755, 0.39, 0.755, 0.305)
 
     # Compact branch cues
-    ax_pipe.text(0.22, 0.708, "flat futures", ha="right", va="center", fontsize=5.8, color=PALETTE["muted"], style="italic")
-    ax_pipe.text(0.78, 0.708, "kinks / curves", ha="left", va="center", fontsize=5.8, color=PALETTE["muted"], style="italic")
+    ax_pipe.text(0.22, 0.708, "flat futures", ha="right", va="center", fontsize=6.4, color=PALETTE["muted"], style="italic")
+    ax_pipe.text(0.78, 0.708, "kinks / curves", ha="left", va="center", fontsize=6.4, color=PALETTE["muted"], style="italic")
 
     # --- Panel (b): Quantile Bias Rate Verification (P^1/3 vs P^1/2) ---
     rates = load_json(LEG / "E5c_certified_cantelli" / "e5c_rates.json")
@@ -358,9 +359,12 @@ def build_fig3():
                 label="BCJ 960-path quantiser (hollow)")
 
     # Crisp badge placed in the wide-open mid-right channel (y=26..30, x=6..12)
+    _bcj = load_json(RES / "vix_futures_full_suite.json")["block_c_bcj2023_18cells"]
+    _w = math.ceil(max(r["condvar_width"] for r in _bcj) * 1e5) / 1e5
+    _rlo, _rhi = (math.floor(fn(r["ratio_vs_jmm"] for r in _bcj)) for fn in (min, max))
     ax_bcj.text(
         12.3, 27.6,
-        "RoughCert-CV (solid):\nmax width $0.013$ pts\n($483$–$817\\times$ tighter)",
+        f"RoughCert-CV (solid):\nmax width ${_w:.5f}$ pts\n(${_rlo}$–${_rhi}\\times$ tighter)",
         ha="right", va="center", fontsize=6.1, color=PALETTE["roughcert"], fontweight="bold",
         bbox=dict(boxstyle="round,pad=0.25", fc="#F0FDFA", ec=PALETTE["roughcert"], lw=0.6),
     )
@@ -442,7 +446,8 @@ def build_fig4():
         transform=ax2.transAxes, ha="center", va="top", fontsize=5.8, color=PALETTE["ln"],
         bbox=dict(boxstyle="round,pad=0.20", fc="#F1F5F9", ec=PALETTE["ln"], lw=0.5),
     )
-    ax2.text(0.97, 0.05, "Refined ATM: 0.55 pp\nBDG$_3$ & LAB: 6/6 below",
+    _atm = math.ceil(load_json(RES / "refinement.json")["grid"]["options"][2]["iv_width_pct"] * 1e3) / 1e3
+    ax2.text(0.97, 0.05, f"Refined ATM: {_atm:.3f} pp\nBDG$_3$ & LAB: 6/6 below",
              transform=ax2.transAxes, fontsize=5.9, color=PALETTE["ink"], ha="right", va="bottom")
     ax2.set_xlabel(r"Log-moneyness $k$")
     ax2.set_ylim(125.75, 129.00)
@@ -473,7 +478,7 @@ def build_fig4():
         Line2D([0], [0], color=PALETTE["roughcert"], lw=5.0, alpha=0.38, label="RoughCert-CV IV band"),
         Line2D([0], [0], color=PALETTE["bdg"], marker="o", ms=3.7, lw=1.25, label="BDG (2023) order-3 / root-split"),
         Line2D([0], [0], color=PALETTE["lab"], ls="--", marker="D", ms=3.4, lw=1.2, label="LAB (2026) direct IV"),
-        Line2D([0], [0], color=PALETTE["bdg_fd"], ls=":", marker="s", mfc="white", ms=3.4, lw=1.05, label="BDG$_3$ 100-node FD (mixed)"),
+        Line2D([0], [0], color=PALETTE["bdg_fd"], ls=":", marker="s", mfc="white", ms=3.4, lw=1.05, label="BDG$_3$ 100-node GH (mixed)"),
     ]
     fig.legend(
         handles=handles, loc="upper center", bbox_to_anchor=(0.51, 1.07),
@@ -513,7 +518,7 @@ def build_fig5():
     ax_m.fill_between(k, lo_r, hi_r, color=PALETTE["roughcert_fill"], alpha=0.30, lw=0, label="RoughCert-CV band")
     ax_m.plot(k, lo_r, color=PALETTE["roughcert"], lw=0.9)
     ax_m.plot(k, hi_r, color=PALETTE["roughcert"], lw=0.9)
-    ax_m.plot(k, fd_r, "--", color=PALETTE["bcj"], marker="s", mfc="white", ms=3.8, lw=1.05, label="100-node FD (kink noise)")
+    ax_m.plot(k, fd_r, "--", color=PALETTE["bcj"], marker="s", mfc="white", ms=3.8, lw=1.05, label="100-node GH (kink noise)")
     ax_m.plot(k, sp_r, "-", color=PALETTE["bdg"], marker="o", ms=4.0, lw=1.45, label="Root-split BDG$_3$ (Arb)")
 
     ax_m.annotate(
@@ -633,7 +638,7 @@ def build_fig6():
 
     max_w=max(r["condvar_width"] for r in load_json(RES/"vix_futures_full_suite.json")["block_c_bcj2023_18cells"])
     ax_q.axhline(max_w, color=PALETTE["roughcert"], ls="-.", lw=1.05, zorder=2)
-    ax_q.text(1050, 0.0148, "RoughCert-CV max width ($0.013$)", ha="right",
+    ax_q.text(1050, 0.0148, f"RoughCert-CV max width (${math.ceil(max_w * 1e5) / 1e5:.5f}$)", ha="right",
               fontsize=6.1, color=PALETTE["roughcert"], fontweight="bold")
 
     ax_q.fill_between(paths, bcj_min, bcj_max, color=PALETTE["bcj"], alpha=0.16, lw=0, label="18-cell BCJ range")
